@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
+    public int     bewitched = 1;                      // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
     #endregion
 
     #region Monobehavior
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     // Mover el jugador
     void MovePlayer()
     {
+        _moveDirection *= bewitched;
         _moveDirection.y = 0f; // Asegurarnos de que el movimiento es horizontal (sin componente Y)
 
         // Mover el jugador usando el Transform
@@ -68,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("MoveSpeed", speed);
         }
+    }
+    //Asigna el valor correspondiente a la variable bewitched para invertir los controles.
+    public void TriggerSpell()
+    {
+        bewitched *= -1;
     }
     #endregion
 
