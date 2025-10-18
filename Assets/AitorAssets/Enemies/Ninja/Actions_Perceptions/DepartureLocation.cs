@@ -57,7 +57,7 @@ public class DepartureLocation: MonoBehaviour
         Transform chosenPoint = validPoints[Random.Range(0, validPoints.Count)];
 
         // Poner Posiciones de ruta
-        Pathing pathing = GetComponent<Pathing>();
+        PathingNinja pathing = GetComponent<PathingNinja>();
         pathing.positions.Clear();
       
         for (int i = 0; i < chosenPoint.childCount; i++) {

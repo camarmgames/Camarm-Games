@@ -1,0 +1,1141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2459767655542257373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3195298621435166445}
+  - component: {fileID: 372442642892161402}
+  - component: {fileID: 6293407067938092851}
+  - component: {fileID: 4315128549535837402}
+  m_Layer: 0
+  m_Name: Espada
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3195298621435166445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459767655542257373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.14720519, y: 0, z: 0, w: 0.989106}
+  m_LocalPosition: {x: 0.38, y: 0.08, z: -0.7}
+  m_LocalScale: {x: 0.14, y: 0.2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8615825422300241871}
+  m_LocalEulerAnglesHint: {x: 16.93, y: 0, z: 0}
+--- !u!33 &372442642892161402
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459767655542257373}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6293407067938092851
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459767655542257373}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4315128549535837402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459767655542257373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5449151931212921450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8684688831116579290}
+  - component: {fileID: 5339309121466199384}
+  - component: {fileID: 2522635485658638688}
+  - component: {fileID: 6245350727789724357}
+  m_Layer: 0
+  m_Name: GomiNinja
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8684688831116579290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5449151931212921450}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014358714, y: 0, z: 7.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8615825422300241871}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5339309121466199384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5449151931212921450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7033c32493b38240a6a2c47736ac9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
+  _eventHandler:
+    debugStatusChanges: 1
+    identifier: 
+  data:
+    graphs:
+    - name: FSMNinja0
+      id: 1a06ff5a-39b2-40af-9e4e-18dec00e4a0a
+      graph:
+        rid: 1744865972589953082
+      nodes:
+      - name: MainRoot
+        id: 765089e6-7539-491e-9870-6bbbd83b3023
+        position: {x: 640, y: -325.6}
+        node:
+          rid: 1744865972589953083
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744865972589953106
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds:
+        - df9f4ea4-b5de-4380-b612-093e1d67dee2
+      - name: SalidaTriunfal
+        id: 8eb197e3-bd76-4ea8-8f94-b04766a2aa8c
+        position: {x: 533, y: 319}
+        node:
+          rid: 1744865972589953085
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744865972589953107
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: 1744865972589953108
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - bb8eb02f-2fbd-4c3c-9aea-e8d08e94245a
+        childIds:
+        - 1b99cc5c-d641-4205-a001-f83da90948af
+      - name: EntradaTriunfal
+        id: 06ddee74-3162-408d-a61c-26d65e1f51f9
+        position: {x: 795.2, y: 318.4}
+        node:
+          rid: 1744865972589953086
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744865972589953105
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 1b99cc5c-d641-4205-a001-f83da90948af
+        childIds:
+        - bb8eb02f-2fbd-4c3c-9aea-e8d08e94245a
+      - name: CheckInterval
+        id: df9f4ea4-b5de-4380-b612-093e1d67dee2
+        position: {x: 636.8, y: -126.399994}
+        node:
+          rid: 1744865972589953098
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744865972589953099
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 765089e6-7539-491e-9870-6bbbd83b3023
+        childIds:
+        - 1b99cc5c-d641-4205-a001-f83da90948af
+      - name: DepartureLocation
+        id: 1b99cc5c-d641-4205-a001-f83da90948af
+        position: {x: 645.6, y: 81.6}
+        node:
+          rid: 1744865972589953100
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744865972589953101
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - df9f4ea4-b5de-4380-b612-093e1d67dee2
+        - 8eb197e3-bd76-4ea8-8f94-b04766a2aa8c
+        childIds:
+        - 06ddee74-3162-408d-a61c-26d65e1f51f9
+      - name: Normal
+        id: bb8eb02f-2fbd-4c3c-9aea-e8d08e94245a
+        position: {x: 1104, y: 575}
+        node:
+          rid: 1744866001277943866
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744866001277943871
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 06ddee74-3162-408d-a61c-26d65e1f51f9
+        - 82bb1476-332e-4e78-a512-1dc4e953de91
+        childIds:
+        - 05885b04-a386-40fc-88c2-28b6e4f1b3f9
+        - 8eb197e3-bd76-4ea8-8f94-b04766a2aa8c
+      - name: DetectarJugador
+        id: 05885b04-a386-40fc-88c2-28b6e4f1b3f9
+        position: {x: 1493, y: 492}
+        node:
+          rid: 1744866001277943876
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943896
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - bb8eb02f-2fbd-4c3c-9aea-e8d08e94245a
+        childIds:
+        - 73c60981-254e-4fb6-b086-812f32958053
+      - name: Alerta
+        id: 73c60981-254e-4fb6-b086-812f32958053
+        position: {x: 1890, y: 618}
+        node:
+          rid: 1744866001277943897
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744866001277943945
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 05885b04-a386-40fc-88c2-28b6e4f1b3f9
+        - 5d237df8-d1bc-422a-bdd2-e6783f9c8599
+        childIds:
+        - 82bb1476-332e-4e78-a512-1dc4e953de91
+        - 3e08cc42-aca2-4761-8c9f-3a82a6a1d2fe
+      - name: ConfirmadoJugador
+        id: 754c3d33-15c4-40c1-bd1c-6f7765a9f909
+        position: {x: 2008, y: 273}
+        node:
+          rid: 1744866001277943959
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943961
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds: []
+        childIds: []
+      - name: NoDetectaJugador
+        id: 82bb1476-332e-4e78-a512-1dc4e953de91
+        position: {x: 1511, y: 688}
+        node:
+          rid: 1744866001277943960
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943962
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 73c60981-254e-4fb6-b086-812f32958053
+        childIds:
+        - bb8eb02f-2fbd-4c3c-9aea-e8d08e94245a
+      - name: Ataque
+        id: 26f0490b-5ee7-4d1e-ac8c-2ecdac102d10
+        position: {x: 2766, y: 668}
+        node:
+          rid: 1744866001277943963
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744866001277943964
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 3e08cc42-aca2-4761-8c9f-3a82a6a1d2fe
+        childIds:
+        - 5d237df8-d1bc-422a-bdd2-e6783f9c8599
+      - name: Ataque
+        id: 5d237df8-d1bc-422a-bdd2-e6783f9c8599
+        position: {x: 2357, y: 799}
+        node:
+          rid: 1744866001277943965
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943966
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 26f0490b-5ee7-4d1e-ac8c-2ecdac102d10
+        childIds:
+        - 73c60981-254e-4fb6-b086-812f32958053
+      - name: Ataque
+        id: 3e08cc42-aca2-4761-8c9f-3a82a6a1d2fe
+        position: {x: 2403, y: 433}
+        node:
+          rid: 1744866001277943973
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943974
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 73c60981-254e-4fb6-b086-812f32958053
+        childIds:
+        - 26f0490b-5ee7-4d1e-ac8c-2ecdac102d10
+    - name: EstadoNormal
+      id: 35b3d52c-21bf-4f59-b4a2-a94d313382ab
+      graph:
+        rid: 1744866001277943868
+      nodes:
+      - name: QuietoPensativo
+        id: 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+        position: {x: 656, y: 648}
+        node:
+          rid: 1744866001277943877
+        references:
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 7fc93bad-8340-4b51-8d90-61061a458b58
+        - 4b5139cb-9518-4db3-a688-16e951728f6b
+        childIds:
+        - cf9725ea-08f8-4b98-b628-8a6dcf8dbfbd
+        - 34829e42-c13d-4657-99f2-8f97a5631aad
+        - 9cc92576-e705-4177-be19-5261554ffbc9
+      - name: DecisionTomada
+        id: cf9725ea-08f8-4b98-b628-8a6dcf8dbfbd
+        position: {x: 351, y: 816}
+        node:
+          rid: 1744866001277943878
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943947
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+        childIds:
+        - 81fcfa42-79fa-4ab1-a0fd-892c89edbeac
+      - name: DecisionTomada
+        id: 34829e42-c13d-4657-99f2-8f97a5631aad
+        position: {x: 900, y: 975}
+        node:
+          rid: 1744866001277943879
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943948
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+        childIds:
+        - 59c85948-b3ae-4350-b024-2ace89a2de4d
+      - name: Patrullar
+        id: 81fcfa42-79fa-4ab1-a0fd-892c89edbeac
+        position: {x: 163, y: 1048}
+        node:
+          rid: 1744866001277943880
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744866001277943881
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - cf9725ea-08f8-4b98-b628-8a6dcf8dbfbd
+        childIds:
+        - 7fc93bad-8340-4b51-8d90-61061a458b58
+        - fd0f080f-3565-4d0d-b23f-35611c084d21
+      - name: LlegoZona
+        id: 7fc93bad-8340-4b51-8d90-61061a458b58
+        position: {x: 40, y: 781}
+        node:
+          rid: 1744866001277943882
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943883
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 81fcfa42-79fa-4ab1-a0fd-892c89edbeac
+        childIds:
+        - 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+      - name: PonerTrampa
+        id: 59c85948-b3ae-4350-b024-2ace89a2de4d
+        position: {x: 803, y: 1240}
+        node:
+          rid: 1744866001277943884
+        references:
+        - fieldName: Action
+          value:
+            rid: 1744866001277943885
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 34829e42-c13d-4657-99f2-8f97a5631aad
+        childIds:
+        - 4b5139cb-9518-4db3-a688-16e951728f6b
+        - 721c9ea0-863c-4a8f-b3f2-43a999082866
+      - name: TrampaLista
+        id: 4b5139cb-9518-4db3-a688-16e951728f6b
+        position: {x: 629, y: 991}
+        node:
+          rid: 1744866001277943886
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943887
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 59c85948-b3ae-4350-b024-2ace89a2de4d
+        childIds:
+        - 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+      - name: 
+        id: fd0f080f-3565-4d0d-b23f-35611c084d21
+        position: {x: 329, y: 1291}
+        node:
+          rid: 1744866001277943949
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943950
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 81fcfa42-79fa-4ab1-a0fd-892c89edbeac
+        childIds: []
+      - name: 
+        id: 721c9ea0-863c-4a8f-b3f2-43a999082866
+        position: {x: 709.55005, y: 1447.8501}
+        node:
+          rid: 1744866001277943951
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943952
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 59c85948-b3ae-4350-b024-2ace89a2de4d
+        childIds: []
+      - name: 
+        id: 9cc92576-e705-4177-be19-5261554ffbc9
+        position: {x: 785, y: 430}
+        node:
+          rid: 1744866001277943954
+        references:
+        - fieldName: Perception
+          value:
+            rid: 1744866001277943955
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - fieldName: Action
+          value:
+            rid: -2
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 6905dd39-5d24-442b-b6c1-0c7fd748e90b
+        childIds: []
+    pushPerceptions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1744865972589953082
+      type: {class: FSM, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744865972589953083
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744865972589953085
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744865972589953086
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744865972589953098
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744865972589953099
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 5
+    - rid: 1744865972589953100
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744865972589953101
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: DepartureLocation
+          methodName: CalculatePositionToExit
+    - rid: 1744865972589953105
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: DepartureLocation
+          methodName: CheckInvisible
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744865972589953106
+      type: {class: DelayAction, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        delayTime: 60
+    - rid: 1744865972589953107
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 180
+    - rid: 1744865972589953108
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: DepartureLocation
+          methodName: SetInvisible
+    - rid: 1744866001277943866
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943868
+      type: {class: StackFSM, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943871
+      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        ExecuteOnLoop: 0
+        InterruptOptions: 0
+        subgraphId: 35b3d52c-21bf-4f59-b4a2-a94d313382ab
+    - rid: 1744866001277943876
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943877
+      type: {class: ProbabilisticState, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        probabilities:
+        - 0.7
+        - 0.3
+    - rid: 1744866001277943878
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943879
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943880
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943881
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: PathingMove
+    - rid: 1744866001277943882
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943883
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: IsNotMoving
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943884
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943885
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: PutTrap
+    - rid: 1744866001277943886
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943887
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 5
+    - rid: 1744866001277943896
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: DetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943897
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943945
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: Alert
+    - rid: 1744866001277943947
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: NoDetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943948
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: NoDetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943949
+      type: {class: ExitTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+        ExitStatus: 2
+    - rid: 1744866001277943950
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: DetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943951
+      type: {class: ExitTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+        ExitStatus: 2
+    - rid: 1744866001277943952
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: DetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943954
+      type: {class: ExitTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+        ExitStatus: 2
+    - rid: 1744866001277943955
+      type: {class: CompoundPerceptionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundPerception:
+          rid: 1744866001277943956
+        subPerceptions:
+        - perception:
+            rid: 1744866001277943957
+        - perception:
+            rid: 1744866001277943958
+    - rid: 1744866001277943956
+      type: {class: OrPerception, ns: BehaviourAPI.Core.Perceptions, asm: BehaviourAPI.Core}
+      data: 
+    - rid: 1744866001277943957
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: DetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943958
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 180
+    - rid: 1744866001277943959
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943960
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 1744866001277943961
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 15
+    - rid: 1744866001277943962
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: NoDetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 1744866001277943963
+      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 1744866001277943964
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: Attack
+    - rid: 1744866001277943965
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: -1
+    - rid: 1744866001277943966
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 15
+    - rid: 1744866001277943973
+      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data:
+        StatusFlags: 0
+    - rid: 1744866001277943974
+      type: {class: CompoundPerceptionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundPerception:
+          rid: 1744866001277943975
+        subPerceptions:
+        - perception:
+            rid: 1744866001277943976
+        - perception:
+            rid: 1744866001277943977
+    - rid: 1744866001277943975
+      type: {class: AndPerception, ns: BehaviourAPI.Core.Perceptions, asm: BehaviourAPI.Core}
+      data: 
+    - rid: 1744866001277943976
+      type: {class: UnityTimePerception, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
+      data:
+        TotalTime: 15
+    - rid: 1744866001277943977
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: PathingNinja
+          methodName: DetectPlayer
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+--- !u!114 &2522635485658638688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5449151931212921450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b6f0725d1e054409c64d073821a377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 5
+  minDistance: 10
+  maxDistance: 25
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnPrefab: {fileID: 8758989733871778297}
+--- !u!114 &6245350727789724357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5449151931212921450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c4a8f9708457543a9f594f6f979d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  positions: []
+  distanceThreshold: 0.1
+  trapPrefab: {fileID: 3118233731871587103, guid: c81fddc6075eccf44adc460b0a47cdb3, type: 3}
+  trapsAvailable: 2
+  viewRadius: 30
+  viewAngle: 90
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  firePosition: {fileID: 4187439566434005067, guid: 7fd0e97f68254f549b67f080c9387fac, type: 3}
+  proyectilePrefab: {fileID: 3287407581643311352, guid: 7fd0e97f68254f549b67f080c9387fac, type: 3}
+  launchForce: 15
+  attackCooldown: 2
+  playerVisible: 0
+--- !u!1 &8758989733871778297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8615825422300241871}
+  - component: {fileID: 2741730062205601406}
+  - component: {fileID: 6976277633321307769}
+  - component: {fileID: 7995890661392601639}
+  m_Layer: 0
+  m_Name: GomiNinjaCuerpo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8615825422300241871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758989733871778297}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.88873696, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3195298621435166445}
+  m_Father: {fileID: 8684688831116579290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2741730062205601406
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758989733871778297}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6976277633321307769
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758989733871778297}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &7995890661392601639
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8758989733871778297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

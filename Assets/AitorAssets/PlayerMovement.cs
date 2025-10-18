@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
+    public float initialSpeed;
     #endregion
 
     #region Monobehavior
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         _moveDirection = Vector3.zero;
+        initialSpeed = moveSpeed;
         //animator = GetComponent<Animator>();
         //cameraTransform = GameObject.Find("MainCamera").transform;
     }
