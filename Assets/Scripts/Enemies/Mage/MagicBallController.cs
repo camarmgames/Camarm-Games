@@ -19,6 +19,7 @@ public class MagicBallController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GetComponent<Renderer>().material.color = Color.blue;
         offset = Random.Range(0.0f, 3.0f);
         timeLight = Random.Range(5.0f, 10.0f);
         timeBetween = Random.Range(5.0f, 8.0f);
