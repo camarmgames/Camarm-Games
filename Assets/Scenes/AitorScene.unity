@@ -2979,11 +2979,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1755450750512103414, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.137173
       objectReference: {fileID: 0}
     - target: {fileID: 1755450750512103414, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -10
+      value: -10.34293
       objectReference: {fileID: 0}
     - target: {fileID: 2312971921690890715, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_Layer
@@ -2995,15 +2995,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2363494766397588791, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1198449
+      value: 0.11984489
       objectReference: {fileID: 0}
     - target: {fileID: 2363494766397588791, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -8.841899e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2363494766397588791, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 1.06735225e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2405716195541181291, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_Layer
@@ -3055,11 +3055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5118887969350002645, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.137173
       objectReference: {fileID: 0}
     - target: {fileID: 5118887969350002645, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -10
+      value: -10.34293
       objectReference: {fileID: 0}
     - target: {fileID: 5134133012655047671, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_Layer
@@ -3107,12 +3107,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6289081898548497770, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 4
+      value: 4.137173
       objectReference: {fileID: 0}
     - target: {fileID: 6289081898548497770, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -10
+      value: -10.34293
       objectReference: {fileID: 0}
+    - target: {fileID: 6346003551572845634, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aac3985a5568b64408bea01a8ba20a45, type: 2}
     - target: {fileID: 6357901247186524138, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_XAxis.m_Wrap
       value: 0
@@ -3127,20 +3131,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389124847333944861, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1198449
+      value: 0.11984489
       objectReference: {fileID: 0}
     - target: {fileID: 6389124847333944861, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -8.841899e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6389124847333944861, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 1.06735225e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6748028932543234492, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8339864105744695060, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aac3985a5568b64408bea01a8ba20a45, type: 2}
     - target: {fileID: 8444035131568227680, guid: 706716dde4678244ba8e34199fd5fd86, type: 3}
       propertyPath: m_Name
       value: Player
