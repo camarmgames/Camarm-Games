@@ -625,6 +625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   cameraTransform: {fileID: 0}
+  initialSpeed: 0
+  bewitched: 1
 --- !u!1 &2466560846784540254
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +638,6 @@ GameObject:
   - component: {fileID: 7877455061139253525}
   - component: {fileID: 5215696604579606369}
   - component: {fileID: 8339864105744695060}
-  - component: {fileID: 9103044575074942147}
   m_Layer: 0
   m_Name: BodyMesh
   m_TagString: Untagged
@@ -713,29 +714,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9103044575074942147
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2466560846784540254}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3441127451845377026
 GameObject:
   m_ObjectHideFlags: 0

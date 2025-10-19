@@ -77,13 +77,12 @@ public class DepartureLocation: MonoBehaviour
         spawnPrefab.SetActive(true);
     }
 
-    public bool SetInvisible()
+    public void SetInvisible()
     {
         // Animaciones y cosas
 
         // Hacer invisible al personaje
         spawnPrefab.SetActive(false);
-        return true;
     }
 
     public bool CheckInvisible()

@@ -7,8 +7,9 @@ using BehaviourAPI.Core.Perceptions;
 using BehaviourAPI.UnityToolkit;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Framework;
+using BehaviourAPI.StateMachines.StackFSMs;
 
-public class BehaviourNinja : BehaviourRunner
+public class BehavourNinjaV2 : BehaviourRunner
 {
 	[SerializeField] private DepartureLocation m_DepartureLocation;
 	[SerializeField] private PathingNinja m_PathingNinja;
@@ -30,16 +31,16 @@ public class BehaviourNinja : BehaviourRunner
 		MainRoot_action.delayTime = 60f;
 		State MainRoot = FSMNinja0.CreateState(MainRoot_action);
 		
-		SubsystemAction Normal_action = new SubsystemAction(EstadoNormal, ExecutionInterruptOptions.None, false);
+		SubsystemAction Normal_action = new SubsystemAction(EstadoNormal, false);
 		State Normal = FSMNinja0.CreateState(Normal_action);
-		
-		SimpleAction DepartureLocation_action = new SimpleAction();
+
+        FunctionalAction DepartureLocation_action = new FunctionalAction();
 		DepartureLocation_action.onStarted = m_DepartureLocation.CalculatePositionToExit;
 		State DepartureLocation = FSMNinja0.CreateState(DepartureLocation_action);
 		
 		UnityTimePerception SalidaTriunfal_perception = new UnityTimePerception();
 		SalidaTriunfal_perception.TotalTime = 180f;
-		SimpleAction SalidaTriunfal_action = new SimpleAction();
+        FunctionalAction SalidaTriunfal_action = new FunctionalAction();
 		SalidaTriunfal_action.onStarted = m_DepartureLocation.SetInvisible;
 		StateTransition SalidaTriunfal = FSMNinja0.CreateTransition(Normal, DepartureLocation, SalidaTriunfal_perception, SalidaTriunfal_action);
 		
@@ -50,18 +51,18 @@ public class BehaviourNinja : BehaviourRunner
 		UnityTimePerception CheckInterval_perception = new UnityTimePerception();
 		CheckInterval_perception.TotalTime = 5f;
 		StateTransition CheckInterval = FSMNinja0.CreateTransition(MainRoot, DepartureLocation, CheckInterval_perception);
-		
-		SimpleAction Alerta_action = new SimpleAction();
+
+        FunctionalAction Alerta_action = new FunctionalAction();
 		Alerta_action.onStarted = m_PathingNinja.Alert;
 		State Alerta = FSMNinja0.CreateState(Alerta_action);
 		
 		ConditionPerception DetectarJugador_perception = new ConditionPerception();
 		DetectarJugador_perception.onCheck = m_PathingNinja.DetectPlayer;
-		SimpleAction DetectarJugador_action = new SimpleAction();
+        FunctionalAction DetectarJugador_action = new FunctionalAction();
 		DetectarJugador_action.onStarted = m_PathingNinja.CancelMove;
 		StateTransition DetectarJugador = FSMNinja0.CreateTransition(Normal, Alerta, DetectarJugador_perception, DetectarJugador_action);
-		
-		SimpleAction Ataque_action = new SimpleAction();
+
+        FunctionalAction Ataque_action = new FunctionalAction();
 		Ataque_action.onStarted = m_PathingNinja.Attack;
 		State Ataque = FSMNinja0.CreateState(Ataque_action);
 		
@@ -85,16 +86,16 @@ public class BehaviourNinja : BehaviourRunner
 		
 		ProbabilisticState QuietoPensativo = EstadoNormal.CreateProbabilisticState();
 		QuietoPensativo.probabilities = new List<float>() {0.7f, 0.3f};
-		
-		SimpleAction Patrullar_action = new SimpleAction();
+
+        FunctionalAction Patrullar_action = new FunctionalAction();
 		Patrullar_action.onStarted = m_PathingNinja.PathingMove;
 		State Patrullar = EstadoNormal.CreateState(Patrullar_action);
 		
 		ConditionPerception DecisionTomada_perception = new ConditionPerception();
 		DecisionTomada_perception.onCheck = m_PathingNinja.NoDetectPlayer;
 		StateTransition DecisionTomada = EstadoNormal.CreateTransition(QuietoPensativo, Patrullar, DecisionTomada_perception);
-		
-		SimpleAction PonerTrampa_action = new SimpleAction();
+
+        FunctionalAction PonerTrampa_action = new FunctionalAction();
 		PonerTrampa_action.onStarted = m_PathingNinja.PutTrap;
 		State PonerTrampa = EstadoNormal.CreateState(PonerTrampa_action);
 		
@@ -110,20 +111,20 @@ public class BehaviourNinja : BehaviourRunner
 		TrampaLista_perception.TotalTime = 5f;
 		StateTransition TrampaLista = EstadoNormal.CreateTransition(PonerTrampa, QuietoPensativo, TrampaLista_perception);
 		
-		ConditionPerception unnamed_perception = new ConditionPerception();
-		unnamed_perception.onCheck = m_PathingNinja.DetectPlayer;
-		ExitTransition unnamed = EstadoNormal.CreateExitTransition(Patrullar, Status.Success, unnamed_perception);
+		ConditionPerception Volver1_perception = new ConditionPerception();
+		Volver1_perception.onCheck = m_PathingNinja.DetectPlayer;
+		ExitTransition Volver1 = EstadoNormal.CreateExitTransition(Patrullar, Status.Success, Volver1_perception);
 		
-		ConditionPerception unnamed_1_perception = new ConditionPerception();
-		unnamed_1_perception.onCheck = m_PathingNinja.DetectPlayer;
-		ExitTransition unnamed_1 = EstadoNormal.CreateExitTransition(PonerTrampa, Status.Success, unnamed_1_perception);
+		ConditionPerception Volver2_perception = new ConditionPerception();
+		Volver2_perception.onCheck = m_PathingNinja.DetectPlayer;
+		ExitTransition Volver2 = EstadoNormal.CreateExitTransition(PonerTrampa, Status.Success, Volver2_perception);
 		
-		ConditionPerception unnamed_2_perception_sub1 = new ConditionPerception();
-		unnamed_2_perception_sub1.onCheck = m_PathingNinja.DetectPlayer;
-		UnityTimePerception unnamed_2_perception_sub2 = new UnityTimePerception();
-		unnamed_2_perception_sub2.TotalTime = 180f;
-		OrPerception unnamed_2_perception = new OrPerception(unnamed_2_perception_sub1, unnamed_2_perception_sub2);
-		ExitTransition unnamed_2 = EstadoNormal.CreateExitTransition(QuietoPensativo, Status.Success, unnamed_2_perception);
+		ConditionPerception Volver_perception_sub1 = new ConditionPerception();
+		Volver_perception_sub1.onCheck = m_PathingNinja.DetectPlayer;
+		UnityTimePerception Volver_perception_sub2 = new UnityTimePerception();
+		Volver_perception_sub2.TotalTime = 180f;
+		OrPerception Volver_perception = new OrPerception(Volver_perception_sub1, Volver_perception_sub2);
+		ExitTransition Volver = EstadoNormal.CreateExitTransition(QuietoPensativo, Status.Success, Volver_perception);
 		
 		return FSMNinja0;
 	}
