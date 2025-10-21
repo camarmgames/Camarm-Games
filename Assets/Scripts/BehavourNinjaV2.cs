@@ -6,7 +6,6 @@ using BehaviourAPI.Core.Actions;
 using BehaviourAPI.Core.Perceptions;
 using BehaviourAPI.UnityToolkit;
 using BehaviourAPI.StateMachines;
-using BehaviourAPI.UnityToolkit.GUIDesigner.Framework;
 using BehaviourAPI.StateMachines.StackFSMs;
 
 public class BehavourNinjaV2 : BehaviourRunner
