@@ -1,0 +1,18 @@
+DOCUMENTO INFORMATIVO DE PROGRAMACIÓN:
+La idea es seguir un criterio como nos especificán en algunos puntos de la asignatura de web.
+
+1. Cosas significativas hacerlas en su propia rama no en main
+
+2. Antes de pasar algo significativo a main que lo compruebe un 
+miembro gestor de programación: Ruben o Aitor
+
+3. Gestor de versiones cuando se suba un cambio usar este formato:
+
+X.Y.Z
+
+X: Cambios entre alfa, beta y release
+Y: Avances significativos en el proyecto
+z: Avances menores en el proyecto
+
+EJ.
+V: A.1.2 Movimiento de jugador 
