@@ -10,7 +10,7 @@ miembro gestor de programación: Ruben o Aitor
 
 X.Y.Z
 
-X: Cambios entre alfa, beta y release
+X: Cambios entre alfa (0), beta(1) y release ...
 Y: Avances significativos en el proyecto
 z: Avances menores en el proyecto
 
