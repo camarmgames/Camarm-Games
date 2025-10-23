@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
     public float initialSpeed;
-    public int     bewitched = 1;                      // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
+    public int bewitched = 1;                      // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
+
+    [SerializeField, Range(0.1f, 10f)]
+    private float rotationSmoothness = 2f;
     #endregion
 
     #region Monobehavior
@@ -48,15 +51,19 @@ public class PlayerMovement : MonoBehaviour
     // Mover el jugador
     void MovePlayer()
     {
-        _moveDirection *= bewitched;
         _moveDirection.y = 0f; // Asegurarnos de que el movimiento es horizontal (sin componente Y)
 
         // Mover el jugador usando el Transform
         if (_moveDirection != Vector3.zero)
         {
-            // Calcular la rotacion en Y basada en la direccion del movimiento
-            Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 720f * Time.deltaTime);
+            float dot = Vector3.Dot(transform.forward, _moveDirection);
+
+            if(dot > 0f)
+            {
+                // Calcular la rotacion en Y basada en la direccion del movimiento
+                Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
+            }
 
             // Mover al jugador en la direccion deseada
             transform.Translate(_moveDirection * moveSpeed * Time.deltaTime, Space.World);
@@ -85,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     // Funcion llamada automaticamente cuando se recibe un movimiento vertical u horizontal (WASD-Flechas)
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _input = ctx.ReadValue<Vector2>(); //Se guarda localmente
+        _input = ctx.ReadValue<Vector2>() * bewitched; //Se guarda localmente
     }
     #endregion
 

@@ -26,7 +26,6 @@ public class PathingNinja: MonoBehaviour
     public Transform firePosition;
     public GameObject proyectilePrefab;
     public float launchForce = 15f;
-    public float attackCooldown = 2f;
 
     [Header("Debug")]
     public bool playerVisible;
@@ -39,6 +38,8 @@ public class PathingNinja: MonoBehaviour
     private Vector3 target;
 
     bool isMoving;
+
+    bool changeLocation = false;
 
 
     public void CancelMove()
@@ -110,12 +111,9 @@ public class PathingNinja: MonoBehaviour
     }
 
 
-    public void PathingMove()
+    public bool checkChangeLocation()
     {
-        if (positions.Count > 0)
-        {
-            SetTarget(positions[currentTargetPosId].position);
-        }
+        return changeLocation;
     }
 
     private bool CanPlaceTrap(Vector3 position, float checkRadius)
@@ -131,23 +129,9 @@ public class PathingNinja: MonoBehaviour
         return true;
     }
 
-    public void PutTrap()
-    {
-        if ((trapCount != trapsAvailable))
-        {
-            Debug.Log("Maximo de trampas alcanzado");    
-        }
-        
-        Vector3 trapPosition = new Vector3(GetComponent<Transform>().position.x, trapPrefab.GetComponent<Transform>().position.y, GetComponent<Transform>().position.z);
+    
 
-        if(CanPlaceTrap(trapPosition, 1.0f))
-        {
-            trapCount++;
-            Instantiate(trapPrefab, trapPosition, Quaternion.identity);
-        }
-    }
-
-
+    
     public bool DetectPlayer()
     {
         playerVisible = false;
@@ -181,8 +165,6 @@ public class PathingNinja: MonoBehaviour
 
     public bool NoDetectPlayer()
     {
-        
-
         // Comprobar si el jugador esta dentro del radio
         Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
@@ -237,6 +219,45 @@ public class PathingNinja: MonoBehaviour
     }
 
 
+
+
+    #region Actions
+    public void newLocation()
+    {
+        changeLocation = false;
+    }
+    public void ChangeLocation()
+    {
+        if (NoDetectPlayer())
+        {
+            changeLocation = true;
+            currentTargetPosId = 0;
+            CancelMove();
+        }
+    }
+    public void PathingMove()
+    {
+        if (positions.Count > 0)
+        {
+            SetTarget(positions[currentTargetPosId].position);
+        }
+    }
+    public void PutTrap()
+    {
+        if ((trapCount != trapsAvailable))
+        {
+            Debug.Log("Maximo de trampas alcanzado");
+        }
+
+        Vector3 trapPosition = new Vector3(GetComponent<Transform>().position.x, trapPrefab.GetComponent<Transform>().position.y, GetComponent<Transform>().position.z);
+
+        if (CanPlaceTrap(trapPosition, 1.0f))
+        {
+            trapCount++;
+            Instantiate(trapPrefab, trapPosition, Quaternion.identity);
+        }
+    }
+
     public void Alert()
     {
         Debug.Log("ALERTA JUGADOR");
@@ -248,12 +269,14 @@ public class PathingNinja: MonoBehaviour
         GameObject proyectile = Instantiate(proyectilePrefab, firePoint, Quaternion.identity);
 
         // Calcula direccion hacia el jugador
-        Vector3 direction = (player.position - firePoint).normalized;
+        Vector3 impactPosition = new Vector3(player.position.x, player.position.y +1.5f, player.position.z);
+        Vector3 direction = (impactPosition - firePoint).normalized;
 
         // Lanza el proyectil con fuerza
         Rigidbody rb = proyectile.GetComponent<Rigidbody>();
-        
+
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
 
     }
+    #endregion
 }
