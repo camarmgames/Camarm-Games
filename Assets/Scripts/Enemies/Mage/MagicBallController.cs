@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class MagicBallController : MonoBehaviour
 {
@@ -12,10 +11,6 @@ public class MagicBallController : MonoBehaviour
     [SerializeField]
     [Tooltip("Time the magic ball is off. Not the first time.")]
     private float timeBetween;
-    [SerializeField]
-    [Tooltip("Time your controls are inverted")]
-    private float timingTrigger = 5f;
-
 
     private float timeLeftOff;
     private bool isOn = false;
@@ -48,18 +43,6 @@ public class MagicBallController : MonoBehaviour
         if (Vector2.Distance(GetPosition2D(player.transform.position), GetPosition2D(transform.position)) < 4.0f && isOn && movement.bewitched != -1)
         {
             Debug.Log("Player is inside the magic ball.");
-            StartCoroutine(TriggerSpell());
-        }
-    }
-
-    IEnumerator TriggerSpell()
-    {
-        if (movement.bewitched != -1)
-        {
-            movement.TriggerSpell();
-
-            yield return new WaitForSeconds(timingTrigger);
-
             movement.TriggerSpell();
         }
     }
