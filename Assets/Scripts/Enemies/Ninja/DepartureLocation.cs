@@ -5,30 +5,23 @@ using UnityEngine;
 public class DepartureLocation: MonoBehaviour
 {
     [Header("Configuration of Spawn")]
-    [Tooltip("Timer in seconds")]
-    public float checkInterval = 5f;
-
+    [SerializeField]
     [Tooltip("Minimum distance to player")]
-    public float minDistance = 10f;
-
+    private float minDistance = 10f;
+    [SerializeField]
     [Tooltip("Maximum distance to player")]
-    public float maxDistance = 50f;
-
+    private float maxDistance = 50f;
+    [SerializeField]
     [Tooltip("List of posible locations")]
-    public List<Transform> spawnPoints = new List<Transform>();
-
-    public GameObject spawnPrefab;
-
-    // Variables Publicas
-    private float timer;
-    
+    private List<Transform> spawnPoints = new List<Transform>();
+    [SerializeField]
+    [Tooltip("Prefab of renderObject")]
+    private GameObject renderPrefab;
 
     private Vector3 playerPosition;
 
-    private void Start()
-    {
-        
-    }
+
+    #region Actions
     public void CalculatePositionToExit()
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
@@ -37,7 +30,7 @@ public class DepartureLocation: MonoBehaviour
 
         // Lista temporal con las posiciones validas segun distancia
         List<Transform> validPoints = new List<Transform>();
-        while(validPoints.Count == 0)
+        while (validPoints.Count == 0)
         {
             foreach (Transform point in spawnPoints)
             {
@@ -53,14 +46,15 @@ public class DepartureLocation: MonoBehaviour
                 maxDistance += 50;
             }
         }
-        
+
         Transform chosenPoint = validPoints[Random.Range(0, validPoints.Count)];
 
         // Poner Posiciones de ruta
         PathingNinja pathing = GetComponent<PathingNinja>();
         pathing.positions.Clear();
-      
-        for (int i = 0; i < chosenPoint.childCount; i++) {
+
+        for (int i = 0; i < chosenPoint.childCount; i++)
+        {
             pathing.positions.Add(chosenPoint.GetChild(i));
 
             Debug.Log(pathing.positions[i].position);
@@ -70,11 +64,11 @@ public class DepartureLocation: MonoBehaviour
         Vector3 departurePosition = new Vector3(chosenPoint.position.x, GetComponent<Transform>().position.y, chosenPoint.position.z);
 
         // Animaciones y cosas
-        
+
 
         // Hacer visible el personaje
         GetComponent<Transform>().position = departurePosition;
-        spawnPrefab.SetActive(true);
+        renderPrefab.SetActive(true);
     }
 
     public void SetInvisible()
@@ -82,12 +76,15 @@ public class DepartureLocation: MonoBehaviour
         // Animaciones y cosas
 
         // Hacer invisible al personaje
-        spawnPrefab.SetActive(false);
+        renderPrefab.SetActive(false);
     }
 
+    #endregion
+
+    #region Perceptions
     public bool CheckInvisible()
     {
-        if (spawnPrefab.activeSelf == true)
+        if (renderPrefab.activeSelf == true)
         {
             return true;
         }
@@ -96,4 +93,5 @@ public class DepartureLocation: MonoBehaviour
             return false;
         }
     }
+    #endregion
 }

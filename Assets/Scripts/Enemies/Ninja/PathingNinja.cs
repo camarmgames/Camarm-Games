@@ -4,80 +4,50 @@ using UnityEngine;
 public class PathingNinja: MonoBehaviour
 {
     [Header("Configuration of pathing")]
-    [Tooltip("Enemy speed")]
-    public float speed;
+    [SerializeField, Tooltip("Enemy speed")]
+    private float speed;
     [Tooltip("Positions that have to follow")]
     public List<Transform> positions;
-    [Tooltip("The distance the agent must be from one point to go to the next")]
-    public float distanceThreshold;
-    [Tooltip("The trap is going to put")]
-    public GameObject trapPrefab;
-    [Tooltip("Number of trap it can put")]
-    public int trapsAvailable;
+    [SerializeField, Tooltip("The distance the agent must be from one point to go to the next")]
+    private float distanceThreshold;
+    [SerializeField, Tooltip("The trap is going to put")]
+    private GameObject trapPrefab;
+    [SerializeField, Tooltip("Number of trap it can put")]
+    private int trapsAvailable;
 
     [Header("Parameters of vision")]
-    public float viewRadius = 10f;
+    [SerializeField, Tooltip("Distance the enemy can see to")]
+    private float viewRadius = 10f;
     [Range(0, 360)]
-    public float viewAngle = 90f;
-    public LayerMask playerMask;
-    public LayerMask obstacleMask;
+    [SerializeField, Tooltip("Angle of vision of the enemy")]
+    private float viewAngle = 90f;
+    [SerializeField, Tooltip("Layer of the objective, he have to identify")]
+    private LayerMask playerMask;
+    [SerializeField, Tooltip("Layer of the objects the enemy can not see through them")]
+    private LayerMask obstacleMask;
 
     [Header("References of projectile")]
-    public Transform firePosition;
-    public GameObject proyectilePrefab;
-    public float launchForce = 15f;
+    [SerializeField, Tooltip("Position to fire")]
+    private Transform firePosition;
+    [SerializeField, Tooltip("Prefab of proyectile")]
+    private GameObject proyectilePrefab;
+    [SerializeField, Tooltip("Force of launch")]
+    private float launchForce = 15f;
 
     [Header("Debug")]
-    public bool playerVisible;
+    [SerializeField, Tooltip("Test of script")]
+    private bool playerVisible;
 
 
     private Transform player;
 
-    int currentTargetPosId = 0;
+    private int currentTargetPosId = 0;
     private int trapCount = 0;
     private Vector3 target;
 
-    bool isMoving;
+    private bool isMoving;
 
-    bool changeLocation = false;
-
-
-    public void CancelMove()
-    {
-        target = Vector3.zero;
-        isMoving = false;
-    }
-
-    public bool IsNotMoving()
-    {
-        return !isMoving;
-    }
-
-    public bool CanMove(Vector3 targetPos)
-    {
-        return true;
-    }
-
-    public Vector3 GetTarget()
-    {
-        return target;
-    }
-
-    public bool HasArrived()
-    {
-        return Vector3.Distance(transform.position, target) < distanceThreshold;
-    }
-
-    public void MoveInstant(Vector3 targetPos, Quaternion targetRot = default)
-    {
-        transform.SetLocalPositionAndRotation(targetPos, targetRot);
-    }
-
-    public void SetTarget(Vector3 targetPos)
-    {
-        target = targetPos;
-        isMoving = true;
-    }
+    private bool changeLocation = false;
 
     void Start()
     {
@@ -110,118 +80,38 @@ public class PathingNinja: MonoBehaviour
         }
     }
 
-
-    public bool checkChangeLocation()
+    #region Standar Functions
+    public Vector3 GetTarget()
     {
-        return changeLocation;
+        return target;
     }
 
-    private bool CanPlaceTrap(Vector3 position, float checkRadius)
+    public bool HasArrived()
     {
-        Collider[] overlaps = Physics.OverlapSphere(position, checkRadius);
-        foreach (Collider collision in overlaps)
-        {
-            if(collision.gameObject.GetComponent<TrapNinja>() != null)
-            {
-                return false;
-            }
-        }   
-        return true;
-    }
-
-    
-
-    
-    public bool DetectPlayer()
-    {
-        playerVisible = false;
-
-        // Comprobar si el jugador esta dentro del radio
-        Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
-
-        if (targets.Length > 0)
-        {
-            Transform target = targets[0].transform;
-            Vector3 dirtToPlayer = (target.position - transform.position).normalized;
-
-            // Comprobar si esta dentro del angulo de vision
-            if(Vector3.Angle(transform.forward, dirtToPlayer) < viewAngle / 2)
-            {
-                float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-
-                // Comrpobar si hay linea de vision (sin obstaculos en medio)
-                if(!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirtToPlayer, distanceToPlayer, obstacleMask))
-                {
-                    playerVisible = true;
-                    Debug.Log("Jugador detectado");
-                    return true;
-                }
-            }
-
-        }
-
-        return false;
-    }
-
-    public bool NoDetectPlayer()
-    {
-        // Comprobar si el jugador esta dentro del radio
-        Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
-
-        if (targets.Length > 0)
-        {
-            Transform target = targets[0].transform;
-            Vector3 dirtToPlayer = (target.position - transform.position).normalized;
-
-            // Comprobar si esta dentro del angulo de vision
-            if (Vector3.Angle(transform.forward, dirtToPlayer) < viewAngle / 2)
-            {
-                float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-
-                // Comrpobar si hay linea de vision (sin obstaculos en medio)
-                if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirtToPlayer, distanceToPlayer, obstacleMask))
-                {
-                    return false;
-                }
-            }
-
-        }
-        Debug.Log("Jugador NO detectado");
-        return true;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, viewRadius);
-
-        Vector3 leftBoundary = DirectionFromAngle(-viewAngle / 2, false);
-        Vector3 rightBoundary = DirectionFromAngle(viewAngle / 2, false);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + leftBoundary * viewRadius);
-        Gizmos.DrawLine(transform.position, transform.position + rightBoundary * viewRadius);
-
-        if (playerVisible && player != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, player.position);
-        }
-
-    }
-
-    Vector3 DirectionFromAngle(float angleInDegrees, bool global)
-    {
-        if (!global)
-            angleInDegrees += transform.eulerAngles.y;
-
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        return Vector3.Distance(transform.position, target) < distanceThreshold;
     }
 
 
-
+    #endregion
 
     #region Actions
+    public void CancelMove()
+    {
+        target = Vector3.zero;
+        isMoving = false;
+    }
+
+    public void MoveInstant(Vector3 targetPos, Quaternion targetRot = default)
+    {
+        transform.SetLocalPositionAndRotation(targetPos, targetRot);
+    }
+
+    public void SetTarget(Vector3 targetPos)
+    {
+        target = targetPos;
+        isMoving = true;
+    }
+
     public void newLocation()
     {
         changeLocation = false;
@@ -277,6 +167,123 @@ public class PathingNinja: MonoBehaviour
 
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
 
+    }
+    #endregion
+
+    #region Perceptions
+    public bool IsNotMoving()
+    {
+        return !isMoving;
+    }
+
+    public bool CanMove(Vector3 targetPos)
+    {
+        return true;
+    }
+    public bool checkChangeLocation()
+    {
+        return changeLocation;
+    }
+
+    private bool CanPlaceTrap(Vector3 position, float checkRadius)
+    {
+        Collider[] overlaps = Physics.OverlapSphere(position, checkRadius);
+        foreach (Collider collision in overlaps)
+        {
+            if (collision.gameObject.GetComponent<TrapNinja>() != null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool DetectPlayer()
+    {
+        playerVisible = false;
+
+        // Comprobar si el jugador esta dentro del radio
+        Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+
+        if (targets.Length > 0)
+        {
+            Transform target = targets[0].transform;
+            Vector3 dirtToPlayer = (target.position - transform.position).normalized;
+
+            // Comprobar si esta dentro del angulo de vision
+            if (Vector3.Angle(transform.forward, dirtToPlayer) < viewAngle / 2)
+            {
+                float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+
+                // Comrpobar si hay linea de vision (sin obstaculos en medio)
+                if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirtToPlayer, distanceToPlayer, obstacleMask))
+                {
+                    playerVisible = true;
+                    Debug.Log("Jugador detectado");
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+    }
+
+    public bool NoDetectPlayer()
+    {
+        // Comprobar si el jugador esta dentro del radio
+        Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+
+        if (targets.Length > 0)
+        {
+            Transform target = targets[0].transform;
+            Vector3 dirtToPlayer = (target.position - transform.position).normalized;
+
+            // Comprobar si esta dentro del angulo de vision
+            if (Vector3.Angle(transform.forward, dirtToPlayer) < viewAngle / 2)
+            {
+                float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+
+                // Comrpobar si hay linea de vision (sin obstaculos en medio)
+                if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirtToPlayer, distanceToPlayer, obstacleMask))
+                {
+                    return false;
+                }
+            }
+
+        }
+        Debug.Log("Jugador NO detectado");
+        return true;
+    }
+    #endregion
+
+    #region Gizmos
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+
+        Vector3 leftBoundary = DirectionFromAngle(-viewAngle / 2, false);
+        Vector3 rightBoundary = DirectionFromAngle(viewAngle / 2, false);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary * viewRadius);
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary * viewRadius);
+
+        if (playerVisible && player != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, player.position);
+        }
+
+    }
+
+    Vector3 DirectionFromAngle(float angleInDegrees, bool global)
+    {
+        if (!global)
+            angleInDegrees += transform.eulerAngles.y;
+
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
     #endregion
 }

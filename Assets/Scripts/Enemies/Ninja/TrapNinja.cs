@@ -4,9 +4,12 @@ using UnityEngine;
 public class TrapNinja: MonoBehaviour
 {
     [Header("Configuration of trap")]
-    public float timingStuck = 5f;
-    public bool temporal = false;
-    public float lifeTime = 5f;
+    [SerializeField, Tooltip("Timing the trap stuck the player")]
+    private float timingStuck = 5f;
+    [SerializeField, Tooltip("If its temporal and disapear with the time")]
+    private bool temporal = false;
+    [SerializeField, Tooltip("Time of live of the trap")]
+    private float lifeTime = 5f;
 
     private float initialPlayerSpeed;
 

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public int bewitched = 1;                      // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
 
     [SerializeField, Range(0.1f, 10f)]
+    [Tooltip("Sensibility of the rotation")]
     private float rotationSmoothness = 2f;
     #endregion
 
