@@ -6,11 +6,14 @@ public class DetectPlayer: MonoBehaviour
     private Transform player;
     private bool isDetecting;
     private bool detectionConfirmed;
+    private bool suspicious;
     private Coroutine loseSightCoroutine;
 
     [Header("Parameters of vision")]
-    [SerializeField, Tooltip("Distance the enemy can see to")]
+    [SerializeField, Tooltip("Distance the enemy can see perfectly")]
     private float viewRadius = 10f;
+    [SerializeField, Tooltip("Distance the enemy don't diferentiate")]
+    private float alertRadius = 20f;
     [Range(0, 360)]
     [SerializeField, Tooltip("Angle of vision of the enemy")]
     private float viewAngle = 90f;
@@ -46,7 +49,7 @@ public class DetectPlayer: MonoBehaviour
     {
         if (CanSeePlayer())
         {
-            if (!detectionConfirmed && !isDetecting) {
+            if (!detectionConfirmed && !isDetecting && !suspicious) {
                 StartCoroutine(ConfirmDetectionAfterDelay());
             }
 
@@ -76,7 +79,7 @@ public class DetectPlayer: MonoBehaviour
     private bool CanSeePlayer()
     {
         // Comprobar si el jugador esta dentro del radio
-        Collider[] targets = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
+        Collider[] targets = Physics.OverlapSphere(transform.position, alertRadius, playerMask);
 
         if (targets.Length > 0)
         {
@@ -91,7 +94,19 @@ public class DetectPlayer: MonoBehaviour
                 // Comrpobar si hay linea de vision (sin obstaculos en medio)
                 if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirtToPlayer, distanceToPlayer, obstacleMask))
                 {
-                    return true;
+                    if(distanceToPlayer <= viewRadius)
+                    {
+                        suspicious = false;
+                        return true;
+                    }
+                    else
+                    {
+                        suspicious = true;
+                        if (debugLog)
+                            Debug.Log("Ve algo moverse, está en alerta");
+
+                    }
+                    
                 }
             }
 
@@ -110,6 +125,8 @@ public class DetectPlayer: MonoBehaviour
         detectionConfirmed = true;
         playerVisible = true;
         isDetecting = false;
+        suspicious = false;
+
         if (debugLog)
             Debug.Log("Jugador detectado tras retraso");
     }
@@ -127,6 +144,9 @@ public class DetectPlayer: MonoBehaviour
             Debug.Log("Jugador perdido tras " + loseSightDelay + "s sin verlo");
     }
 
+    public bool IsSuspicious() => suspicious;
+    public bool IsPlayerDetected() => detectionConfirmed;
+
     public bool PNoDetectPlayer()
     {
         return !playerVisible;
@@ -134,15 +154,20 @@ public class DetectPlayer: MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
+        // Rango de sospecha (amarillo)
+        Gizmos.color = new Color(1f, 1f, 0f, 0.3f);
+        Gizmos.DrawWireSphere(transform.position, alertRadius);
+
+        // Rango de visión confirmada (rojo)
+        Gizmos.color = new Color(1f, 0.3f, 0.3f, 0.3f);
         Gizmos.DrawWireSphere(transform.position, viewRadius);
 
         Vector3 leftBoundary = DirectionFromAngle(-viewAngle / 2, false);
         Vector3 rightBoundary = DirectionFromAngle(viewAngle / 2, false);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + leftBoundary * viewRadius);
-        Gizmos.DrawLine(transform.position, transform.position + rightBoundary * viewRadius);
+        Gizmos.DrawLine(transform.position, transform.position + leftBoundary * alertRadius);
+        Gizmos.DrawLine(transform.position, transform.position + rightBoundary * alertRadius);
 
         if (playerVisible && player != null)
         {
