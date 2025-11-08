@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
     public float initialSpeed;
-    public int bewitched = 1;                      // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
+    public int bewitched = 1;                   // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
+
 
     [SerializeField, Range(0.1f, 10f)]
     [Tooltip("Sensibility of the rotation")]
