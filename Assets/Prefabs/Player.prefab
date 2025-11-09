@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 9094941075744269742}
   - component: {fileID: 1529886146696211897}
   - component: {fileID: 229665346422296436}
+  - component: {fileID: 1080485426287118979}
   m_Layer: 0
   m_Name: PlayerMovement
   m_TagString: Untagged
@@ -433,6 +434,23 @@ MonoBehaviour:
   initialSpeed: 0
   bewitched: 1
   rotationSmoothness: 2
+--- !u!114 &1080485426287118979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405716195541181291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e73a472179f02498e1a05ac6cd18d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 16
+  footOrigin: {fileID: 0}
+  stepDistance: 2
 --- !u!1 &2466560846784540254
 GameObject:
   m_ObjectHideFlags: 0

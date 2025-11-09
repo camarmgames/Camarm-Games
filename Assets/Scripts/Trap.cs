@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class TrapNinja: MonoBehaviour
+public class Trap: MonoBehaviour
 {
     public enum TrapType
     {
@@ -41,12 +41,12 @@ public class TrapNinja: MonoBehaviour
     public void ActivateTrapEffect(Collider target)
     {
         PlayerMovement playerMovement = target.GetComponent<PlayerMovement>();
-        if(playerMovement == null) return;
+        if (playerMovement == null) return;
 
         switch (trapType)
         {
             case TrapType.Slow:
-                StartCoroutine(SlowEffect(playerMovement)); 
+                StartCoroutine(SlowEffect(playerMovement));
                 break;
 
             case TrapType.Stuck:
