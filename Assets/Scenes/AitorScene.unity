@@ -6651,6 +6651,8 @@ GameObject:
   - component: {fileID: 1882510886}
   - component: {fileID: 1882510885}
   - component: {fileID: 1882510891}
+  - component: {fileID: 1882510892}
+  - component: {fileID: 1882510893}
   m_Layer: 3
   m_Name: CubePatrol
   m_TagString: Untagged
@@ -6800,6 +6802,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hearingThreshold: 0.5
   forgetTime: 3
+--- !u!114 &1882510892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882510884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4f231dff36196f4f8508afbc2b78138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapPrefab: {fileID: 3118233731871587103, guid: c81fddc6075eccf44adc460b0a47cdb3, type: 3}
+  trapHeightOffset: 0
+  limitTraps: 3
+--- !u!114 &1882510893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882510884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c0fa7de1d8eb34e9ddeb960cf95dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behindDistance: 2
+  playerT: {fileID: 0}
 --- !u!1 &1887645296
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class Trap: MonoBehaviour
 
     [Header("Configuration of trap")]
     [SerializeField, Tooltip("Type of trap effect")]
-    private TrapType trapType = TrapType.Slow;
+    public TrapType trapType = TrapType.Slow;
     [SerializeField, Tooltip("Timing the trap stuck the player")]
     private float timingEffect = 5f;
     [SerializeField, Tooltip("If its temporal and disapear with the time")]
@@ -21,6 +21,7 @@ public class Trap: MonoBehaviour
     private float lifeTime = 5f;
 
     private float initialPlayerSpeed;
+    public TrapSpawner trapSpawner;
 
     private void Start()
     {
@@ -57,6 +58,9 @@ public class Trap: MonoBehaviour
                 ActivarMago();
                 break;
         }
+        
+        if(trapSpawner != null)
+            trapSpawner.limitTraps++;
     }
 
     IEnumerator SlowEffect(PlayerMovement player)
@@ -78,7 +82,7 @@ public class Trap: MonoBehaviour
     {
         float originalSpeed = player.moveSpeed;
         player.moveSpeed = 0f;
-        Debug.Log("Jugador atrapado por trampa");
+        Debug.Log("Jugador atrapado");
 
         yield return new WaitForSeconds(timingEffect);
 

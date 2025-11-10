@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7582864505698023508}
   - component: {fileID: 25020873673516813}
   - component: {fileID: 3148122748447322895}
-  - component: {fileID: 1529578115782120788}
   - component: {fileID: 2267822470344928110}
+  - component: {fileID: 6316991247305712964}
   m_Layer: 0
   m_Name: TrampaPegajosa
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3118233731871587103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 0.1, z: 6.38396}
-  m_LocalScale: {x: 0.3, y: 1, z: 0.34}
+  m_LocalPosition: {x: 4.7, y: 0, z: 6.38396}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,19 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1529578115782120788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3118233731871587103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839a068e32bdd48498b264cb9653f4c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timingStuck: 5
 --- !u!65 &2267822470344928110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -122,3 +109,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.68, y: 1.51, z: 7.54}
   m_Center: {x: 0, y: 0.74, z: 0}
+--- !u!114 &6316991247305712964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3118233731871587103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256fe305809c67748b5dcdfae7f7bb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapType: 0
+  timingEffect: 5
+  temporal: 0
+  lifeTime: 5
