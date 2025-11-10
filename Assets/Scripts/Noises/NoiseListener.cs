@@ -12,7 +12,14 @@ public class NoiseListener: MonoBehaviour
     private Vector3 lastHeardPosition;
     private NoiseType lastHeardNoise;
 
+    private Transform playerT;
 
+    private void Start()
+    {
+        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+        if (player != null)
+            playerT = player.transform;
+    }
 
     private void Update()
     {
@@ -47,6 +54,10 @@ public class NoiseListener: MonoBehaviour
         if(lastHeardNoise != null && lastHeardNoise.intensity == 1)
         {
             Debug.Log("Sonido fuerte");
+
+            TeleportBehindPlayer teleportEnemy = GetComponent<TeleportBehindPlayer>();
+            if (teleportEnemy != null)
+                teleportEnemy.playerT = playerT;
             return true;
         }
             

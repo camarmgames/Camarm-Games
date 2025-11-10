@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1200532699461826775}
   - component: {fileID: 7914213030536426147}
   - component: {fileID: 3469347935356182595}
-  - component: {fileID: 1390275076249773616}
+  - component: {fileID: 8032134755022266885}
   m_Layer: 0
   m_Name: Caramelo
   m_TagString: Untagged
@@ -137,7 +137,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1390275076249773616
+--- !u!114 &8032134755022266885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +146,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3287407581643311352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839a068e32bdd48498b264cb9653f4c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 256fe305809c67748b5dcdfae7f7bb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timingStuck: 5
-  temporal: 1
+  trapType: 0
+  timingEffect: 5
+  temporal: 0
   lifeTime: 5
+  trapSpawner: {fileID: 0}
