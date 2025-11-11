@@ -26,18 +26,18 @@ public class BlockPath: MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            ABlockPath(pointsBlock);
+            ABlockPath();
         }
     }
 
-    public void ABlockPath(List<Transform> posiblesPaths)
+    public void ABlockPath()
     {
-        if (isBlockingPath || posiblesPaths == null || posiblesPaths.Count == 0) return;
+        if (isBlockingPath || pointsBlock == null || pointsBlock.Count == 0) return;
 
         Transform target = null;
         float minDist = Mathf.Infinity;
 
-        foreach (var path in posiblesPaths) {
+        foreach (var path in pointsBlock) {
             float dist = Vector3.Distance(transform.position, path.position);
             if ((dist < minDist))
             {
@@ -46,10 +46,20 @@ public class BlockPath: MonoBehaviour
             }
         }
         if (target != null) { 
-            StartCoroutine(MoveAndBlock(target));
+            MoveAndBlock2(target);
         }
     }
 
+    private void MoveAndBlock2(Transform target)
+    {
+        isBlockingPath = true;
+        transform.LookAt(target);
+        if (wallPrefab != null)
+        {
+            Instantiate(wallPrefab, target.position, target.rotation);
+        }
+        isBlockingPath = false;
+    }
     private IEnumerator MoveAndBlock(Transform target)
     {
         isBlockingPath = true;
