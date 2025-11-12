@@ -8,14 +8,22 @@ public class NoiseListener: MonoBehaviour
     [Tooltip("Time that need to forget the sound")]
     public float forgetTime = 3f;
 
+    [Header("Debug")]
+    [SerializeField, Tooltip("Message console")]
+    private bool debugLog;
+
     private float forgetTimer;
     private Vector3 lastHeardPosition;
     private NoiseType lastHeardNoise;
 
     private Transform playerT;
+    private DetectPlayer detectPlayer;
+    private Investigation investigation;
 
     private void Start()
     {
+        detectPlayer = GetComponent<DetectPlayer>();
+        investigation = GetComponent<Investigation>();
         PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
         if (player != null)
             playerT = player.transform;
@@ -31,9 +39,6 @@ public class NoiseListener: MonoBehaviour
         {
             lastHeardNoise = null;
         }
-
-        HighNoise();
-        LightNoise();
     }
 
     public void OnNoiseHeard(Vector3 position, NoiseType noise)
@@ -44,8 +49,8 @@ public class NoiseListener: MonoBehaviour
             lastHeardPosition = position;
             lastHeardNoise = noise;
             forgetTimer = forgetTime;
-
-            Debug.Log($"{name} escucho un ruido {noise.name} en {position}");
+            if(debugLog)
+                Debug.Log($"{name} escucho un ruido {noise.name} en {position}");
         }
     }
 
@@ -53,11 +58,12 @@ public class NoiseListener: MonoBehaviour
     {
         if(lastHeardNoise != null && lastHeardNoise.intensity == 1)
         {
-            Debug.Log("Sonido fuerte");
+            if (debugLog)
+                Debug.Log("Sonido fuerte");
 
             TeleportBehindPlayer teleportEnemy = GetComponent<TeleportBehindPlayer>();
             if (teleportEnemy != null)
-                teleportEnemy.playerT = playerT;
+                teleportEnemy.player = playerT;
             return true;
         }
             
@@ -66,11 +72,29 @@ public class NoiseListener: MonoBehaviour
 
     public bool LightNoise()
     {
-        if(lastHeardNoise != null && lastHeardNoise.intensity == 0.5)
+        detectPlayer.PDetectPlayer();
+        if (detectPlayer.IsSuspicious())
         {
-            Debug.Log("Sonido leve");
+            if (investigation != null)
+                investigation.pointToInvestigateArea = playerT.position;
+
+            if (debugLog)
+                Debug.Log("Vi algo sospechoso");
+
             return true;
         }
+
+        if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5) || detectPlayer.IsPlayerDetected())
+        {
+            if (investigation != null)
+                investigation.pointToInvestigateArea = lastHeardPosition;
+
+            if (debugLog)
+                Debug.Log("Sonido leve");
+            return true;
+        }
+
+        
             
         return false;
     }

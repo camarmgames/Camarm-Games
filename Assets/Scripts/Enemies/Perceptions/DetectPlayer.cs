@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DetectPlayer: MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class DetectPlayer: MonoBehaviour
     private bool detectionConfirmed;
     private bool suspicious;
     private Coroutine loseSightCoroutine;
+    private Coroutine confirmDetectionCoroutine;
+    private LaunchFire throwScript;
+    private NavMeshAgent agent;
 
     [Header("Parameters of vision")]
     [SerializeField, Tooltip("Distance the enemy can see perfectly")]
@@ -21,6 +25,12 @@ public class DetectPlayer: MonoBehaviour
     private LayerMask playerMask;
     [SerializeField, Tooltip("Layer of the objects the enemy can not see through them")]
     private LayerMask obstacleMask;
+    [SerializeField, Tooltip("Velocidad de rotación al mirar")]
+    private float rotationSpeed = 3f;
+    [SerializeField, Tooltip("Amplitud del giro lateral cuando lo pierde de vista")]
+    private float searchAngle = 25f;
+    [SerializeField, Tooltip("Velocidad del movimiento lateral de la cabeza/cuerpo")]
+    private float searchSpeed = 2f;
 
     [Header("Detection timing")]
     [SerializeField, Tooltip("Seconds before confirming detection")]
@@ -34,23 +44,38 @@ public class DetectPlayer: MonoBehaviour
     [SerializeField, Tooltip("Message console")]
     private bool debugLog;
 
+
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        throwScript = GetComponent<LaunchFire>();
     }
 
-    void Update()
+    public void StopDetection()
     {
-        bool dP = PDetectPlayer();
-        bool nP = PNoDetectPlayer();
+        if(confirmDetectionCoroutine != null)
+            StopCoroutine(confirmDetectionCoroutine);
+
+        if(loseSightCoroutine != null)
+            StopCoroutine(loseSightCoroutine);
     }
 
     public bool PDetectPlayer()
     {
+        if (detectionConfirmed)
+            SmoothLookAt();
+
         if (CanSeePlayer())
         {
             if (!detectionConfirmed && !isDetecting && !suspicious) {
-                StartCoroutine(ConfirmDetectionAfterDelay());
+                if(confirmDetectionCoroutine == null)
+                    confirmDetectionCoroutine = StartCoroutine(ConfirmDetectionAfterDelay());
+            }
+
+            if (detectionConfirmed) {
+                if(throwScript != null)
+                    throwScript.playerPosition = player.position;
             }
 
             // Si ya lo detecta y esta contando para perderlo, reinicia
@@ -69,7 +94,8 @@ public class DetectPlayer: MonoBehaviour
             // Si no lo ve, pero estaba detectado, empieza el conteo
             if(detectionConfirmed && loseSightCoroutine == null)
             {
-                loseSightCoroutine = StartCoroutine(LoseSightAfterDelay());
+                if(loseSightCoroutine == null)
+                    loseSightCoroutine = StartCoroutine(LoseSightAfterDelay());
             }
 
             return detectionConfirmed;
@@ -129,6 +155,8 @@ public class DetectPlayer: MonoBehaviour
 
         if (debugLog)
             Debug.Log("Jugador detectado tras retraso");
+
+        confirmDetectionCoroutine = null;
     }
 
     private IEnumerator LoseSightAfterDelay()
@@ -142,6 +170,29 @@ public class DetectPlayer: MonoBehaviour
         playerVisible = false;
         if (debugLog)
             Debug.Log("Jugador perdido tras " + loseSightDelay + "s sin verlo");
+
+        loseSightCoroutine = null;
+    }
+
+    private void SmoothLookAt()
+    {
+        if (agent != null && agent.hasPath)
+            return;
+
+        Vector3 targetDir;
+
+        if (loseSightCoroutine == null)
+        {
+            targetDir = (player.position - transform.position).normalized;
+
+            targetDir.y = 0f;
+
+            if (targetDir.magnitude > 0.1f)
+            {
+                Quaternion lookRot = Quaternion.LookRotation(targetDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
+            }
+        }
     }
 
     public bool IsSuspicious() => suspicious;
