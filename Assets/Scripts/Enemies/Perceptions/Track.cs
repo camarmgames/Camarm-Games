@@ -2,6 +2,7 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,24 +31,50 @@ public class Track: MonoBehaviour
     private int lastSeenFootprintID = -1;
     private bool inspecting = false;
 
-    void Start()
+    private Footprint target;
+    private bool hasEndedFollowing;
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
             agent.speed = followSpeed;
     }
 
-    void Update()
-    {
-        if(!isFollowingTrail && !inspecting)
-            TryDetectFootprints();   
-    }
-
-    public bool TryDetectFootprints()
+    public bool DetectFootprint()
     {
         Collider[] footprints = Physics.OverlapSphere(transform.position, viewRadius, footprintMask);
-        if(footprints.Length == 0) return false;
+        if (footprints.Length == 0) return false;
+        List<Footprint> visibleFootprints = new List<Footprint>();
+        foreach (var f in footprints)
+        {
+            Vector3 dirToFootprint = (f.transform.position - transform.position).normalized;
+            float distToFootprint = Vector3.Distance(transform.position, f.transform.position);
 
+            if (Vector3.Angle(transform.forward, dirToFootprint) < viewAngle / 2)
+            {
+                if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dirToFootprint, distToFootprint, obstacleMask))
+                {
+                    visibleFootprints.Add(f.GetComponent<Footprint>());
+                }
+            }
+        }
+        if (visibleFootprints.Count == 0) return false;
+        visibleFootprints.Sort((a, b) => a.footprintID.CompareTo(b.footprintID));
+        foreach (var fp in visibleFootprints)
+            if (fp.footprintID > lastSeenFootprintID)
+                return true;
+        return false;
+    }
+
+    public void Detect()
+    {
+        TryDetectFootprints();
+    }
+    public bool TryDetectFootprints()
+    {
+        hasEndedFollowing = false;
+        Collider[] footprints = Physics.OverlapSphere(transform.position, viewRadius, footprintMask);
+        if(footprints.Length == 0) return false;
         List<Footprint> visibleFootprints = new List<Footprint>();
         foreach (var f in footprints)
         {
@@ -62,13 +89,8 @@ public class Track: MonoBehaviour
                 }
             }
         }
-
         if (visibleFootprints.Count == 0) return false;
-
-        // Ordenar por ID
         visibleFootprints.Sort((a,b) => a.footprintID.CompareTo(b.footprintID));
-
-
         foreach(var fp in visibleFootprints)
         {
             if(fp.footprintID > lastSeenFootprintID)
@@ -77,7 +99,7 @@ public class Track: MonoBehaviour
                 return true;
             }
         }
-
+        //hasEndedFollowing = true;
         return false;
     }
 
@@ -113,20 +135,30 @@ public class Track: MonoBehaviour
             if(stuckTimer > 3f)
             {
                 Debug.LogWarning($"{name}: Atascado, abortando seguimiento");
+                hasEndedFollowing = true;
                 break;
             }
             yield return null;
         }
-
+        agent.ResetPath();
+        Debug.Log("Pongo la rotación como toca");
         transform.LookAt(currentTargetFootprint.transform.position);
+
 
         lastSeenFootprintID = currentTargetFootprint.footprintID;
         isFollowingTrail = false;
 
         yield return new WaitForSeconds(0.5f);
-        if (!TryDetectFootprints())
+        if (!DetectFootprint())
             StartCoroutine(InspectArea(currentTargetFootprint.transform.position));
+        else
+            hasEndedFollowing = true;
     }
+    public bool HasEndedFollowing()
+    {
+        return hasEndedFollowing;
+    }
+
 
     private IEnumerator InspectArea(Vector3 lastPosition)
     {
@@ -155,6 +187,7 @@ public class Track: MonoBehaviour
 
         inspecting = false;
         Debug.Log($"{name}: no encontro mas huellas");
+        hasEndedFollowing = true;
     }
 
     private void OnDrawGizmosSelected()
