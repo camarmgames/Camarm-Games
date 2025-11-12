@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class TrapNinja: MonoBehaviour
+public class Trap: MonoBehaviour
 {
     public enum TrapType
     {
@@ -12,7 +12,7 @@ public class TrapNinja: MonoBehaviour
 
     [Header("Configuration of trap")]
     [SerializeField, Tooltip("Type of trap effect")]
-    private TrapType trapType = TrapType.Slow;
+    public TrapType trapType = TrapType.Slow;
     [SerializeField, Tooltip("Timing the trap stuck the player")]
     private float timingEffect = 5f;
     [SerializeField, Tooltip("If its temporal and disapear with the time")]
@@ -21,6 +21,7 @@ public class TrapNinja: MonoBehaviour
     private float lifeTime = 5f;
 
     private float initialPlayerSpeed;
+    public TrapSpawner trapSpawner;
 
     private void Start()
     {
@@ -41,12 +42,12 @@ public class TrapNinja: MonoBehaviour
     public void ActivateTrapEffect(Collider target)
     {
         PlayerMovement playerMovement = target.GetComponent<PlayerMovement>();
-        if(playerMovement == null) return;
+        if (playerMovement == null) return;
 
         switch (trapType)
         {
             case TrapType.Slow:
-                StartCoroutine(SlowEffect(playerMovement)); 
+                StartCoroutine(SlowEffect(playerMovement));
                 break;
 
             case TrapType.Stuck:
@@ -57,6 +58,9 @@ public class TrapNinja: MonoBehaviour
                 ActivarMago();
                 break;
         }
+        
+        if(trapSpawner != null)
+            trapSpawner.limitTraps++;
     }
 
     IEnumerator SlowEffect(PlayerMovement player)
@@ -78,7 +82,7 @@ public class TrapNinja: MonoBehaviour
     {
         float originalSpeed = player.moveSpeed;
         player.moveSpeed = 0f;
-        Debug.Log("Jugador atrapado por trampa");
+        Debug.Log("Jugador atrapado");
 
         yield return new WaitForSeconds(timingEffect);
 
