@@ -1,15 +1,37 @@
+using System.Collections;
 using UnityEngine;
 
 public class TeleportBehindPlayer: MonoBehaviour
 {
+    [Header("Teleport Settings")]
     [SerializeField, Tooltip("Distance behind of the player")]
-    private float behindDistance = 2f;
+    private float behindDistance = 4f;
 
-    public Transform playerT;
+    [SerializeField, Tooltip("Cooldown between teleports")]
+    private float teleportCooldown = 25f;
 
-    public void TeleportEnemyBehindPlayer(Transform player)
+    [Header("Debug")]
+    [SerializeField, Tooltip("Message console")]
+    private bool debugLog;
+
+    public Transform player;
+    private bool canTeleport = true;
+    public void TeleportEnemyBehindPlayer()
     {
-        Vector3 behindPosition = player.position - player.forward*behindDistance;
+        if (!canTeleport)
+        {
+            if (debugLog)
+                Debug.Log("Teleport en cooldown");
+            return;
+        }
+
+        StartCoroutine(TeleportCooldownRoutine());
+        PerformTeleport();
+    }
+
+    private void PerformTeleport()
+    {
+        Vector3 behindPosition = player.position - player.forward * behindDistance;
 
         behindPosition.y = transform.position.y;
 
@@ -20,9 +42,12 @@ public class TeleportBehindPlayer: MonoBehaviour
         Debug.Log($"{name} se ha teletransportado detras de {player.name}");
     }
 
-    public void ATeleportEnemyBehindPlayer()
+    private IEnumerator TeleportCooldownRoutine()
     {
-        if(playerT != null)
-            TeleportEnemyBehindPlayer(playerT);
+        canTeleport = false;
+
+        yield return new WaitForSeconds(teleportCooldown);
+
+        canTeleport = true;
     }
 }

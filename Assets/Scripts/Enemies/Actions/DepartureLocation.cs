@@ -18,8 +18,28 @@ public class DepartureLocation: MonoBehaviour
     [Tooltip("Prefab of renderObject")]
     private GameObject renderPrefab;
 
+    [Header("Timer Settings")]
+    [SerializeField]
+    [Tooltip("Cooldown time before allowing next spawn")]
+    private float cooldownTime = 10f;
+
     private Vector3 playerPosition;
 
+    private float timer = 0f;
+    private bool timerRunning = false;
+
+    private void Update()
+    {
+        if (timerRunning)
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0f)
+            {
+                timerRunning = false;
+                timer = 0f;
+            }
+        }
+    }
 
     #region Actions
     public void CalculatePositionToExit()
@@ -28,6 +48,11 @@ public class DepartureLocation: MonoBehaviour
 
         if (playerPosition == null || spawnPoints.Count == 0) return;
 
+        // Reinicio timer
+        timer = cooldownTime;
+        timerRunning = true;
+
+
         // Lista temporal con las posiciones validas segun distancia
         List<Transform> validPoints = new List<Transform>();
         while (validPoints.Count == 0)
@@ -35,7 +60,6 @@ public class DepartureLocation: MonoBehaviour
             foreach (Transform point in spawnPoints)
             {
                 float dist = Vector3.Distance(point.position, playerPosition);
-                Debug.Log(dist);
                 if (dist >= minDistance && dist <= maxDistance)
                 {
                     validPoints.Add(point);
@@ -51,15 +75,12 @@ public class DepartureLocation: MonoBehaviour
 
         // Poner Posiciones de ruta
         PathingNinja pathing = GetComponent<PathingNinja>();
-        pathing.positions.Clear();
+        pathing.patrolPoints.Clear();
 
         for (int i = 0; i < chosenPoint.childCount; i++)
         {
-            pathing.positions.Add(chosenPoint.GetChild(i));
-
-            Debug.Log(pathing.positions[i].position);
+            pathing.patrolPoints.Add(chosenPoint.GetChild(i));
         }
-        Debug.Log(pathing.positions.Count);
 
         Vector3 departurePosition = new Vector3(chosenPoint.position.x, GetComponent<Transform>().position.y, chosenPoint.position.z);
 
@@ -84,14 +105,17 @@ public class DepartureLocation: MonoBehaviour
     #region Perceptions
     public bool CheckInvisible()
     {
-        if (renderPrefab.activeSelf == true)
+        return !renderPrefab.activeSelf;
+    }
+
+    public bool FinishTimer()
+    {
+        if (!timerRunning)
         {
+            SetInvisible();
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     #endregion
 }

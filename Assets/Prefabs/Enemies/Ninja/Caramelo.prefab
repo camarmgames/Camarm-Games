@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256fe305809c67748b5dcdfae7f7bb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapType: 0
+  trapType: 1
   timingEffect: 5
-  temporal: 0
-  lifeTime: 5
+  temporal: 1
+  lifeTime: 10
   trapSpawner: {fileID: 0}

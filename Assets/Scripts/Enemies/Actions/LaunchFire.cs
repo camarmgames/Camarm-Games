@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class Throw: MonoBehaviour
+public class LaunchFire: MonoBehaviour
 {
     [Header("References of projectile")]
     [SerializeField, Tooltip("Position to fire")]
@@ -10,8 +11,17 @@ public class Throw: MonoBehaviour
     [SerializeField, Tooltip("Force of launch")]
     private float launchForce = 15f;
 
-    public void Attack(Vector3 playerPosition)
+    [SerializeField, Tooltip("Cooldown between launchs")]
+    private float launchCooldown = 5f;
+
+    public Vector3 playerPosition;
+    private bool canLaunch = true;
+
+    public void Attack()
     {
+        if(!canLaunch)
+            return;
+
         Trap trap = proyectilePrefab.GetComponent<Trap>();
         Trap.TrapType randomType = (Trap.TrapType)Random.Range(0, System.Enum.GetValues(typeof(Trap.TrapType)).Length);
 
@@ -28,5 +38,16 @@ public class Throw: MonoBehaviour
         Rigidbody rb = proyectile.GetComponent<Rigidbody>();
 
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
+
+        StartCoroutine(LaunchCooldownRoutine());
+    }
+
+    private IEnumerator LaunchCooldownRoutine()
+    {
+        canLaunch = false;
+
+        yield return new WaitForSeconds(launchCooldown);
+
+        canLaunch = true;
     }
 }

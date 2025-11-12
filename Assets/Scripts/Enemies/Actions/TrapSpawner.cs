@@ -13,17 +13,11 @@ public class TrapSpawner: MonoBehaviour
     [SerializeField, Tooltip("Limit of traps")]
     public int limitTraps = 3;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.LeftShift))
-            PlaceRandomTrap(transform.position);
-    }
-
-    public void PlaceRandomTrap(Vector3 position)
+    public void PlaceRandomTrap()
     {
         if (trapPrefab == null || limitTraps <= 0) return;
 
-        Vector3 trapPos = new Vector3(position.x, position.y + trapHeightOffset, position.z);
+        Vector3 trapPos = new Vector3(transform.position.x, transform.position.y + trapHeightOffset, transform.position.z);
 
         Trap trap = trapPrefab.GetComponent<Trap>();
         Trap.TrapType randomType = (Trap.TrapType)Random.Range(0, System.Enum.GetValues(typeof(Trap.TrapType)).Length);
@@ -33,7 +27,7 @@ public class TrapSpawner: MonoBehaviour
 
         Instantiate(trapPrefab, trapPos, transform.rotation);
 
-        Debug.Log($"Trampa colocada: {randomType} en {position}");
+        Debug.Log($"Trampa colocada: {randomType} en {transform.position}");
         limitTraps--;
     }
 }

@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,35 +9,40 @@ public class Investigation: MonoBehaviour
     [SerializeField] private float inspectionRadius = 3f;
     [SerializeField] private float timePerPoint = 2f;
     [SerializeField] private int pointsToInvestigate = 5;
+    [SerializeField] private float maxAngleDeviation = 30f;
+    [SerializeField] private float rotationSpeed = 5f;
 
     [Header("Debug")]
-    public Transform pointToInvestigateArea;
+    public Vector3 pointToInvestigateArea;
 
     private NavMeshAgent agent;
     private bool isInvestigating = false;
+    private Coroutine investigateCoroutine;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); 
-        
-        if(pointToInvestigateArea != null)
-        {
-            InvestigateArea(pointToInvestigateArea.position);
-        }
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    public void InvestigateArea(Vector3 targetPosition)
+    public void InvestigateArea()
     {
         if (!isInvestigating)
         {
-            StartCoroutine(InspectArea(targetPosition));
+            isInvestigating = true;
+            agent.isStopped = false;
+            investigateCoroutine = StartCoroutine(InspectArea(pointToInvestigateArea));
         }
+    }
+
+    public void StopInvestigation()
+    {
+        if(investigateCoroutine != null)
+            StopCoroutine(investigateCoroutine);
+        isInvestigating = false;
     }
 
     private IEnumerator InspectArea(Vector3 targetPosition)
     {
-        isInvestigating = true;
-
         agent.SetDestination(targetPosition);
 
         while (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
@@ -44,36 +50,58 @@ public class Investigation: MonoBehaviour
             yield return null;
         }
 
+        Vector3 baseDirection = (targetPosition - transform.position).normalized;
+
         for (int i = 0; i < pointsToInvestigate; i++)
         {
-            Vector3 randomPoint = GetRandomPointAround(targetPosition, inspectionRadius);
+            Vector3 randomPoint = GetRandomPointAround(targetPosition, baseDirection,inspectionRadius);
             agent.SetDestination(randomPoint);
 
             while (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
             {
+                SmoothLookAt(agent.steeringTarget);
                 yield return null;
             }
 
-            float timer = 0f;
-            while (timer < timePerPoint)
+            if(i > 0)
             {
-                timer += Time.deltaTime;
-                yield return null;
+                float timer = 0f;
+                while (timer < timePerPoint)
+                {
+                    timer += Time.deltaTime;
+                    SmoothLookAt(agent.steeringTarget);
+                    yield return null;
+                }
             }
         }
 
         isInvestigating = false;
     }
 
-    private Vector3 GetRandomPointAround(Vector3 center, float radius)
+    private Vector3 GetRandomPointAround(Vector3 center, Vector3 forwardDirection, float radius)
     {
-        Vector3 randomPos = center + Random.insideUnitSphere * radius;
+        float angle = Random.Range(-maxAngleDeviation, maxAngleDeviation);
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);
+        Vector3 direction = rotation * forwardDirection;
+
+        Vector3 randomPos = center + direction * Random.Range(radius * 0.5f, radius);
         randomPos.y = center.y;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPos, out hit, radius, NavMesh.AllAreas))
-        {
             return hit.position;
-        }
+        
         return center;
+    }
+
+    private void SmoothLookAt(Vector3 lookTarget)
+    {
+        Vector3 direction = (lookTarget - transform.position).normalized;
+        direction.y = 0f;
+
+        if(direction.magnitude > 0.1f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 }
