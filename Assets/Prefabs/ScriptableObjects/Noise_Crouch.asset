@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d1db73e6529f64fab464bbe9edd86d, type: 3}
   m_Name: Noise_Crouch
   m_EditorClassIdentifier: 
-  radius: 25
+  radius: 20
   intensity: 0.2
   duration: 0.2
   gizmoColor: {r: 0.347569, g: 1, b: 0.015686274, a: 1}
