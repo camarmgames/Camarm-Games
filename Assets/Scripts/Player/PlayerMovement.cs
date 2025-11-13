@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        _moveDirection = (cameraTransform.forward * _input.y + cameraTransform.right * _input.x).normalized;
+        //_moveDirection = (cameraTransform.forward * _input.y + cameraTransform.right * _input.x).normalized;
         HandleAnimations();
     }
 
@@ -53,21 +53,18 @@ public class PlayerMovement : MonoBehaviour
     // Mover el jugador
     void MovePlayer()
     {
-        _moveDirection.y = 0f; // Asegurarnos de que el movimiento es horizontal (sin componente Y)
+        //_moveDirection.y = 0f; // Asegurarnos de que el movimiento es horizontal (sin componente Y)
+
+        _moveDirection = new Vector3(_input.x, 0f, _input.y).normalized;
 
         // Mover el jugador usando el Transform
-        if (_moveDirection != Vector3.zero)
+        if (_moveDirection.magnitude > 0.1f)
         {
-            float dot = Vector3.Dot(transform.forward, _moveDirection);
+            // Rotación suave hacia la dirección de movimiento
+            Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
 
-            if(dot > 0f)
-            {
-                // Calcular la rotacion en Y basada en la direccion del movimiento
-                Quaternion targetRotation = Quaternion.LookRotation(_moveDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothness * Time.deltaTime);
-            }
-
-            // Mover al jugador en la direccion deseada
+            // Movimiento en el espacio mundial
             transform.Translate(_moveDirection * moveSpeed * Time.deltaTime, Space.World);
         }
     }
