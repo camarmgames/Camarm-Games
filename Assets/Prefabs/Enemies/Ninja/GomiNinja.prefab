@@ -371,23 +371,23 @@ MonoBehaviour:
       nodes:
       - name: Main Loop
         id: 5dfa11eb-b830-46d4-ad7f-5dd9a5d44f04
-        position: {x: 225, y: 0}
+        position: {x: 280, y: -186.4}
         node:
           rid: 8750596587425890305
         references: []
         parentIds: []
         childIds:
-        - 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
+        - 16f82e32-0882-4867-b814-3f60baa4a411
       - name: Sequencer_1
         id: a62bba33-a26e-4b52-90ac-af617d919306
-        position: {x: 458.4, y: 505.6}
+        position: {x: 135.2, y: 1050.4}
         node:
           rid: 8750596587425890309
         references: []
         parentIds:
-        - 4b3d6190-d039-4d51-843b-dd8f4505d3a7
+        - 03ad65aa-9d4f-4074-b15d-6f5c6e0656c7
         childIds:
-        - 2c1ac1bc-4ff1-4b76-894c-f1c5a919c352
+        - 5be23ca0-96ac-4562-b95a-849654e42759
       - name: Selector_0
         id: 5caa0127-a5f7-4534-a9d1-b40b4c59bebd
         position: {x: -526.4, y: 605.60004}
@@ -401,7 +401,7 @@ MonoBehaviour:
         - 2d8830b0-acfa-49df-a6fb-920acc12c1c6
       - name: Departure Location
         id: bda01958-045c-464f-be70-3a0e24806cda
-        position: {x: 280, y: 848}
+        position: {x: 590.4, y: 1087.2001}
         node:
           rid: 8750596587425890312
         references:
@@ -411,11 +411,11 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         parentIds:
-        - 2c1ac1bc-4ff1-4b76-894c-f1c5a919c352
+        - 03ad65aa-9d4f-4074-b15d-6f5c6e0656c7
         childIds: []
       - name: Time Finish
         id: 2c1ac1bc-4ff1-4b76-894c-f1c5a919c352
-        position: {x: 280, y: 648}
+        position: {x: 427.2, y: 645.60004}
         node:
           rid: 8750596587425890317
         references:
@@ -425,9 +425,9 @@ MonoBehaviour:
           fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         parentIds:
-        - a62bba33-a26e-4b52-90ac-af617d919306
+        - 5397a7dc-add5-41a7-bdb1-2ba4a80632cf
         childIds:
-        - bda01958-045c-464f-be70-3a0e24806cda
+        - 03ad65aa-9d4f-4074-b15d-6f5c6e0656c7
       - name: Sequencer_3
         id: dd53962e-fd4c-43b0-a01e-cbe5d95e722f
         position: {x: -652, y: 833.60004}
@@ -597,12 +597,12 @@ MonoBehaviour:
         childIds: []
       - name: Selector_2
         id: 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
-        position: {x: 260, y: 232}
+        position: {x: 212, y: 204.79999}
         node:
           rid: 8750596596371030113
         references: []
         parentIds:
-        - 5dfa11eb-b830-46d4-ad7f-5dd9a5d44f04
+        - 16f82e32-0882-4867-b814-3f60baa4a411
         childIds:
         - 5caa0127-a5f7-4534-a9d1-b40b4c59bebd
         - 4b3d6190-d039-4d51-843b-dd8f4505d3a7
@@ -615,8 +615,73 @@ MonoBehaviour:
         parentIds:
         - 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
         childIds:
-        - a62bba33-a26e-4b52-90ac-af617d919306
+        - 5397a7dc-add5-41a7-bdb1-2ba4a80632cf
         - 4e1623f6-9c32-4b20-894a-641db4f91a3f
+      - name: CheckAppearDisapear
+        id: 16f82e32-0882-4867-b814-3f60baa4a411
+        position: {x: 250.4, y: -24.8}
+        node:
+          rid: 8750596663829856316
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596663829856317
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 5dfa11eb-b830-46d4-ad7f-5dd9a5d44f04
+        childIds:
+        - 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
+      - name: Selector_4
+        id: 03ad65aa-9d4f-4074-b15d-6f5c6e0656c7
+        position: {x: 427.2, y: 818.4}
+        node:
+          rid: 8750596663829856321
+        references: []
+        parentIds:
+        - 2c1ac1bc-4ff1-4b76-894c-f1c5a919c352
+        childIds:
+        - a62bba33-a26e-4b52-90ac-af617d919306
+        - bda01958-045c-464f-be70-3a0e24806cda
+      - name: Sequencer_6
+        id: 5397a7dc-add5-41a7-bdb1-2ba4a80632cf
+        position: {x: 438.4, y: 523.2}
+        node:
+          rid: 8750596663829856322
+        references: []
+        parentIds:
+        - 4b3d6190-d039-4d51-843b-dd8f4505d3a7
+        childIds:
+        - 2c1ac1bc-4ff1-4b76-894c-f1c5a919c352
+      - name: CheckActualDisappear
+        id: 5be23ca0-96ac-4562-b95a-849654e42759
+        position: {x: 128.8, y: 1212}
+        node:
+          rid: 8750596663829856323
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596663829856324
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - a62bba33-a26e-4b52-90ac-af617d919306
+        childIds:
+        - 867bf80e-0a54-41aa-a0f7-f680218196db
+      - name: Disappear
+        id: 867bf80e-0a54-41aa-a0f7-f680218196db
+        position: {x: 180.8, y: 1475.2001}
+        node:
+          rid: 8750596663829856325
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596663829856327
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 5be23ca0-96ac-4562-b95a-849654e42759
+        childIds: []
     pushPerceptions: []
   references:
     version: 2
@@ -957,6 +1022,124 @@ MonoBehaviour:
       type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
       data:
         IsRandomized: 0
+    - rid: 8750596663829856316
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596663829856317
+      type: {class: CompoundPerceptionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundPerception:
+          rid: 8750596663829856318
+        subPerceptions:
+        - perception:
+            rid: 8750596663829856319
+        - perception:
+            rid: 8750596663829856320
+    - rid: 8750596663829856318
+      type: {class: AndPerception, ns: BehaviourAPI.Core.Perceptions, asm: BehaviourAPI.Core}
+      data: 
+    - rid: 8750596663829856319
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: DepartureLocation
+          methodName: CheckAppear
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596663829856320
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: DepartureLocation
+          methodName: CheckDisappear
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596663829856321
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596663829856322
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596663829856323
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596663829856324
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: DepartureLocation
+          methodName: CheckActualDisappear
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596663829856325
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596663829856327
+      type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundAction:
+          rid: 8750596663829856328
+        subActions:
+        - action:
+            rid: 8750596663829856329
+        - action:
+            rid: 8750596663829856330
+        - action:
+            rid: 8750596663829856331
+    - rid: 8750596663829856328
+      type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
+      data:
+        TargetStatus: 2
+    - rid: 8750596663829856329
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StopPatrol
+    - rid: 8750596663829856330
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Investigation
+          methodName: StopInvestigation
+    - rid: 8750596663829856331
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: DepartureLocation
+          methodName: SetInvisible
 --- !u!114 &7587908546096825446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +1159,10 @@ MonoBehaviour:
   - {fileID: 5534105568771040632}
   - {fileID: 605797056166881465}
   renderPrefab: {fileID: 7428952972362927622}
+  appearDisapearMaterial: {fileID: 2100000, guid: 445279379b66f304b9b4ff0cd2ff2430, type: 2}
+  standardMaterial: {fileID: 2100000, guid: 5acd21e455354ae44a2fb5e9e7ee6c86, type: 2}
+  appearHeightOffset: -1.5
+  moveSpeed: 2
   cooldownTime: 50
 --- !u!114 &2681569841182190070
 MonoBehaviour:
