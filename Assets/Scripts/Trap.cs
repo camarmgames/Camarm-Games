@@ -69,11 +69,13 @@ public class Trap: MonoBehaviour
 
         if (initialPlayerSpeed == originalSpeed)
         {
+            player.trapEffect = true;
             player.moveSpeed *= 0.4f;
 
             yield return new WaitForSeconds(timingEffect);
 
             player.moveSpeed = originalSpeed;
+            player.trapEffect = false;
             Destroy(gameObject);
         }
     }
@@ -81,12 +83,14 @@ public class Trap: MonoBehaviour
     IEnumerator StuckEffect(PlayerMovement player)
     {
         float originalSpeed = player.moveSpeed;
+        player.trapEffect = true;
         player.moveSpeed = 0f;
         Debug.Log("Jugador atrapado");
 
         yield return new WaitForSeconds(timingEffect);
 
         player.moveSpeed = originalSpeed;
+        player.trapEffect = false;
         Debug.Log("Jugador liberado");
         Destroy(gameObject);
     }
