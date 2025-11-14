@@ -83,7 +83,7 @@ public class DepartureLocation: MonoBehaviour
         }
 
         Vector3 departurePosition = new Vector3(chosenPoint.position.x, GetComponent<Transform>().position.y, chosenPoint.position.z);
-
+        Debug.Log(departurePosition);
         // Animaciones y cosas
 
 
