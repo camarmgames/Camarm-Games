@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -98,4 +99,20 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
+    #region CollideFunction
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Collectable collectable;
+        if (other != null)
+        {
+            collectable = other.GetComponent<Collectable>();
+            if (collectable != null)
+            {
+                PlayerInventory.instance.Add(collectable);
+                Destroy(collectable.gameObject);
+            }
+        }
+    }
+    #endregion
 }
