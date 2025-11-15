@@ -196,7 +196,8 @@ public class DepartureLocation: MonoBehaviour
 
     private void SetMaterial(Material mat)
     {
-        Renderer r = renderPrefab.GetComponent<Renderer>();
+       Transform secondChild = renderPrefab.transform.GetChild(1);
+        SkinnedMeshRenderer r = secondChild.GetComponent<SkinnedMeshRenderer>();
         if (r != null)
             r.material = mat;
     }

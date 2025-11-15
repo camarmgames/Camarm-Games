@@ -11,6 +11,7 @@ public class Investigation: MonoBehaviour
     [SerializeField] private int pointsToInvestigate = 5;
     [SerializeField] private float maxAngleDeviation = 30f;
     [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private Animator animator;
 
     [Header("Debug")]
     public Vector3 pointToInvestigateArea;
@@ -24,6 +25,11 @@ public class Investigation: MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void InvestigateArea()
     {
         if (!isInvestigating)
@@ -31,14 +37,21 @@ public class Investigation: MonoBehaviour
             isInvestigating = true;
             agent.isStopped = false;
             investigateCoroutine = StartCoroutine(InspectArea(pointToInvestigateArea));
+            if (animator != null)
+                animator.SetBool("isWalking", isInvestigating);
         }
     }
 
     public void StopInvestigation()
     {
         if(investigateCoroutine != null)
+        {
             StopCoroutine(investigateCoroutine);
-        isInvestigating = false;
+            investigateCoroutine = null;
+            isInvestigating = false;
+            if (animator != null)
+                animator.SetBool("isWalking", isInvestigating);
+        } 
     }
 
     private IEnumerator InspectArea(Vector3 targetPosition)
@@ -76,6 +89,7 @@ public class Investigation: MonoBehaviour
         }
 
         isInvestigating = false;
+        investigateCoroutine = null;
     }
 
     private Vector3 GetRandomPointAround(Vector3 center, Vector3 forwardDirection, float radius)

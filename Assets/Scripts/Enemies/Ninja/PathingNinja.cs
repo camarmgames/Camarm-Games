@@ -7,12 +7,14 @@ public class PathingNinja: MonoBehaviour
     [Header("Settings Patrol")]
     [SerializeField] public List<Transform> patrolPoints;
     [SerializeField] private float waitTime = 2f;
+    [SerializeField] private Animator animator;
 
     public int currentPointIndex = 0;
     private int lastPointIndex = -2;
     private float timer = 0f;
     private NavMeshAgent agent;
     private bool isPatrolling = false;
+
 
     private void Start()
     {
@@ -62,6 +64,9 @@ public class PathingNinja: MonoBehaviour
         agent.isStopped = false;
         GoToNextPoint();
         Debug.Log("Empieza a patrullar");
+
+        if (animator != null)
+            animator.SetBool("isWalking", isPatrolling);
     }
 
     public void StopPatrol()
@@ -74,5 +79,8 @@ public class PathingNinja: MonoBehaviour
         timer = 0f;
         lastPointIndex = ((currentPointIndex - 1) + patrolPoints.Count) % patrolPoints.Count;
         Debug.Log("Patrulla detenida");
+
+        if(animator != null)
+            animator.SetBool("isWalking", isPatrolling);
     }
 }

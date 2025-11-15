@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 
 public class Attack: MonoBehaviour
 {
-    [SerializeField]
-    private PlayerInput playerInput;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Animator animator;
+
 
     void Start()
     {
@@ -14,9 +15,11 @@ public class Attack: MonoBehaviour
 
     public void AttackP()
     {
+        if(animator != null)
+            animator.SetBool("isAttacking", true);
+
         playerInput.actions["Move"].Disable();
-        StartCoroutine(DelayPlayerEnable());
-        Debug.Log("Jugador paralizado");
+        //Debug.Log("Jugador paralizado");
     }
 
     public IEnumerator DelayPlayerEnable()

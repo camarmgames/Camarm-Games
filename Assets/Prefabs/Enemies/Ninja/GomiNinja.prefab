@@ -321,7 +321,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7656329188634811170}
-  - {fileID: 3027206903558387614}
   - {fileID: 1546951614533248682}
   m_Father: {fileID: 7912864258368617150}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -372,7 +371,7 @@ MonoBehaviour:
       nodes:
       - name: Main Loop
         id: 5dfa11eb-b830-46d4-ad7f-5dd9a5d44f04
-        position: {x: 280, y: -186.4}
+        position: {x: 264, y: -531.2}
         node:
           rid: 8750596587425890305
         references: []
@@ -598,7 +597,7 @@ MonoBehaviour:
         childIds: []
       - name: Selector_2
         id: 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
-        position: {x: 212, y: 204.79999}
+        position: {x: 196, y: -140}
         node:
           rid: 8750596596371030113
         references: []
@@ -606,7 +605,7 @@ MonoBehaviour:
         - 16f82e32-0882-4867-b814-3f60baa4a411
         childIds:
         - 5caa0127-a5f7-4534-a9d1-b40b4c59bebd
-        - 4b3d6190-d039-4d51-843b-dd8f4505d3a7
+        - 0e75ae58-9619-44a1-9ee6-65f005b6ffb9
       - name: Selector_3
         id: 4b3d6190-d039-4d51-843b-dd8f4505d3a7
         position: {x: 684.8, y: 376.8}
@@ -614,13 +613,13 @@ MonoBehaviour:
           rid: 8750596608655622202
         references: []
         parentIds:
-        - 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
+        - e3c76ad3-fa3d-471e-8e14-42305712cd1f
         childIds:
         - 5397a7dc-add5-41a7-bdb1-2ba4a80632cf
         - 4e1623f6-9c32-4b20-894a-641db4f91a3f
       - name: CheckAppearDisapear
         id: 16f82e32-0882-4867-b814-3f60baa4a411
-        position: {x: 250.4, y: -24.8}
+        position: {x: 234.4, y: -369.6}
         node:
           rid: 8750596663829856316
         references:
@@ -683,6 +682,31 @@ MonoBehaviour:
         parentIds:
         - 5be23ca0-96ac-4562-b95a-849654e42759
         childIds: []
+      - name: Sequencer_7
+        id: 0e75ae58-9619-44a1-9ee6-65f005b6ffb9
+        position: {x: 737.6, y: 79.200005}
+        node:
+          rid: 8750596681406087232
+        references: []
+        parentIds:
+        - 1f2ad99a-e778-4cf2-8f63-03b2a5f064e4
+        childIds:
+        - e3c76ad3-fa3d-471e-8e14-42305712cd1f
+      - name: CheckTrapFinish
+        id: e3c76ad3-fa3d-471e-8e14-42305712cd1f
+        position: {x: 716.8, y: 218.4}
+        node:
+          rid: 8750596681406087233
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087234
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 0e75ae58-9619-44a1-9ee6-65f005b6ffb9
+        childIds:
+        - 4b3d6190-d039-4d51-843b-dd8f4505d3a7
     pushPerceptions: []
   references:
     version: 2
@@ -839,6 +863,8 @@ MonoBehaviour:
             rid: 8750596596371030085
         - action:
             rid: 8750596596371030087
+        - action:
+            rid: 8750596681406087229
     - rid: 8750596596371030082
       type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
       data:
@@ -859,8 +885,8 @@ MonoBehaviour:
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
-          componentName: TeleportBehindPlayer
-          methodName: TeleportEnemyBehindPlayer
+          componentName: TrapSpawner
+          methodName: StopTrapCoroutine
     - rid: 8750596596371030088
       type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -907,6 +933,8 @@ MonoBehaviour:
             rid: 8750596596371030097
         - action:
             rid: 8750596596371030099
+        - action:
+            rid: 8750596681406087231
     - rid: 8750596596371030095
       type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
       data:
@@ -927,8 +955,8 @@ MonoBehaviour:
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
-          componentName: LaunchFire
-          methodName: Attack
+          componentName: TrapSpawner
+          methodName: StopTrapCoroutine
     - rid: 8750596596371030100
       type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -973,6 +1001,8 @@ MonoBehaviour:
             rid: 8750596596371030107
         - action:
             rid: 8750596596371030108
+        - action:
+            rid: 8750596681406087230
     - rid: 8750596596371030106
       type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
       data:
@@ -987,8 +1017,8 @@ MonoBehaviour:
       type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
         method:
-          componentName: Investigation
-          methodName: InvestigateArea
+          componentName: TrapSpawner
+          methodName: StopTrapCoroutine
     - rid: 8750596596371030109
       type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
       data:
@@ -1141,6 +1171,49 @@ MonoBehaviour:
         method:
           componentName: DepartureLocation
           methodName: SetInvisible
+    - rid: 8750596681406087229
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: TeleportBehindPlayer
+          methodName: TeleportEnemyBehindPlayer
+    - rid: 8750596681406087230
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Investigation
+          methodName: InvestigateArea
+    - rid: 8750596681406087231
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: LaunchFire
+          methodName: Attack
+    - rid: 8750596681406087232
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087233
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087234
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: TrapSpawner
+          methodName: FinishPlacingTrap
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
 --- !u!114 &7587908546096825446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,6 +1298,7 @@ MonoBehaviour:
   pointsToInvestigate: 5
   maxAngleDeviation: 30
   rotationSpeed: 5
+  animator: {fileID: 7541337415847535602}
   pointToInvestigateArea: {x: 0, y: 0, z: 0}
 --- !u!114 &1948020629907747670
 MonoBehaviour:
@@ -1257,6 +1331,7 @@ MonoBehaviour:
   trapPrefab: {fileID: 3118233731871587103, guid: c81fddc6075eccf44adc460b0a47cdb3, type: 3}
   trapHeightOffset: 0.1
   limitTraps: 3
+  animator: {fileID: 7541337415847535602}
 --- !u!114 &3945624534296226582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,6 +1346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints: []
   waitTime: 1
+  animator: {fileID: 7541337415847535602}
   currentPointIndex: 0
 --- !u!114 &1303259283290552347
 MonoBehaviour:
@@ -1288,6 +1364,7 @@ MonoBehaviour:
   proyectilePrefab: {fileID: 3287407581643311352, guid: 7fd0e97f68254f549b67f080c9387fac, type: 3}
   launchForce: 10
   launchCooldown: 4
+  animator: {fileID: 7541337415847535602}
   playerPosition: {x: 0, y: 0.1, z: 0}
 --- !u!195 &9069600030452053978
 NavMeshAgent:
@@ -2599,92 +2676,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7428952972362927622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3027206903558387614}
-  - component: {fileID: 8396889246639155375}
-  - component: {fileID: 4675515276489818650}
-  m_Layer: 0
-  m_Name: RenderCube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3027206903558387614
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428952972362927622}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6078099542539262123}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8396889246639155375
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428952972362927622}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4675515276489818650
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428952972362927622}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7955922116294244134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,6 +3047,11 @@ PrefabInstance:
 --- !u!1 &6992804315055784344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9162645839121371247, guid: 659cef07dd8f1604d81ee4e44c72c559, type: 3}
+  m_PrefabInstance: {fileID: 2171631817435795959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7541337415847535602 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8541949488104092165, guid: 659cef07dd8f1604d81ee4e44c72c559, type: 3}
   m_PrefabInstance: {fileID: 2171631817435795959}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7656329188634811170 stripped
