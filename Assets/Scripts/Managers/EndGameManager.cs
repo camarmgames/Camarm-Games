@@ -10,7 +10,7 @@ public class EndGameManager: MonoBehaviour
     public GameObject btnPlayAgain;
     public TMPro.TextMeshProUGUI titleText;
 
-    private bool isShowing = false;
+    public bool isShowing = false;
 
     void Awake()
     {

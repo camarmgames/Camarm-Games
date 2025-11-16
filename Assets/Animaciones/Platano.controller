@@ -420,7 +420,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: andar
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8444992860081259693}
@@ -435,7 +435,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -623603649343465320, guid: a1ea243b8185bd042aa023548ea20408, type: 3}
+  m_Motion: {fileID: -8800838248204228948, guid: 6dfa1a147758ae44e8c6567cc4fe4177, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

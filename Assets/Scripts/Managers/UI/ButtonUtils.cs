@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ButtonUtils : MonoBehaviour
@@ -32,6 +33,9 @@ public class ButtonUtils : MonoBehaviour
     public void NotShowEndGame()
     {
         EndGameManager.Instance.endScreen.SetActive(false);
-
+        EndGameManager.Instance.isShowing = false;
+        PlayerInput playerInput = FindFirstObjectByType<PlayerInput>();
+        playerInput.actions["Move"].Enable();
+        Time.timeScale = 1.0f;
     }
 }
