@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1ea243b8185bd042aa023548ea20408
+guid: 84ab1fb0b5081ce42a106a603f035323
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: andarPlatano
+      name: CorrerF
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
