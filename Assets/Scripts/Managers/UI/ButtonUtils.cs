@@ -17,4 +17,21 @@ public class ButtonUtils : MonoBehaviour
     {
         SceneManager.LoadScene(nameSceneToGo);
     }
+
+    public void OnSelectCharacter(int index)
+    {
+        CharacterSelection.Instance.SelectCharacter(index);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void NotShowEndGame()
+    {
+        EndGameManager.Instance.endScreen.SetActive(false);
+
+    }
 }
