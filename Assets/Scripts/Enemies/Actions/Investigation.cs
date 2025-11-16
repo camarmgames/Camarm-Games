@@ -17,7 +17,7 @@ public class Investigation: MonoBehaviour
     public Vector3 pointToInvestigateArea;
 
     private NavMeshAgent agent;
-    private bool isInvestigating = false;
+    public bool isInvestigating = false;
     private Coroutine investigateCoroutine;
 
     void Start()

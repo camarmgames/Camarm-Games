@@ -89,9 +89,7 @@ public class NoiseListener: MonoBehaviour
                 Debug.Log("Vi algo sospechoso");
 
             return true;
-        }
-
-        if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5))
+        }else if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5))
         {
             if (investigation != null)
                 investigation.pointToInvestigateArea = lastHeardPosition;

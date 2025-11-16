@@ -39,13 +39,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        int index = CharacterSelection.Instance.selectedCharacterIndex;
-        
-        foreach(var model in characterModels)
-            model.SetActive(false);
+        if(CharacterSelection.Instance != null)
+        {
+            int index = CharacterSelection.Instance.selectedCharacterIndex;
 
-        if(index >= 0 && index < characterModels.Length)
-            characterModels[index].SetActive(true);
+            foreach (var model in characterModels)
+                model.SetActive(false);
+
+            if (index >= 0 && index < characterModels.Length)
+                characterModels[index].SetActive(true);
+        }
     }
 
     void Update()
