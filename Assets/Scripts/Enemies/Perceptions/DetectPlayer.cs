@@ -12,6 +12,7 @@ public class DetectPlayer: MonoBehaviour
     private Coroutine confirmDetectionCoroutine;
     private LaunchFire throwScript;
     private NavMeshAgent agent;
+    private bool suspiciousInstant;
 
     [Header("Parameters of vision")]
     [SerializeField, Tooltip("Distance the enemy can see perfectly")]
@@ -104,6 +105,8 @@ public class DetectPlayer: MonoBehaviour
 
     private bool CanSeePlayer()
     {
+        suspiciousInstant = false;
+
         // Comprobar si el jugador esta dentro del radio
         Collider[] targets = Physics.OverlapSphere(transform.position, alertRadius, playerMask);
 
@@ -127,6 +130,7 @@ public class DetectPlayer: MonoBehaviour
                     }
                     else
                     {
+                        suspiciousInstant = true;
                         suspicious = true;
                         if (debugLog)
                             Debug.Log("Ve algo moverse, está en alerta");
@@ -195,7 +199,7 @@ public class DetectPlayer: MonoBehaviour
         }
     }
 
-    public bool IsSuspicious() => suspicious;
+    public bool IsInstantSuspicious() => suspiciousInstant;
     public bool IsPlayerDetected() => detectionConfirmed;
 
     public bool PNoDetectPlayer()

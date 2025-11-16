@@ -14,13 +14,55 @@ public class LaunchFire: MonoBehaviour
     [SerializeField, Tooltip("Cooldown between launchs")]
     private float launchCooldown = 5f;
 
+    [SerializeField]
+    private Animator animator;
+
     public Vector3 playerPosition;
     private bool canLaunch = true;
+    private Coroutine launchCoroutine;
+    private bool isLaunchingAnimation = false;
+
+    private void Update()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("isLaunching", isLaunchingAnimation);
+        }
+    }
+
+    public void StopLaunchCoroutine()
+    {
+        if (launchCoroutine != null)
+        {
+            StopCoroutine(launchCoroutine);
+            launchCoroutine = null;
+            isLaunchingAnimation = false;
+        }
+    }
 
     public void Attack()
     {
         if(!canLaunch)
             return;
+
+        launchCoroutine = StartCoroutine(LaunchRoutine());
+
+        StartCoroutine(LaunchCooldownRoutine());
+    }
+    private IEnumerator LaunchRoutine()
+    {
+        if (animator != null)
+        {
+            isLaunchingAnimation = true;
+
+            yield return new WaitUntil(() =>
+                animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"));
+
+            yield return new WaitUntil(() =>
+                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+            isLaunchingAnimation = false;
+        }
 
         Trap trap = proyectilePrefab.GetComponent<Trap>();
         Trap.TrapType randomType = (Trap.TrapType)Random.Range(0, System.Enum.GetValues(typeof(Trap.TrapType)).Length);
@@ -39,7 +81,7 @@ public class LaunchFire: MonoBehaviour
 
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
 
-        StartCoroutine(LaunchCooldownRoutine());
+        launchCoroutine = null;
     }
 
     private IEnumerator LaunchCooldownRoutine()
@@ -49,5 +91,10 @@ public class LaunchFire: MonoBehaviour
         yield return new WaitForSeconds(launchCooldown);
 
         canLaunch = true;
+    }
+
+    public bool FinishLaunching()
+    {
+        return launchCoroutine == null;
     }
 }

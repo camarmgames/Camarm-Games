@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &450252379918119733
+--- !u!1 &213467070384632908
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,29 +8,256 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 573857119769563436}
+  - component: {fileID: 5074864476700834212}
+  - component: {fileID: 2368541100223371607}
+  - component: {fileID: 5237510446297181672}
   m_Layer: 0
-  m_Name: P1
+  m_Name: PatrolPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &573857119769563436
+--- !u!4 &5074864476700834212
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450252379918119733}
+  m_GameObject: {fileID: 213467070384632908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: -6.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9156548764150656590}
+  m_Father: {fileID: 6179637873647109455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2368541100223371607
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213467070384632908}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5237510446297181672
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213467070384632908}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4a6c535f291c2d84fac294baed306577, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1119104088500669243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070101767604920445}
+  - component: {fileID: 7130472546108818614}
+  - component: {fileID: 4034054706005230059}
+  m_Layer: 0
+  m_Name: PatrolPoint (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1070101767604920445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119104088500669243}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: 0, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6179637873647109455}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7130472546108818614
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119104088500669243}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4034054706005230059
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119104088500669243}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4a6c535f291c2d84fac294baed306577, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1292507104628874538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8699134159776500825}
+  - component: {fileID: 5238378899066604075}
+  - component: {fileID: 8181430968254583154}
+  m_Layer: 0
+  m_Name: PatrolPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8699134159776500825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292507104628874538}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 34.7, y: 0, z: -7.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6179637873647109455}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5238378899066604075
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292507104628874538}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8181430968254583154
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292507104628874538}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4a6c535f291c2d84fac294baed306577, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1864234617431757814
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,10 +287,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 573857119769563436}
+  - {fileID: 976644870412977430}
   m_Father: {fileID: 6503078537264609518}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3973214401313447717
+--- !u!1 &4419954785326504289
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,56 +298,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5243295935998911713}
-  - component: {fileID: 1149676969972623344}
-  - component: {fileID: 4526330995935508696}
-  - component: {fileID: 37111608650803912}
-  - component: {fileID: 204006860791360018}
-  - component: {fileID: 3129396852664360084}
-  - component: {fileID: 5765092076217925146}
-  - component: {fileID: 1226604503845508228}
-  - component: {fileID: 9116126141669629449}
-  - component: {fileID: 1069123157720449970}
-  - component: {fileID: 2061145501838021605}
-  - component: {fileID: 7446448932978149713}
+  - component: {fileID: 5834366107807748476}
+  - component: {fileID: 8665714956426891799}
+  - component: {fileID: 5857736760250191713}
   m_Layer: 0
-  m_Name: GomiPoli
+  m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5243295935998911713
+--- !u!4 &5834366107807748476
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
+  m_GameObject: {fileID: 4419954785326504289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -85.9, y: 0.67, z: -47.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6503078537264609518}
+  m_Father: {fileID: 6179637873647109455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1149676969972623344
+--- !u!33 &8665714956426891799
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4526330995935508696
+  m_GameObject: {fileID: 4419954785326504289}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5857736760250191713
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
+  m_GameObject: {fileID: 4419954785326504289}
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -136,7 +354,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4a6c535f291c2d84fac294baed306577, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,606 +376,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &37111608650803912
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &204006860791360018
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &3129396852664360084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7033c32493b38240a6a2c47736ac9c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  executeOnLoop: 0
-  interruptOptions: 0
-  _eventHandler:
-    debugStatusChanges: 0
-    identifier: 
-  data:
-    graphs:
-    - name: GomiPoliFSM1
-      id: eb34e68a-5f04-4ba8-b26c-1725bdd96975
-      graph:
-        rid: 9100042217412886598
-      nodes:
-      - name: Movimiento
-        id: 9de8f903-805c-4295-ba04-0af01fa48658
-        position: {x: 378.61615, y: 196.12271}
-        node:
-          rid: 9100042217412886599
-        references:
-        - fieldName: Action
-          value:
-            rid: 9100042217412886601
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 370d023a-b1e9-4c8a-965b-4a07303f83cc
-        childIds:
-        - eb1955a1-9a99-4418-9924-63e577040900
-      - name: T12
-        id: eb1955a1-9a99-4418-9924-63e577040900
-        position: {x: 656.8, y: 42.4}
-        node:
-          rid: 9100042217412886602
-        references:
-        - fieldName: Perception
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: 9100042217412886646
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 9de8f903-805c-4295-ba04-0af01fa48658
-        childIds:
-        - d0f94c29-781e-4977-be4c-56612646f3a7
-      - name: Potenciacion
-        id: d0f94c29-781e-4977-be4c-56612646f3a7
-        position: {x: 981.6, y: 215.19998}
-        node:
-          rid: 9100042217412886603
-        references:
-        - fieldName: Action
-          value:
-            rid: 9100042217412886660
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - eb1955a1-9a99-4418-9924-63e577040900
-        childIds:
-        - 370d023a-b1e9-4c8a-965b-4a07303f83cc
-      - name: T21
-        id: 370d023a-b1e9-4c8a-965b-4a07303f83cc
-        position: {x: 672.8, y: 339.19998}
-        node:
-          rid: 9100042217412886605
-        references:
-        - fieldName: Perception
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - d0f94c29-781e-4977-be4c-56612646f3a7
-        childIds:
-        - 9de8f903-805c-4295-ba04-0af01fa48658
-    - name: GomiPoliFSM2
-      id: d6ffb194-4726-4a3d-8111-4a6a4ddb8938
-      graph:
-        rid: 9100042217412886600
-      nodes:
-      - name: Normal
-        id: 8926fe0d-e50e-4181-8242-42c2c1cb9e26
-        position: {x: 381.6, y: 150.4}
-        node:
-          rid: 9100042217412886632
-        references:
-        - fieldName: Action
-          value:
-            rid: 9100042217412886645
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - b298c7fd-6f0f-43c4-9523-5e31ccbfaa1a
-        - b5f1ce3a-1aaf-4ff3-9378-f28d4f4be2ca
-        childIds:
-        - 08dcb9bb-f126-4fb6-8e8d-2996799b2e54
-        - 535b4f8d-f4d9-49f8-b950-9f551abb80c6
-      - name: DetectaRastro
-        id: 08dcb9bb-f126-4fb6-8e8d-2996799b2e54
-        position: {x: 748, y: 188.79999}
-        node:
-          rid: 9100042233164070975
-        references:
-        - fieldName: Perception
-          value:
-            rid: 9100042233164070988
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: 9100042233164070990
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 8926fe0d-e50e-4181-8242-42c2c1cb9e26
-        childIds:
-        - 995738fd-8ac9-4681-8833-c8a3d4215b6b
-      - name: Alerta
-        id: 995738fd-8ac9-4681-8833-c8a3d4215b6b
-        position: {x: 1058.4, y: 328}
-        node:
-          rid: 9100042233164070985
-        references:
-        - fieldName: Action
-          value:
-            rid: 9100042236073607251
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 08dcb9bb-f126-4fb6-8e8d-2996799b2e54
-        childIds:
-        - b298c7fd-6f0f-43c4-9523-5e31ccbfaa1a
-      - name: VolverPatrullar
-        id: b298c7fd-6f0f-43c4-9523-5e31ccbfaa1a
-        position: {x: 756, y: 419.19998}
-        node:
-          rid: 9100042236073607246
-        references:
-        - fieldName: Perception
-          value:
-            rid: 9100042236073607248
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: 9100042264649662464
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 995738fd-8ac9-4681-8833-c8a3d4215b6b
-        childIds:
-        - 8926fe0d-e50e-4181-8242-42c2c1cb9e26
-      - name: Ataque
-        id: 4469e62d-e491-4e94-918d-7b09111d9cba
-        position: {x: 1066.4, y: -82.4}
-        node:
-          rid: 9100042285622231108
-        references:
-        - fieldName: Action
-          value:
-            rid: 9100042285622231112
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 535b4f8d-f4d9-49f8-b950-9f551abb80c6
-        childIds:
-        - b5f1ce3a-1aaf-4ff3-9378-f28d4f4be2ca
-      - name: DetectaPersonaje
-        id: 535b4f8d-f4d9-49f8-b950-9f551abb80c6
-        position: {x: 726.4, y: -10.399998}
-        node:
-          rid: 9100042285622231109
-        references:
-        - fieldName: Perception
-          value:
-            rid: 9100042285622231111
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 8926fe0d-e50e-4181-8242-42c2c1cb9e26
-        childIds:
-        - 4469e62d-e491-4e94-918d-7b09111d9cba
-      - name: VolverAtaque
-        id: b5f1ce3a-1aaf-4ff3-9378-f28d4f4be2ca
-        position: {x: 725.6, y: -163.2}
-        node:
-          rid: 9100042285622231110
-        references:
-        - fieldName: Perception
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        - fieldName: Action
-          value:
-            rid: -2
-          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        parentIds:
-        - 4469e62d-e491-4e94-918d-7b09111d9cba
-        childIds:
-        - 8926fe0d-e50e-4181-8242-42c2c1cb9e26
-    pushPerceptions:
-    - name: ApareceMago
-      targetNodeIds:
-      - eb1955a1-9a99-4418-9924-63e577040900
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 9100042217412886598
-      type: {class: StackFSM, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042217412886599
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042217412886600
-      type: {class: FSM, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042217412886601
-      type: {class: SubgraphAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        ExecuteOnLoop: 0
-        InterruptOptions: 2
-        subgraphId: d6ffb194-4726-4a3d-8111-4a6a4ddb8938
-    - rid: 9100042217412886602
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 0
-    - rid: 9100042217412886603
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042217412886605
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 6
-    - rid: 9100042217412886632
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042217412886645
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: Patrol
-          methodName: EnablePatrol
-        update:
-          componentName: 
-          methodName: 
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042217412886646
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: Patrol
-          methodName: DisablePatrol
-        update:
-          componentName: 
-          methodName: 
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042217412886660
-      type: {class: DelayAction, ns: BehaviourAPI.UnityToolkit, asm: BehaviourAPI.UnityToolkit}
-      data:
-        delayTime: 4
-    - rid: 9100042233164070975
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 1
-    - rid: 9100042233164070985
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042233164070988
-      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        init:
-          componentName: 
-          methodName: 
-        check:
-          componentName: Track
-          methodName: DetectFootprint
-        reset:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042233164070990
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: Patrol
-          methodName: DisablePatrol
-    - rid: 9100042236073607246
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 1
-    - rid: 9100042236073607248
-      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        init:
-          componentName: 
-          methodName: 
-        check:
-          componentName: Track
-          methodName: HasEndedFollowing
-        reset:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042236073607251
-      type: {class: CustomAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        start:
-          componentName: Track
-          methodName: Detect
-        update:
-          componentName: 
-          methodName: 
-        stop:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042264649662464
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: BlockPath
-          methodName: ABlockPath
-    - rid: 9100042285622231108
-      type: {class: State, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data: 
-    - rid: 9100042285622231109
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 0
-    - rid: 9100042285622231110
-      type: {class: StateTransition, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
-      data:
-        StatusFlags: 6
-    - rid: 9100042285622231111
-      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        init:
-          componentName: 
-          methodName: 
-        check:
-          componentName: DetectPlayer
-          methodName: PDetectPlayer
-        reset:
-          componentName: 
-          methodName: 
-        pause:
-          componentName: 
-          methodName: 
-        unpause:
-          componentName: 
-          methodName: 
-    - rid: 9100042285622231112
-      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
-      data:
-        method:
-          componentName: Attack
-          methodName: AttackP
---- !u!114 &5765092076217925146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34e97822d15f4054ea2fab23a98ef731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stressLevel: 0
---- !u!114 &1226604503845508228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8587b27c849e1045a99f5dba079dc60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPoints:
-  - {fileID: 5834366107807748476}
-  - {fileID: 0}
-  waitTime: 1
---- !u!114 &9116126141669629449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc54180fed643c4b83252b9ff6023ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  footprintMask:
-    serializedVersion: 2
-    m_Bits: 256
-  followSpeed: 3.5
-  viewRadius: 10
-  viewAngle: 90
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
-  showGizmos: 1
---- !u!114 &1069123157720449970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19203d15a777a234d972168ff9b5650d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 4071832300304311256, guid: 50808b58c2d701743978c7136ddb7e28, type: 3}
-  blockRadius: 2
-  buildTime: 2
-  pointsBlock:
-  - {fileID: 573857119769563436}
-  - {fileID: 0}
---- !u!114 &2061145501838021605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c2a3d0e748fcc428cd0f560096e752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 10
-  alertRadius: 20
-  viewAngle: 90
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 0
-  rotationSpeed: 3
-  searchAngle: 25
-  searchSpeed: 2
-  detectionDelay: 2
-  loseSightDelay: 3
-  playerVisible: 0
-  debugLog: 0
---- !u!114 &7446448932978149713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3973214401313447717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ab5faa834120744bf5c51564184b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
---- !u!1 &4419954785326504289
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5834366107807748476}
-  m_Layer: 0
-  m_Name: P1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5834366107807748476
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4419954785326504289}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6179637873647109455}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5272576479950289572
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,8 +406,876 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5834366107807748476}
+  - {fileID: 8699134159776500825}
+  - {fileID: 5074864476700834212}
+  - {fileID: 1070101767604920445}
   m_Father: {fileID: 6503078537264609518}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6836769572321688057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7131096818378092829}
+  - component: {fileID: 2139108935971050674}
+  - component: {fileID: 3155919821413636338}
+  - component: {fileID: 4275487891899991475}
+  - component: {fileID: 7203126721418083614}
+  - component: {fileID: 3767405504783289938}
+  - component: {fileID: 4780105226902226921}
+  - component: {fileID: 264258476469163845}
+  - component: {fileID: 672913018998927660}
+  - component: {fileID: 3272797118470575066}
+  m_Layer: 0
+  m_Name: BehviourPoliAPI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7131096818378092829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 895759420273703619}
+  m_Father: {fileID: 6503078537264609518}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &2139108935971050674
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &3155919821413636338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7033c32493b38240a6a2c47736ac9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
+  _eventHandler:
+    debugStatusChanges: 0
+    identifier: 
+  data:
+    graphs:
+    - name: BTMainStandar
+      id: 4d2a2a6f-6d78-47db-a879-83f062ae2f95
+      graph:
+        rid: 8750596681406087247
+      nodes:
+      - name: Main Loop
+        id: a5444f8e-3e09-423a-845d-69f9bfc428ae
+        position: {x: 700.9452, y: 16.635159}
+        node:
+          rid: 8750596681406087248
+        references: []
+        parentIds: []
+        childIds:
+        - d2adc47a-3c6c-4b36-b298-25d4bf784ecc
+      - name: Selector_0
+        id: d2adc47a-3c6c-4b36-b298-25d4bf784ecc
+        position: {x: 717, y: 225}
+        node:
+          rid: 8750596681406087249
+        references: []
+        parentIds:
+        - a5444f8e-3e09-423a-845d-69f9bfc428ae
+        childIds:
+        - 301764fe-9913-4ae9-b784-db0987b3f840
+        - de3b0d70-5ba1-44b3-bf2d-5a4735b5eecb
+        - 380cab52-79ab-4749-96fb-c92be5d6e9ec
+      - name: Sequencer_0
+        id: 301764fe-9913-4ae9-b784-db0987b3f840
+        position: {x: 283, y: 423}
+        node:
+          rid: 8750596681406087250
+        references: []
+        parentIds:
+        - d2adc47a-3c6c-4b36-b298-25d4bf784ecc
+        childIds:
+        - 0dd5d3f4-9632-41de-87e0-ab90d8526276
+      - name: DetectSomething
+        id: 0dd5d3f4-9632-41de-87e0-ab90d8526276
+        position: {x: 291, y: 574}
+        node:
+          rid: 8750596681406087251
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087266
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 301764fe-9913-4ae9-b784-db0987b3f840
+        childIds:
+        - 2a2fdd6a-54c6-46b7-bf84-140a6ed3ac61
+      - name: Selector_1
+        id: 2a2fdd6a-54c6-46b7-bf84-140a6ed3ac61
+        position: {x: 291, y: 795}
+        node:
+          rid: 8750596681406087252
+        references: []
+        parentIds:
+        - 0dd5d3f4-9632-41de-87e0-ab90d8526276
+        childIds:
+        - 26fc949b-2de4-4f22-a6bc-8051f1aeafe9
+        - 6c40e49b-9d86-4e17-b568-e6710b948fa6
+      - name: Sequencer_1
+        id: 26fc949b-2de4-4f22-a6bc-8051f1aeafe9
+        position: {x: 81, y: 1002}
+        node:
+          rid: 8750596681406087253
+        references: []
+        parentIds:
+        - 2a2fdd6a-54c6-46b7-bf84-140a6ed3ac61
+        childIds:
+        - 585f53d9-bacc-40ab-98a2-3219f636c5b6
+      - name: Investigate
+        id: 6c40e49b-9d86-4e17-b568-e6710b948fa6
+        position: {x: 493, y: 1026}
+        node:
+          rid: 8750596681406087254
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596681406087276
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 2a2fdd6a-54c6-46b7-bf84-140a6ed3ac61
+        childIds: []
+      - name: DetectPlayer
+        id: 585f53d9-bacc-40ab-98a2-3219f636c5b6
+        position: {x: 89, y: 1175}
+        node:
+          rid: 8750596681406087255
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087268
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 26fc949b-2de4-4f22-a6bc-8051f1aeafe9
+        childIds:
+        - 557c30f9-5284-4e65-a6cc-e603c38a39d4
+      - name: Attack
+        id: 557c30f9-5284-4e65-a6cc-e603c38a39d4
+        position: {x: 119, y: 1440}
+        node:
+          rid: 8750596681406087256
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596681406087272
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 585f53d9-bacc-40ab-98a2-3219f636c5b6
+        childIds: []
+      - name: Sequencer_2
+        id: c3a7c3fe-9bd0-4438-9fa2-f6341e85299a
+        position: {x: 754, y: 615}
+        node:
+          rid: 8750596681406087258
+        references: []
+        parentIds:
+        - de3b0d70-5ba1-44b3-bf2d-5a4735b5eecb
+        childIds:
+        - d1a7b471-e678-4c2d-add8-9a33440ee677
+      - name: BeforeFollowFootprint
+        id: d1a7b471-e678-4c2d-add8-9a33440ee677
+        position: {x: 786, y: 797}
+        node:
+          rid: 8750596681406087259
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087285
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - c3a7c3fe-9bd0-4438-9fa2-f6341e85299a
+        childIds:
+        - 1591391f-ff1f-4b72-909d-70956d363afc
+      - name: BlockingWall
+        id: 1591391f-ff1f-4b72-909d-70956d363afc
+        position: {x: 770, y: 1010}
+        node:
+          rid: 8750596681406087260
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596681406087292
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - d1a7b471-e678-4c2d-add8-9a33440ee677
+        childIds: []
+      - name: Sequencer_3
+        id: 7f3e2638-298a-4737-89ab-c6ece8826ef5
+        position: {x: 1230, y: 623}
+        node:
+          rid: 8750596681406087261
+        references: []
+        parentIds:
+        - de3b0d70-5ba1-44b3-bf2d-5a4735b5eecb
+        childIds:
+        - fc81550c-2ced-45b4-b589-3aa3d64b8b79
+      - name: FollowFootprints
+        id: 00e44cf3-57ac-40d9-9557-8163fa694b35
+        position: {x: 1238, y: 966}
+        node:
+          rid: 8750596681406087262
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596681406087300
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - fc81550c-2ced-45b4-b589-3aa3d64b8b79
+        childIds: []
+      - name: DetectFootprints
+        id: fc81550c-2ced-45b4-b589-3aa3d64b8b79
+        position: {x: 1238, y: 770}
+        node:
+          rid: 8750596681406087263
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087270
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 7f3e2638-298a-4737-89ab-c6ece8826ef5
+        childIds:
+        - 00e44cf3-57ac-40d9-9557-8163fa694b35
+      - name: Patrol
+        id: b22814cc-c35a-4691-9e77-f629f17f6137
+        position: {x: 1732, y: 786}
+        node:
+          rid: 8750596681406087264
+        references:
+        - fieldName: Action
+          value:
+            rid: 8750596681406087309
+          fieldType: BehaviourAPI.Core.Actions.Action, BehaviourAPI.Core, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - c95e0d1c-88dd-47bb-b7d7-c007f1a7881a
+        childIds: []
+      - name: HasTrack
+        id: c95e0d1c-88dd-47bb-b7d7-c007f1a7881a
+        position: {x: 1724, y: 570}
+        node:
+          rid: 8750596681406087280
+        references:
+        - fieldName: Perception
+          value:
+            rid: 8750596681406087310
+          fieldType: BehaviourAPI.Core.Perceptions.Perception, BehaviourAPI.Core,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        parentIds:
+        - 380cab52-79ab-4749-96fb-c92be5d6e9ec
+        childIds:
+        - b22814cc-c35a-4691-9e77-f629f17f6137
+      - name: Sequencer_4
+        id: 380cab52-79ab-4749-96fb-c92be5d6e9ec
+        position: {x: 1740, y: 395}
+        node:
+          rid: 8750596681406087281
+        references: []
+        parentIds:
+        - d2adc47a-3c6c-4b36-b298-25d4bf784ecc
+        childIds:
+        - c95e0d1c-88dd-47bb-b7d7-c007f1a7881a
+      - name: Selector_Probability
+        id: de3b0d70-5ba1-44b3-bf2d-5a4735b5eecb
+        position: {x: 995, y: 411}
+        node:
+          rid: 8750596681406087314
+        references: []
+        parentIds:
+        - d2adc47a-3c6c-4b36-b298-25d4bf784ecc
+        childIds:
+        - c3a7c3fe-9bd0-4438-9fa2-f6341e85299a
+        - 7f3e2638-298a-4737-89ab-c6ece8826ef5
+    - name: GomiPoliFSM1
+      id: eb34e68a-5f04-4ba8-b26c-1725bdd96975
+      graph:
+        rid: 9100042217412886598
+      nodes: []
+    - name: GomiPoliFSM2
+      id: d6ffb194-4726-4a3d-8111-4a6a4ddb8938
+      graph:
+        rid: 9100042217412886600
+      nodes: []
+    pushPerceptions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 8750596681406087247
+      type: {class: BehaviourTree, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087248
+      type: {class: LoopNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        Iterations: -1
+    - rid: 8750596681406087249
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087250
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087251
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087252
+      type: {class: SelectorNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087253
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087254
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087255
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087256
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087258
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087259
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087260
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087261
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087262
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087263
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087264
+      type: {class: LeafNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087266
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: NoiseListener
+          methodName: LightNoise
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087268
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: DetectPlayer
+          methodName: IsPlayerDetected
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087270
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Track
+          methodName: DetectFootprint
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087272
+      type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundAction:
+          rid: 8750596681406087273
+        subActions:
+        - action:
+            rid: 8750596681406087274
+        - action:
+            rid: 8750596681406087275
+        - action:
+            rid: 8750596681406087290
+        - action:
+            rid: 8750596681406087297
+        - action:
+            rid: 8750596681406087298
+    - rid: 8750596681406087273
+      type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
+      data:
+        TargetStatus: 2
+    - rid: 8750596681406087274
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Track
+          methodName: StopCoroutines
+    - rid: 8750596681406087275
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: BlockPath
+          methodName: StopCoroutine
+    - rid: 8750596681406087276
+      type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundAction:
+          rid: 8750596681406087277
+        subActions:
+        - action:
+            rid: 8750596681406087278
+        - action:
+            rid: 8750596681406087279
+        - action:
+            rid: 8750596681406087289
+        - action:
+            rid: 8750596681406087299
+    - rid: 8750596681406087277
+      type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
+      data:
+        TargetStatus: 2
+    - rid: 8750596681406087278
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Track
+          methodName: StopCoroutines
+    - rid: 8750596681406087279
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: BlockPath
+          methodName: StopCoroutine
+    - rid: 8750596681406087280
+      type: {class: ConditionNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data: 
+    - rid: 8750596681406087281
+      type: {class: SequencerNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+    - rid: 8750596681406087285
+      type: {class: CompoundPerceptionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundPerception:
+          rid: 8750596681406087286
+        subPerceptions:
+        - perception:
+            rid: 8750596681406087287
+        - perception:
+            rid: 8750596681406087288
+    - rid: 8750596681406087286
+      type: {class: AndPerception, ns: BehaviourAPI.Core.Perceptions, asm: BehaviourAPI.Core}
+      data: 
+    - rid: 8750596681406087287
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Track
+          methodName: BeforeShowPrint
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087288
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Track
+          methodName: HasTrack
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087289
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StopPatrol
+    - rid: 8750596681406087290
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Investigation
+          methodName: StopInvestigation
+    - rid: 8750596681406087292
+      type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundAction:
+          rid: 8750596681406087293
+        subActions:
+        - action:
+            rid: 8750596681406087294
+        - action:
+            rid: 8750596681406087295
+        - action:
+            rid: 8750596681406087296
+    - rid: 8750596681406087293
+      type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
+      data:
+        TargetStatus: 2
+    - rid: 8750596681406087294
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StopPatrol
+    - rid: 8750596681406087295
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Track
+          methodName: StopCoroutines
+    - rid: 8750596681406087296
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: BlockPath
+          methodName: ABlockPath
+    - rid: 8750596681406087297
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StopPatrol
+    - rid: 8750596681406087298
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Attack
+          methodName: AttackP
+    - rid: 8750596681406087299
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Investigation
+          methodName: InvestigateArea
+    - rid: 8750596681406087300
+      type: {class: CompoundActionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundAction:
+          rid: 8750596681406087301
+        subActions:
+        - action:
+            rid: 8750596681406087302
+        - action:
+            rid: 8750596681406087303
+    - rid: 8750596681406087301
+      type: {class: SequenceAction, ns: BehaviourAPI.Core.Actions, asm: BehaviourAPI.Core}
+      data:
+        TargetStatus: 2
+    - rid: 8750596681406087302
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StopPatrol
+    - rid: 8750596681406087303
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: Track
+          methodName: Detect
+    - rid: 8750596681406087309
+      type: {class: SimpleAction, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        method:
+          componentName: PathingNinja
+          methodName: StartPatrol
+    - rid: 8750596681406087310
+      type: {class: CompoundPerceptionWrapper, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        compoundPerception:
+          rid: 8750596681406087311
+        subPerceptions:
+        - perception:
+            rid: 8750596681406087312
+        - perception:
+            rid: 8750596681406087313
+    - rid: 8750596681406087311
+      type: {class: AndPerception, ns: BehaviourAPI.Core.Perceptions, asm: BehaviourAPI.Core}
+      data: 
+    - rid: 8750596681406087312
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: BlockPath
+          methodName: IsBlockingPath
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087313
+      type: {class: CustomPerception, ns: BehaviourAPI.UnityToolkit.GUIDesigner.Framework, asm: BehaviourAPI.UnityToolkit.GUIDesigner.Framework}
+      data:
+        init:
+          componentName: 
+          methodName: 
+        check:
+          componentName: Track
+          methodName: HasTrack
+        reset:
+          componentName: 
+          methodName: 
+        pause:
+          componentName: 
+          methodName: 
+        unpause:
+          componentName: 
+          methodName: 
+    - rid: 8750596681406087314
+      type: {class: ProbabilityBranchNode, ns: BehaviourAPI.BehaviourTrees, asm: BehaviourAPI.BehaviourTrees}
+      data:
+        IsRandomized: 0
+        probabilities:
+        - 0.02
+        - 0.98
+    - rid: 9100042217412886598
+      type: {class: StackFSM, ns: BehaviourAPI.StateMachines.StackFSMs, asm: BehaviourAPI.StateMachines}
+      data: 
+    - rid: 9100042217412886600
+      type: {class: FSM, ns: BehaviourAPI.StateMachines, asm: BehaviourAPI.StateMachines}
+      data: 
+--- !u!114 &4275487891899991475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c4a8f9708457543a9f594f6f979d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 5834366107807748476}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waitTime: 1
+  animator: {fileID: 7129894053621372237}
+  currentPointIndex: 0
+--- !u!114 &7203126721418083614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cb424e68f5ca0468561e992b662216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearingThreshold: 0
+  forgetTime: 3
+  debugLog: 0
+--- !u!114 &3767405504783289938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecd53b7c53364c41963a7ea1372a94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectionRadius: 3
+  timePerPoint: 2
+  pointsToInvestigate: 3
+  maxAngleDeviation: 30
+  rotationSpeed: 5
+  animator: {fileID: 7129894053621372237}
+  pointToInvestigateArea: {x: 0, y: 0, z: 0}
+--- !u!114 &4780105226902226921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c2a3d0e748fcc428cd0f560096e752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 8
+  alertRadius: 15
+  viewAngle: 100
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  rotationSpeed: 3
+  searchAngle: 25
+  searchSpeed: 2
+  detectionDelay: 0.5
+  loseSightDelay: 3
+  playerVisible: 0
+  debugLog: 0
+--- !u!114 &264258476469163845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ab5faa834120744bf5c51564184b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
+  animator: {fileID: 7129894053621372237}
+--- !u!114 &672913018998927660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc54180fed643c4b83252b9ff6023ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footprintMask:
+    serializedVersion: 2
+    m_Bits: 256
+  followSpeed: 3.5
+  animator: {fileID: 7129894053621372237}
+  viewRadius: 15
+  viewAngle: 100
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  showGizmos: 1
+  beforeShowPrint: 0
+--- !u!114 &3272797118470575066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836769572321688057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19203d15a777a234d972168ff9b5650d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 4071832300304311256, guid: 50808b58c2d701743978c7136ddb7e28, type: 3}
+  blockRadius: 2
+  buildTime: 0.5
+  pointsBlock:
+  - {fileID: 0}
+  animator: {fileID: 7129894053621372237}
 --- !u!1 &8960887959887156128
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,8 +1305,162 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5243295935998911713}
+  - {fileID: 7131096818378092829}
   - {fileID: 6179637873647109455}
   - {fileID: 9156548764150656590}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9071688987086962287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976644870412977430}
+  - component: {fileID: 1870335281168008720}
+  - component: {fileID: 4386857659904248243}
+  m_Layer: 0
+  m_Name: BlockPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976644870412977430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071688987086962287}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.2, y: 0, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9156548764150656590}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1870335281168008720
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071688987086962287}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4386857659904248243
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071688987086962287}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4929a01772a94db4885f493a82aa010d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &646745955852543744
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7131096818378092829}
+    m_Modifications:
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142793747674498937, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+      propertyPath: m_Name
+      value: oPoli
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7024046292159473790, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+--- !u!4 &895759420273703619 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 330966706528542147, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+  m_PrefabInstance: {fileID: 646745955852543744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7129894053621372237 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7641426423513051725, guid: bed40910cd429f040a2de94913e74e0a, type: 3}
+  m_PrefabInstance: {fileID: 646745955852543744}
+  m_PrefabAsset: {fileID: 0}

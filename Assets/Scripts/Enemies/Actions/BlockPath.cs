@@ -11,28 +11,37 @@ public class BlockPath: MonoBehaviour
     [SerializeField] private float blockRadius = 2f;
     [SerializeField] private float buildTime = 2f;
     [SerializeField] private List<Transform> pointsBlock;
+    [SerializeField] private Animator animator;
 
-    private bool isBlockingPath = false;
     private NavMeshAgent agent;
-
-    
+    private Coroutine blockCoroutine;
+    private Track trackScript;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        trackScript = GetComponent<Track>();
     }
 
-    private void Update()
+    public bool IsBlockingPath()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        return blockCoroutine == null;
+    }
+
+    public void StopCoroutine()
+    {
+        if (blockCoroutine != null)
         {
-            ABlockPath();
+            StopCoroutine(blockCoroutine);
+            blockCoroutine = null;
+            agent.isStopped = true;
+            trackScript.beforeShowPrint = false;
         }
     }
 
     public void ABlockPath()
     {
-        if (isBlockingPath || pointsBlock == null || pointsBlock.Count == 0) return;
+        if (blockCoroutine != null || pointsBlock == null || pointsBlock.Count == 0) return;
 
         Transform target = null;
         float minDist = Mathf.Infinity;
@@ -46,44 +55,75 @@ public class BlockPath: MonoBehaviour
             }
         }
         if (target != null) { 
-            MoveAndBlock2(target);
+            blockCoroutine = StartCoroutine(MoveAndBlock(target));
         }
-    }
-
-    private void MoveAndBlock2(Transform target)
-    {
-        isBlockingPath = true;
-        transform.LookAt(target);
-        if (wallPrefab != null)
-        {
-            Instantiate(wallPrefab, target.position, target.rotation);
-        }
-        isBlockingPath = false;
     }
     private IEnumerator MoveAndBlock(Transform target)
     {
-        isBlockingPath = true;
         Debug.Log($"{name}: Dirigiendose a bloquear el camino en {target.name}");
 
         if(agent && NavMesh.SamplePosition(target.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas)){
             Vector3 dirToTarget = (hit.position - transform.position).normalized;
             Vector3 adjustedDestination = hit.position - dirToTarget * (agent.radius + 1.5f);
+            agent.isStopped = false;
             agent.SetDestination(adjustedDestination);
+            if (animator != null)
+                animator.SetBool("isWalking", true);
         }
 
-        while(Vector3.Distance(transform.position, target.position) > blockRadius)
+        float stuckTimer = 0f;
+
+        Vector3 lastPosition = transform.position;
+
+        while (true)
         {
+            float dist = Vector3.Distance(transform.position, target.position);
+
+            if (Vector3.Distance(transform.position, lastPosition) < 0.05f)
+                stuckTimer += Time.deltaTime;
+            else
+                stuckTimer = 0f;
+
+            lastPosition = transform.position;
+
+            // Si el enemigo lleva 3 segundos sin moverse
+            if (stuckTimer > 3f)
+            {
+                Debug.LogWarning($"{name}: Atascado mientras intentaba bloquear. Reintentando con mayor radio");
+                blockRadius += 1f;             // aumentamos radio
+                stuckTimer = 0f;               // reseteamos
+            }
+
+            
+            if (dist <= blockRadius)
+                break;
+
             yield return null;
         }
 
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isBlocking", true);
+        }
+            
+
         Debug.Log($"{name}: Bloqueando el camino...");
-        yield return new WaitForSeconds(buildTime);
+        yield return new WaitUntil(() =>
+                animator.GetCurrentAnimatorStateInfo(0).IsName("Blocking"));
+
+        yield return new WaitUntil(() =>
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        if (animator != null)
+            animator.SetBool("isBlocking", false);
 
         if (wallPrefab != null) {
             Instantiate(wallPrefab, target.position, transform.rotation);
             Debug.Log($"{name}: Camino boqueado en {target.name}");
         }
 
-        isBlockingPath = false;
+        trackScript.beforeShowPrint = false;
+        blockCoroutine = null;
     }
 }

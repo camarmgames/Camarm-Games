@@ -7,18 +7,22 @@ public class PlayerMovement : MonoBehaviour
     #region Properties
     [Header("Movement Settings")]
     public float moveSpeed = 5f;                // Velocidad de movimiento
-    private Animator animator;                   // Referencia al Animator
-    public Transform cameraTransform;           // Referencia a la c�mara
+    public Animator animator;                   // Referencia al Animator
 
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
     public float initialSpeed;
+    public bool trapEffect = false;
     public int bewitched = 1;                   // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
 
 
     [SerializeField, Range(0.1f, 10f)]
     [Tooltip("Sensibility of the rotation")]
     private float rotationSmoothness = 2f;
+
+
+    private bool _sprint;
+    private bool _crouch;
     #endregion
 
     #region Monobehavior
@@ -27,26 +31,20 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveDirection = Vector3.zero;
         initialSpeed = moveSpeed;
-        //animator = GetComponent<Animator>();
-        //cameraTransform = GameObject.Find("MainCamera").transform;
-    }
-
-    private void Start()
-    {
-        if(animator != null) 
-            animator.SetBool("Grounded", true);
+        
     }
 
     void Update()
     {
-        //_moveDirection = (cameraTransform.forward * _input.y + cameraTransform.right * _input.x).normalized;
-        HandleAnimations();
+        
+       HandleAnimations();
     }
 
     private void FixedUpdate()
     {
         // Calculo del movimiento del personaje
         MovePlayer();
+
     }
     #endregion
 
@@ -54,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
     // Mover el jugador
     void MovePlayer()
     {
-        //_moveDirection.y = 0f; // Asegurarnos de que el movimiento es horizontal (sin componente Y)
-
         _moveDirection = new Vector3(_input.x, 0f, _input.y).normalized;
 
         // Mover el jugador usando el Transform
@@ -68,6 +64,11 @@ public class PlayerMovement : MonoBehaviour
             // Movimiento en el espacio mundial
             transform.Translate(_moveDirection * moveSpeed * Time.deltaTime, Space.World);
         }
+        
+        if (!_sprint && !_crouch && !trapEffect && moveSpeed != initialSpeed)
+        {
+            moveSpeed = initialSpeed;
+        }
     }
 
     // Controlar animacion de movimiento del jugador
@@ -75,9 +76,12 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = Mathf.Abs(_input.x) + Mathf.Abs(_input.y);
 
-        if (animator != null && animator.layerCount > 0)
+
+        if (animator != null)
         {
-            animator.SetFloat("MoveSpeed", speed);
+            animator.SetFloat("Speed", speed);
+            animator.SetBool("isRunning", _sprint);
+            animator.SetBool("isCrouch", _crouch);
         }
     }
     //Asigna el valor correspondiente a la variable bewitched para invertir los controles.
@@ -99,6 +103,25 @@ public class PlayerMovement : MonoBehaviour
     {
         string name = ctx.control.name;
         PlayerInventory.instance.Use(ctx.control.name[0] - '1');
+    }
+    
+    public void OnSprint(InputAction.CallbackContext ctx)
+    {
+        if (!_sprint && !_crouch && trapEffect)
+        {
+            moveSpeed *= 1.5f;
+        }
+        _sprint = ctx.ReadValueAsButton();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext ctx)
+    {
+        if (!_crouch && !_sprint && trapEffect)
+        {
+            moveSpeed = initialSpeed;
+            moveSpeed *= 0.5f;
+        }  
+        _crouch = ctx.ReadValueAsButton();
     }
     #endregion
 
