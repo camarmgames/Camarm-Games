@@ -43,6 +43,13 @@ public class NoiseListener: MonoBehaviour
 
     public void OnNoiseHeard(Vector3 position, NoiseType noise)
     {
+        if(hearingThreshold == 0)
+        {
+            if (debugLog)
+                Debug.Log("ESTOY SORDO");
+
+            return;
+        } 
         float distance = Vector3.Distance(transform.position, position);
 
         if (distance <= noise.radius * noise.intensity) { 
@@ -73,7 +80,7 @@ public class NoiseListener: MonoBehaviour
     public bool LightNoise()
     {
         detectPlayer.PDetectPlayer();
-        if (detectPlayer.IsSuspicious())
+        if (detectPlayer.IsInstantSuspicious())
         {
             if (investigation != null)
                 investigation.pointToInvestigateArea = playerT.position;
@@ -84,7 +91,7 @@ public class NoiseListener: MonoBehaviour
             return true;
         }
 
-        if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5) || detectPlayer.IsPlayerDetected())
+        if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5))
         {
             if (investigation != null)
                 investigation.pointToInvestigateArea = lastHeardPosition;
@@ -94,8 +101,10 @@ public class NoiseListener: MonoBehaviour
             return true;
         }
 
-        
-            
+        if(detectPlayer.IsPlayerDetected())
+            return true;
+
+
         return false;
     }
 

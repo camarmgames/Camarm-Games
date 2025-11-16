@@ -11,6 +11,7 @@ public class Track: MonoBehaviour
     [Header("Detection Settings")]
     [SerializeField] private LayerMask footprintMask;
     [SerializeField] private float followSpeed = 3.5f;
+    [SerializeField] private Animator animator;
 
     [Header("Parameters of vision")]
     [SerializeField, Tooltip("Distance the enemy can see to")]
@@ -29,10 +30,11 @@ public class Track: MonoBehaviour
 
     private Footprint currentTargetFootprint;
     private int lastSeenFootprintID = -1;
-    private bool inspecting = false;
 
-    private Footprint target;
-    private bool hasEndedFollowing;
+
+    private Coroutine followFootprintCoroutine;
+    private Coroutine inspectAreaCoroutine;
+    public bool beforeShowPrint = false;
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -66,13 +68,41 @@ public class Track: MonoBehaviour
         return false;
     }
 
+    public bool HasTrack()
+    {
+        return followFootprintCoroutine == null;
+    }
+
+    public bool BeforeShowPrint()
+    {
+        return beforeShowPrint;
+    }
+
+    public void StopCoroutines()
+    {
+        if(followFootprintCoroutine != null || inspectAreaCoroutine != null)
+            agent.isStopped = true;
+
+        if (followFootprintCoroutine != null)
+        {
+            StopCoroutine(followFootprintCoroutine);
+            followFootprintCoroutine = null;
+        }
+            
+        if(inspectAreaCoroutine != null)
+        {
+            StopCoroutine(inspectAreaCoroutine);
+            inspectAreaCoroutine = null;
+        }
+        
+    }
     public void Detect()
     {
-        TryDetectFootprints();
+        if(followFootprintCoroutine == null)
+            TryDetectFootprints();
     }
     public bool TryDetectFootprints()
     {
-        hasEndedFollowing = false;
         Collider[] footprints = Physics.OverlapSphere(transform.position, viewRadius, footprintMask);
         if(footprints.Length == 0) return false;
         List<Footprint> visibleFootprints = new List<Footprint>();
@@ -95,18 +125,23 @@ public class Track: MonoBehaviour
         {
             if(fp.footprintID > lastSeenFootprintID)
             {
-                StartCoroutine(FollowFootprint(fp));
+                followFootprintCoroutine = StartCoroutine(FollowFootprint(fp));
                 return true;
             }
         }
-        //hasEndedFollowing = true;
+
         return false;
     }
 
     private IEnumerator FollowFootprint(Footprint target)
     {
+        beforeShowPrint = true;
         isFollowingTrail = true;
         currentTargetFootprint = target;
+        agent.isStopped = false;
+
+        if (animator != null)
+            animator.SetBool("isWalking", isFollowingTrail);
 
         if (agent && NavMesh.SamplePosition(currentTargetFootprint.transform.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
@@ -135,34 +170,39 @@ public class Track: MonoBehaviour
             if(stuckTimer > 3f)
             {
                 Debug.LogWarning($"{name}: Atascado, abortando seguimiento");
-                hasEndedFollowing = true;
+                
                 break;
             }
             yield return null;
         }
         agent.ResetPath();
-        Debug.Log("Pongo la rotación como toca");
-        transform.LookAt(currentTargetFootprint.transform.position);
-
+        //Debug.Log("Pongo la rotación como toca");
+        
 
         lastSeenFootprintID = currentTargetFootprint.footprintID;
-        isFollowingTrail = false;
 
-        yield return new WaitForSeconds(0.5f);
-        if (!DetectFootprint())
-            StartCoroutine(InspectArea(currentTargetFootprint.transform.position));
+        if (DetectFootprint())
+        {
+            TryDetectFootprints();
+        }
         else
-            hasEndedFollowing = true;
+        {
+            isFollowingTrail = false;
+
+            if (animator != null)
+                animator.SetBool("isWalking", isFollowingTrail);
+
+            yield return new WaitForSeconds(0.5f);
+            
+           
+            inspectAreaCoroutine = StartCoroutine(InspectArea(currentTargetFootprint.transform.position));
+        } 
     }
-    public bool HasEndedFollowing()
-    {
-        return hasEndedFollowing;
-    }
+
 
 
     private IEnumerator InspectArea(Vector3 lastPosition)
     {
-        inspecting = true;
         Debug.Log($"{name}: Inspeccionando la zona...");
 
         float inspectingTime = 5f;
@@ -177,7 +217,7 @@ public class Track: MonoBehaviour
 
             if (isFollowingTrail)
             {
-                inspecting = false;
+                
                 yield break;
             }
 
@@ -185,9 +225,10 @@ public class Track: MonoBehaviour
             yield return null;
         }
 
-        inspecting = false;
+        
         Debug.Log($"{name}: no encontro mas huellas");
-        hasEndedFollowing = true;
+        followFootprintCoroutine = null;
+        inspectAreaCoroutine = null;
     }
 
     private void OnDrawGizmosSelected()
