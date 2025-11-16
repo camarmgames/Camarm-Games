@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Sensibility of the rotation")]
     private float rotationSmoothness = 2f;
 
+    [SerializeField]
+    private GameObject[] characterModels;
+
 
     private bool _sprint;
     private bool _crouch;
@@ -32,6 +35,17 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection = Vector3.zero;
         initialSpeed = moveSpeed;
         
+    }
+
+    void Start()
+    {
+        int index = CharacterSelection.Instance.selectedCharacterIndex;
+        
+        foreach(var model in characterModels)
+            model.SetActive(false);
+
+        if(index >= 0 && index < characterModels.Length)
+            characterModels[index].SetActive(true);
     }
 
     void Update()
