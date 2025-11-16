@@ -7,6 +7,8 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField]
     private GameObject pausePanel;
+    [SerializeField]
+    private GameObject pauseButtons;
 
     void Update()
     {
@@ -21,12 +23,14 @@ public class PauseManager : MonoBehaviour
         if (!isPaused)
         {
             pausePanel.SetActive(true);
+            pauseButtons.SetActive(true);
             Time.timeScale = 0.0f;
             isPaused = true;
         }
         else
         {
             pausePanel.SetActive(false);
+            pauseButtons.SetActive(false);
             Time.timeScale = 1.0f;
             isPaused = false;
         }

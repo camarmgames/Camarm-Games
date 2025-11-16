@@ -140,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region CollideFunction
-
     public void OnTriggerEnter(Collider other)
     {
         Collectable collectable;
@@ -150,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
             if (collectable != null && !PlayerInventory.instance.IsFull())
             {
                 PlayerInventory.instance.Add(collectable);
-                Destroy(collectable.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }
