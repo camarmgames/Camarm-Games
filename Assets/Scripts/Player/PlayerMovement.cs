@@ -94,6 +94,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _input = ctx.ReadValue<Vector2>() * bewitched; //Se guarda localmente
     }
+
+    public void OnInventoryUsePressed(InputAction.CallbackContext ctx)
+    {
+        string name = ctx.control.name;
+        PlayerInventory.instance.Use(ctx.control.name[0] - '1');
+    }
     #endregion
 
     #region CollideFunction
@@ -104,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         if (other != null)
         {
             collectable = other.GetComponent<Collectable>();
-            if (collectable != null)
+            if (collectable != null && !PlayerInventory.instance.IsFull())
             {
                 PlayerInventory.instance.Add(collectable);
                 Destroy(collectable.gameObject);

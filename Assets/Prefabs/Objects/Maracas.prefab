@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 94846d938ada687498bc29de27f49b59, type: 3}
       propertyPath: m_Name
-      value: maracas
+      value: Maracas
       objectReference: {fileID: 0}
     - target: {fileID: 8082117123032040956, guid: 94846d938ada687498bc29de27f49b59, type: 3}
       propertyPath: m_LocalScale.x
@@ -109,7 +109,7 @@ PrefabInstance:
       addedObject: {fileID: 4520220179706290535}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94846d938ada687498bc29de27f49b59, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3343181567651436430}
+      addedObject: {fileID: 4730536524589227055}
   m_SourcePrefab: {fileID: 100100000, guid: 94846d938ada687498bc29de27f49b59, type: 3}
 --- !u!1 &1871956638406442781 stripped
 GameObject:
@@ -137,7 +137,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.87, y: 2.2, z: 2.9}
   m_Center: {x: -69.7, y: 1.07, z: -21.1}
---- !u!114 &3343181567651436430
+--- !u!114 &4730536524589227055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1871956638406442781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4983385284d62774b8c4e03849bcd204, type: 3}
+  m_Script: {fileID: 11500000, guid: c21b19dd057707f43a488fe618ab9fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}

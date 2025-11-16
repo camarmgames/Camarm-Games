@@ -1,7 +1,14 @@
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+public abstract class Collectable : MonoBehaviour
 {
     public Sprite inventory;
+
+    public abstract void Execute();
+
+    public InventoryItem ToInventoryItem()
+    {
+        return new InventoryItem(inventory, Execute);
+    }
 
 }
