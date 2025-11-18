@@ -13,7 +13,8 @@ public class FinishLevel: MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (finishGame) {
-                EndGameManager.Instance.ShowWinScreen();
+                if(EndGameManager.Instance != null)
+                    EndGameManager.Instance.ShowWinScreen();
             }
             else
             {
