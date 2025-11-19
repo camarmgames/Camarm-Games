@@ -526,8 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfd1edc91d3fce4db375b38a5e60e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  animator: {fileID: 0}
+  moveSpeed: 6
+  animator: {fileID: 2940276724286033537}
   initialSpeed: 0
   trapEffect: 0
   bewitched: 1
@@ -793,6 +793,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 799c26f656f6cb941ba35d64ff3a6064, type: 3}
+--- !u!95 &2940276724286033537 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -8093285475504955642, guid: 799c26f656f6cb941ba35d64ff3a6064, type: 3}
+  m_PrefabInstance: {fileID: 2838157988665610631}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6363802344682045425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165930408545349238, guid: 799c26f656f6cb941ba35d64ff3a6064, type: 3}
