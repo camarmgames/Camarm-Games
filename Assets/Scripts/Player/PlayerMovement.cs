@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Sensibility of the rotation")]
     private float rotationSmoothness = 2f;
 
+    [SerializeField]
+    private GameObject[] characterModels;
+
 
     private bool _sprint;
     private bool _crouch;
@@ -32,6 +35,20 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection = Vector3.zero;
         initialSpeed = moveSpeed;
         
+    }
+
+    void Start()
+    {
+        if(CharacterSelection.Instance != null)
+        {
+            int index = CharacterSelection.Instance.selectedCharacterIndex;
+
+            foreach (var model in characterModels)
+                model.SetActive(false);
+
+            if (index >= 0 && index < characterModels.Length)
+                characterModels[index].SetActive(true);
+        }
     }
 
     void Update()
@@ -126,7 +143,6 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region CollideFunction
-
     public void OnTriggerEnter(Collider other)
     {
         Collectable collectable;
@@ -136,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
             if (collectable != null && !PlayerInventory.instance.IsFull())
             {
                 PlayerInventory.instance.Add(collectable);
-                Destroy(collectable.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }

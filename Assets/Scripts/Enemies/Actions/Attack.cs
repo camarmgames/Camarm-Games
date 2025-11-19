@@ -19,6 +19,8 @@ public class Attack: MonoBehaviour
             animator.SetBool("isAttacking", true);
 
         playerInput.actions["Move"].Disable();
+
+        EndGameManager.Instance.ShowLoseScreen();
         //Debug.Log("Jugador paralizado");
     }
 

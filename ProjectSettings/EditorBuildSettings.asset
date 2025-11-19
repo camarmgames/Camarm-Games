@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OptionsScene.unity
     guid: 877cd6dd289373243b9988f76913c994
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mazmorras.unity
+    guid: 1c2eceea71f41e04f92525d1744287c2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Nivel_2.unity
+    guid: 163b6a136a4a23747a0759b74b779f49
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
