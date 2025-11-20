@@ -12,12 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelector.unity
     guid: 50fe58e0566e9334b830e8a9dd1ce87f
   - enabled: 1
-    path: Assets/Scenes/CreditsScene.unity
-    guid: 8baed36e5cee5f04bbe15d42c0a37433
-  - enabled: 1
-    path: Assets/Scenes/OptionsScene.unity
-    guid: 877cd6dd289373243b9988f76913c994
-  - enabled: 1
     path: Assets/Scenes/Levels/Mazmorras.unity
     guid: 1c2eceea71f41e04f92525d1744287c2
   - enabled: 1

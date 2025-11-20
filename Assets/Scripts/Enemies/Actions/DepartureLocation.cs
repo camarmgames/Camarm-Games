@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,11 +63,11 @@ public class DepartureLocation: MonoBehaviour
     }
 
     #region Actions
-    public void CalculatePositionToExit()
+    public Status CalculatePositionToExit()
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
-        if (playerPosition == null || spawnPoints.Count == 0) return;
+        if (playerPosition == null || spawnPoints.Count == 0) return Status.Failure;
 
         // Reinicio timer
         timer = cooldownTime;
@@ -108,7 +109,11 @@ public class DepartureLocation: MonoBehaviour
         agent.enabled = false;
         // Animations
         if (appearCoroutine == null)
+        {
             appearCoroutine = StartCoroutine(AppearSequence(departurePosition));
+            return Status.Success;
+        }
+        return Status.Success; 
     }
 
     private IEnumerator AppearSequence(Vector3 targetPos)
@@ -135,11 +140,13 @@ public class DepartureLocation: MonoBehaviour
         agent.enabled = true;
     }
 
-    public void SetInvisible()
+    public Status SetInvisible()
     {
         if (disappearCoroutine != null) StopCoroutine(disappearCoroutine);
         agent.enabled = false;
         disappearCoroutine = StartCoroutine(DisappearSequence());
+
+        return Status.Success;
     }
 
     private IEnumerator DisappearSequence()

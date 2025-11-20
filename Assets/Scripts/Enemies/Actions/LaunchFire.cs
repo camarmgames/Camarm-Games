@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 
@@ -40,14 +41,15 @@ public class LaunchFire: MonoBehaviour
         }
     }
 
-    public void Attack()
+    public Status Attack()
     {
         if(!canLaunch)
-            return;
+            return Status.Success;
 
         launchCoroutine = StartCoroutine(LaunchRoutine());
 
         StartCoroutine(LaunchCooldownRoutine());
+        return Status.Success;
     }
     private IEnumerator LaunchRoutine()
     {

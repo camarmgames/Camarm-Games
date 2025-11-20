@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 
@@ -16,17 +17,18 @@ public class TeleportBehindPlayer: MonoBehaviour
 
     public Transform player;
     private bool canTeleport = true;
-    public void TeleportEnemyBehindPlayer()
+    public Status TeleportEnemyBehindPlayer()
     {
         if (!canTeleport)
         {
             if (debugLog)
                 Debug.Log("Teleport en cooldown");
-            return;
+            return Status.Success;
         }
 
         StartCoroutine(TeleportCooldownRoutine());
         PerformTeleport();
+        return Status.Success;
     }
 
     private void PerformTeleport()

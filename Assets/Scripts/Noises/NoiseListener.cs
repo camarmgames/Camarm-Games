@@ -20,7 +20,7 @@ public class NoiseListener: MonoBehaviour
     private DetectPlayer detectPlayer;
     private Investigation investigation;
 
-    private void Start()
+    private void Awake()
     {
         detectPlayer = GetComponent<DetectPlayer>();
         investigation = GetComponent<Investigation>();
@@ -79,6 +79,7 @@ public class NoiseListener: MonoBehaviour
 
     public bool LightNoise()
     {
+        
         detectPlayer.PDetectPlayer();
         if (detectPlayer.IsInstantSuspicious())
         {

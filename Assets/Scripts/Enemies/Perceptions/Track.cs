@@ -1,4 +1,5 @@
 
+using BehaviourAPI.Core;
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,10 +97,12 @@ public class Track: MonoBehaviour
         }
         
     }
-    public void Detect()
+    public Status Detect()
     {
         if(followFootprintCoroutine == null)
             TryDetectFootprints();
+
+        return Status.Success;
     }
     public bool TryDetectFootprints()
     {

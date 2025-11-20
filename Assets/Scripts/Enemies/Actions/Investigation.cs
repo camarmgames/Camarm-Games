@@ -30,7 +30,7 @@ public class Investigation: MonoBehaviour
         
     }
 
-    public void InvestigateArea()
+    public Status InvestigateArea()
     {
         if (!isInvestigating)
         {
@@ -40,6 +40,8 @@ public class Investigation: MonoBehaviour
             if (animator != null)
                 animator.SetBool("isWalking", isInvestigating);
         }
+
+        return Status.Success;
     }
 
     public void StopInvestigation()

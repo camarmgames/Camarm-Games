@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 3945624534296226582}
   - component: {fileID: 1303259283290552347}
   - component: {fileID: 9069600030452053978}
+  - component: {fileID: 9044118100510152945}
   m_Layer: 3
   m_Name: BehaviourNinjaAPI
   m_TagString: Untagged
@@ -352,7 +353,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710322928822357142}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7033c32493b38240a6a2c47736ac9c0, type: 3}
   m_Name: 
@@ -1393,6 +1394,7 @@ MonoBehaviour:
   rotationSpeed: 5
   animator: {fileID: 7541337415847535602}
   pointToInvestigateArea: {x: 0, y: 0, z: 0}
+  isInvestigating: 0
 --- !u!114 &1948020629907747670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1483,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9044118100510152945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710322928822357142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00337e861d7dc894eb64798bb2d99f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
 --- !u!1 &773808653364648045
 GameObject:
   m_ObjectHideFlags: 0
