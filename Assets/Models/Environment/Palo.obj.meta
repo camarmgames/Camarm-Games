@@ -3,7 +3,22 @@ guid: ebd465f026af84a4a9986bfd053b92f9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cylinder001Mat
+    second: {fileID: 2100000, guid: 8c04b6708d852e943b8fac0928e5e0e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus005Mat
+    second: {fileID: 2100000, guid: bb5a2245965a9384ebde5a04fe5d2b16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: coneMat
+    second: {fileID: 2100000, guid: 3ee83fe1aa30a5a498b39c8b9b7ba0de, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
