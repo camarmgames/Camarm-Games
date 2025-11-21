@@ -3,7 +3,27 @@ guid: 94846d938ada687498bc29de27f49b59
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaderaMat
+    second: {fileID: 2100000, guid: 3cf03d533b5714d4aa85b5b1b3cca0d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Raya1Mat
+    second: {fileID: 2100000, guid: 6c32e6115322d55489111321b8243583, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Raya2Mat
+    second: {fileID: 2100000, guid: 924b7cd073a64414a9a39d26b6d4f383, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Raya3Mat
+    second: {fileID: 2100000, guid: de4fba2e68c027e48bc95d5e3e1d8dce, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +53,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.025
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -88,7 +108,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.025
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
