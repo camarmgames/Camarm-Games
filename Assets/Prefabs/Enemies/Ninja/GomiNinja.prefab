@@ -541,7 +541,7 @@ MonoBehaviour:
         childIds: []
       - name: HighNoise
         id: acad0558-eedf-44fa-8a96-a59d01af4f45
-        position: {x: -336, y: 1034.4}
+        position: {x: -314, y: 1024}
         node:
           rid: 8750596587425890333
         references:

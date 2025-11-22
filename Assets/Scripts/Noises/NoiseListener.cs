@@ -8,6 +8,8 @@ public class NoiseListener: MonoBehaviour
     [Tooltip("Time that need to forget the sound")]
     public float forgetTime = 3f;
 
+    public EnemyStateIcon stateIcon;
+
     [Header("Debug")]
     [SerializeField, Tooltip("Message console")]
     private bool debugLog;
@@ -19,6 +21,7 @@ public class NoiseListener: MonoBehaviour
     private Transform playerT;
     private DetectPlayer detectPlayer;
     private Investigation investigation;
+
 
     private void Awake()
     {
@@ -79,8 +82,14 @@ public class NoiseListener: MonoBehaviour
 
     public bool LightNoise()
     {
-        
         detectPlayer.PDetectPlayer();
+
+        if (detectPlayer.IsPlayerDetected())
+        {
+            stateIcon.SetDetected();
+            return true;
+        }
+        
         if (detectPlayer.IsInstantSuspicious())
         {
             if (investigation != null)
@@ -89,20 +98,31 @@ public class NoiseListener: MonoBehaviour
             if (debugLog)
                 Debug.Log("Vi algo sospechoso");
 
+            stateIcon.SetAlert();
+
             return true;
-        }else if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5))
+        }
+        
+        if ((lastHeardNoise != null && lastHeardNoise.intensity == 0.5))
         {
             if (investigation != null)
                 investigation.pointToInvestigateArea = lastHeardPosition;
 
             if (debugLog)
                 Debug.Log("Sonido leve");
+
+            stateIcon.SetAlert();
             return true;
         }
 
-        if(detectPlayer.IsPlayerDetected())
+        if (investigation.isInvestigating)
+        {
+            if (debugLog)
+                Debug.Log("Esta investigando");
             return true;
+        }
 
+        stateIcon.SetCalm();
 
         return false;
     }
