@@ -58,14 +58,14 @@ public class PathingNinja: MonoBehaviour
 
     public Status StartPatrol()
     {
-        Debug.Log("Hemos vuelto");
+        
         if (isPatrolling)
             return Status.Success;
 
         isPatrolling = true;
         agent.isStopped = false;
         GoToNextPoint();
-        Debug.Log("Empieza a patrullar");
+        //Debug.Log("Empieza a patrullar");
 
         if (animator != null)
             animator.SetBool("isWalking", isPatrolling);
@@ -81,7 +81,7 @@ public class PathingNinja: MonoBehaviour
         agent.isStopped = true;
         timer = 0f;
         lastPointIndex = ((currentPointIndex - 1) + patrolPoints.Count) % patrolPoints.Count;
-        Debug.Log("Patrulla detenida");
+        //Debug.Log("Patrulla detenida");
 
         if(animator != null)
             animator.SetBool("isWalking", isPatrolling);

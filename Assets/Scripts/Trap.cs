@@ -20,11 +20,36 @@ public class Trap: MonoBehaviour
     [SerializeField, Tooltip("Time of live of the trap")]
     private float lifeTime = 5f;
 
+    [Header("Trap Materials")]
+    public Material slowMaterial;
+    public Material stuckMaterial;
+    public Material magoMaterial;
+
+    public Renderer rend;
+
+
     private float initialPlayerSpeed;
+    private GomiMagoAppearance gomiMagoAppearance;
     public TrapSpawner trapSpawner;
 
     private void Start()
     {
+        switch (trapType)
+        {
+            case TrapType.Slow:
+                rend.material = slowMaterial;
+                break;
+
+            case TrapType.Stuck:
+                rend.material = stuckMaterial;
+                break;
+
+            case TrapType.GomiMago:
+                rend.material = magoMaterial;
+                break;
+        }
+
+        gomiMagoAppearance = GetComponent<GomiMagoAppearance>();
         initialPlayerSpeed = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().initialSpeed;
 
         if (temporal)
@@ -98,6 +123,7 @@ public class Trap: MonoBehaviour
     public void ActivarMago()
     {
         Debug.Log("Activacion de Mago");
+        gomiMagoAppearance.SpawnMago();
         Destroy(gameObject);
     }
 }

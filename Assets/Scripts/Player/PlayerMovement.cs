@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject[] characterModels;
 
 
-    private bool _sprint;
-    private bool _crouch;
+    public bool _sprint;
+    public bool _crouch;
     #endregion
 
     #region Monobehavior
@@ -66,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Player methods
+
+    public Vector3 getMoveDirection()
+    {
+        return _moveDirection;
+    }
     // Mover el jugador
     void MovePlayer()
     {

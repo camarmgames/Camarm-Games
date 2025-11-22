@@ -181,9 +181,9 @@ public class DepartureLocation: MonoBehaviour
         return disappearCoroutine == null;
     }
 
-    public bool CheckInvisible()
+    public bool CheckNoInvisible()
     {
-        return !renderPrefab.activeSelf;
+        return renderPrefab.activeSelf;
     }
 
     public bool CheckActualDisappear()
