@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1ea243b8185bd042aa023548ea20408
+guid: 30f8355985483af42b446c6828a07de9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: andarPlatano
+      name: idleF
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
-      lastFrame: 17
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

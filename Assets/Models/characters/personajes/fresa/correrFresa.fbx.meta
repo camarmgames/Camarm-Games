@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b766e8ae57ef1ce499c3b3e70d6d87e6
+guid: 84ab1fb0b5081ce42a106a603f035323
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,18 +31,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Shoting
+      name: CorrerF
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
-      lastFrame: 33
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
