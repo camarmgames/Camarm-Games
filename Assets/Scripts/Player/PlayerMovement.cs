@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.AudioSettings;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float initialSpeed;
     public bool trapEffect = false;
     public int bewitched = 1;                   // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
-
+    private bool useMobile = false;
 
     [SerializeField, Range(0.1f, 10f)]
     [Tooltip("Sensibility of the rotation")]
@@ -47,14 +48,36 @@ public class PlayerMovement : MonoBehaviour
                 model.SetActive(false);
 
             if (index >= 0 && index < characterModels.Length)
+            {
                 characterModels[index].SetActive(true);
+                animator = characterModels[index].GetComponent<Animator>();
+            }
+                
         }
+        bool isMobile = MobilePlatformDetector.IsMobile();
+
+        useMobile = isMobile;
     }
 
     void Update()
     {
-        
-       HandleAnimations();
+        if(useMobile && MobileInputBridge.Instance != null)
+        {
+            _input = MobileInputBridge.Instance.GetMove();
+
+            _sprint = MobileInputBridge.Instance.GetSprint();
+            if (!_sprint && !_crouch && trapEffect)
+            {
+                moveSpeed *= 1.5f;
+            }
+            _crouch = MobileInputBridge.Instance.GetCrouch();
+            if (!_crouch && !_sprint && trapEffect)
+            {
+                moveSpeed = initialSpeed;
+                moveSpeed *= 0.5f;
+            }
+        }
+        HandleAnimations();
     }
 
     private void FixedUpdate()
