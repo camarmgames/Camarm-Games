@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,13 +14,15 @@ public class Attack: MonoBehaviour
         playerInput = FindFirstObjectByType<PlayerInput>();    
     }
 
-    public void AttackP()
+    public Status AttackP()
     {
         if(animator != null)
             animator.SetBool("isAttacking", true);
 
         playerInput.actions["Move"].Disable();
-        //Debug.Log("Jugador paralizado");
+
+        EndGameManager.Instance.ShowLoseScreen();
+        return Status.Success;
     }
 
     public IEnumerator DelayPlayerEnable()

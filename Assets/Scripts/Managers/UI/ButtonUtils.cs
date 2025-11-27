@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ButtonUtils : MonoBehaviour
@@ -16,5 +17,25 @@ public class ButtonUtils : MonoBehaviour
     public void ChangeScene(string nameSceneToGo)
     {
         SceneManager.LoadScene(nameSceneToGo);
+    }
+
+    public void OnSelectCharacter(int index)
+    {
+        CharacterSelection.Instance.SelectCharacter(index);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void NotShowEndGame()
+    {
+        EndGameManager.Instance.endScreen.SetActive(false);
+        EndGameManager.Instance.isShowing = false;
+        PlayerInput playerInput = FindFirstObjectByType<PlayerInput>();
+        playerInput.actions["Move"].Enable();
+        Time.timeScale = 1.0f;
     }
 }

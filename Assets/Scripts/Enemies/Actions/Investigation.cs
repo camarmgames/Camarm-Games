@@ -1,4 +1,4 @@
-using BehaviourAPI.Core;
+﻿using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,11 +13,16 @@ public class Investigation: MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private Animator animator;
 
+    [Header("Cooldown")]
+    [SerializeField] private float investigationCooldown = 10f;
+    private float nextInvestigationTime = 0f;
+
     [Header("Debug")]
+    public bool debug;
     public Vector3 pointToInvestigateArea;
 
     private NavMeshAgent agent;
-    private bool isInvestigating = false;
+    public bool isInvestigating = false;
     private Coroutine investigateCoroutine;
 
     void Start()
@@ -30,9 +35,9 @@ public class Investigation: MonoBehaviour
         
     }
 
-    public void InvestigateArea()
+    public Status InvestigateArea()
     {
-        if (!isInvestigating)
+        if (investigateCoroutine == null && Time.time >= nextInvestigationTime)
         {
             isInvestigating = true;
             agent.isStopped = false;
@@ -40,6 +45,8 @@ public class Investigation: MonoBehaviour
             if (animator != null)
                 animator.SetBool("isWalking", isInvestigating);
         }
+
+        return Status.Success;
     }
 
     public void StopInvestigation()
@@ -49,9 +56,25 @@ public class Investigation: MonoBehaviour
             StopCoroutine(investigateCoroutine);
             investigateCoroutine = null;
             isInvestigating = false;
+            agent.isStopped = true;
             if (animator != null)
                 animator.SetBool("isWalking", isInvestigating);
         } 
+    }
+
+    private IEnumerator WaitToReachDestination()
+    {
+        // Esperar a que calcule la ruta
+        yield return new WaitUntil(() => !agent.pathPending);
+
+        // Si no hay path → salir
+        if (agent.pathStatus == NavMeshPathStatus.PathInvalid)
+            yield break;
+
+        // Esperar a que llegue o casi llegue
+        yield return new WaitUntil(() =>
+            agent.remainingDistance <= agent.stoppingDistance + 0.1f &&
+            !agent.hasPath);
     }
 
     private IEnumerator InspectArea(Vector3 targetPosition)
@@ -68,28 +91,44 @@ public class Investigation: MonoBehaviour
         for (int i = 0; i < pointsToInvestigate; i++)
         {
             Vector3 randomPoint = GetRandomPointAround(targetPosition, baseDirection,inspectionRadius);
-            agent.SetDestination(randomPoint);
-
-            while (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance)
+            if (!SetSafeDestination(randomPoint))
             {
+                if (debug) Debug.Log("Punto invalido, saltando al siguiente...");
+                continue;
+            }
+
+            // Esperar llegada
+            yield return StartCoroutine(WaitToReachDestination());
+
+
+            float timer = 0f;
+            while (timer < timePerPoint)
+            {
+                timer += Time.deltaTime;
                 SmoothLookAt(agent.steeringTarget);
                 yield return null;
             }
-
-            if(i > 0)
-            {
-                float timer = 0f;
-                while (timer < timePerPoint)
-                {
-                    timer += Time.deltaTime;
-                    SmoothLookAt(agent.steeringTarget);
-                    yield return null;
-                }
-            }
         }
+
+        if (debug)
+            Debug.Log("Terminada la investigacion 2");
+
+        // Aplicar cooldown ya
+        nextInvestigationTime = Time.time + investigationCooldown;
 
         isInvestigating = false;
         investigateCoroutine = null;
+    }
+
+    private bool SetSafeDestination(Vector3 target)
+    {
+        if (NavMesh.SamplePosition(target, out NavMeshHit hit, 2.5f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+            return true;
+        }
+
+        return false;
     }
 
     private Vector3 GetRandomPointAround(Vector3 center, Vector3 forwardDirection, float radius)

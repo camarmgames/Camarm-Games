@@ -99,6 +99,10 @@ MonoBehaviour:
   timingEffect: 5
   temporal: 1
   lifeTime: 10
+  slowMaterial: {fileID: 2100000, guid: 09b101c6435f69e4586ae5ab14377512, type: 2}
+  stuckMaterial: {fileID: 2100000, guid: c35f264f63c79c84dbbc13cccb7a83b4, type: 2}
+  magoMaterial: {fileID: 2100000, guid: 3c4051132107b544f9fd1dea96a952cb, type: 2}
+  rend: {fileID: 5833130997237845317}
   trapSpawner: {fileID: 0}
 --- !u!1001 &5130413739942351297
 PrefabInstance:
@@ -164,5 +168,10 @@ PrefabInstance:
 --- !u!4 &4663580081957991978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a7bd15d0e6a6bbe40bfe601667888ef7, type: 3}
+  m_PrefabInstance: {fileID: 5130413739942351297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5833130997237845317 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: a7bd15d0e6a6bbe40bfe601667888ef7, type: 3}
   m_PrefabInstance: {fileID: 5130413739942351297}
   m_PrefabAsset: {fileID: 0}

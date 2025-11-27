@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.AudioSettings;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,15 +15,18 @@ public class PlayerMovement : MonoBehaviour
     public float initialSpeed;
     public bool trapEffect = false;
     public int bewitched = 1;                   // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
-
+    private bool useMobile = false;
 
     [SerializeField, Range(0.1f, 10f)]
     [Tooltip("Sensibility of the rotation")]
     private float rotationSmoothness = 2f;
 
+    [SerializeField]
+    private GameObject[] characterModels;
 
-    private bool _sprint;
-    private bool _crouch;
+
+    public bool _sprint;
+    public bool _crouch;
     #endregion
 
     #region Monobehavior
@@ -34,10 +38,46 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    void Start()
+    {
+        if(CharacterSelection.Instance != null)
+        {
+            int index = CharacterSelection.Instance.selectedCharacterIndex;
+
+            foreach (var model in characterModels)
+                model.SetActive(false);
+
+            if (index >= 0 && index < characterModels.Length)
+            {
+                characterModels[index].SetActive(true);
+                animator = characterModels[index].GetComponent<Animator>();
+            }
+                
+        }
+        bool isMobile = MobilePlatformDetector.IsMobile();
+
+        useMobile = isMobile;
+    }
+
     void Update()
     {
-        
-       HandleAnimations();
+        if(useMobile && MobileInputBridge.Instance != null)
+        {
+            _input = MobileInputBridge.Instance.GetMove();
+
+            _sprint = MobileInputBridge.Instance.GetSprint();
+            if (!_sprint && !_crouch && trapEffect)
+            {
+                moveSpeed *= 1.5f;
+            }
+            _crouch = MobileInputBridge.Instance.GetCrouch();
+            if (!_crouch && !_sprint && trapEffect)
+            {
+                moveSpeed = initialSpeed;
+                moveSpeed *= 0.5f;
+            }
+        }
+        HandleAnimations();
     }
 
     private void FixedUpdate()
@@ -49,6 +89,11 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Player methods
+
+    public Vector3 getMoveDirection()
+    {
+        return _moveDirection;
+    }
     // Mover el jugador
     void MovePlayer()
     {
@@ -99,6 +144,12 @@ public class PlayerMovement : MonoBehaviour
         _input = ctx.ReadValue<Vector2>() * bewitched; //Se guarda localmente
     }
 
+    public void OnInventoryUsePressed(InputAction.CallbackContext ctx)
+    {
+        string name = ctx.control.name;
+        PlayerInventory.instance.Use(ctx.control.name[0] - '1');
+    }
+    
     public void OnSprint(InputAction.CallbackContext ctx)
     {
         if (!_sprint && !_crouch && trapEffect)
@@ -120,17 +171,16 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region CollideFunction
-
     public void OnTriggerEnter(Collider other)
     {
         Collectable collectable;
         if (other != null)
         {
             collectable = other.GetComponent<Collectable>();
-            if (collectable != null)
+            if (collectable != null && !PlayerInventory.instance.IsFull())
             {
                 PlayerInventory.instance.Add(collectable);
-                Destroy(collectable.gameObject);
+                Destroy(other.gameObject);
             }
         }
     }

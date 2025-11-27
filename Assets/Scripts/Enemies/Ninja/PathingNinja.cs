@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -55,18 +56,20 @@ public class PathingNinja: MonoBehaviour
         currentPointIndex = (currentPointIndex + 1) % patrolPoints.Count;
     }
 
-    public void StartPatrol()
+    public Status StartPatrol()
     {
+        
         if (isPatrolling)
-            return;
+            return Status.Success;
 
         isPatrolling = true;
         agent.isStopped = false;
         GoToNextPoint();
-        Debug.Log("Empieza a patrullar");
+        //Debug.Log("Empieza a patrullar");
 
         if (animator != null)
             animator.SetBool("isWalking", isPatrolling);
+        return Status.Success;
     }
 
     public void StopPatrol()
@@ -78,7 +81,7 @@ public class PathingNinja: MonoBehaviour
         agent.isStopped = true;
         timer = 0f;
         lastPointIndex = ((currentPointIndex - 1) + patrolPoints.Count) % patrolPoints.Count;
-        Debug.Log("Patrulla detenida");
+        //Debug.Log("Patrulla detenida");
 
         if(animator != null)
             animator.SetBool("isWalking", isPatrolling);

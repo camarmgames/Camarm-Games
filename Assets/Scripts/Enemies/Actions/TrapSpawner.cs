@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -36,10 +37,14 @@ public class TrapSpawner: MonoBehaviour
             isPlacingTrapAnimation = false;
         }
     }
-    public void PlaceRandomTrap()
+    public Status PlaceRandomTrap()
     {
-        if (trapPrefab == null || limitTraps <= 0) return;
-            trapCoroutine = StartCoroutine(PlaceTrapRoutine());   
+        if (trapPrefab == null || limitTraps <= 0)
+        {
+            trapCoroutine = StartCoroutine(PlaceTrapRoutine());
+        }
+
+        return Status.Success;
     }
 
     private IEnumerator PlaceTrapRoutine()
