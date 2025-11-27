@@ -34,8 +34,8 @@ ModelImporter:
       name: idleL
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 2
-      lastFrame: 18
+      firstFrame: 1
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 2
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []
