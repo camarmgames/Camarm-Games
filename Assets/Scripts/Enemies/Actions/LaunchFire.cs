@@ -20,52 +20,30 @@ public class LaunchFire: MonoBehaviour
 
     public Vector3 playerPosition;
     private bool canLaunch = true;
-    private Coroutine launchCoroutine;
-    private bool isLaunchingAnimation = false;
-
-    private void Update()
+    public void AttackStarted()
     {
-        if (animator != null)
-        {
-            animator.SetBool("isLaunching", isLaunchingAnimation);
-        }
+        if (!canLaunch)
+            return;
+
+        animator.Play("Launch");
     }
 
-    public void StopLaunchCoroutine()
-    {
-        if (launchCoroutine != null)
-        {
-            StopCoroutine(launchCoroutine);
-            launchCoroutine = null;
-            isLaunchingAnimation = false;
-        }
-    }
-
-    public Status Attack()
+    public Status AttackUpdate()
     {
         if(!canLaunch)
             return Status.Success;
 
-        launchCoroutine = StartCoroutine(LaunchRoutine());
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
+            return Status.Running;
 
-        StartCoroutine(LaunchCooldownRoutine());
+        LaunchProyectile();
+
+        
         return Status.Success;
     }
-    private IEnumerator LaunchRoutine()
+
+    private void LaunchProyectile()
     {
-        if (animator != null)
-        {
-            isLaunchingAnimation = true;
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).IsName("Launch"));
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
-
-            isLaunchingAnimation = false;
-        }
-
         Trap trap = proyectilePrefab.GetComponent<Trap>();
         Trap.TrapType randomType = (Trap.TrapType)Random.Range(0, System.Enum.GetValues(typeof(Trap.TrapType)).Length);
 
@@ -83,7 +61,7 @@ public class LaunchFire: MonoBehaviour
 
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
 
-        launchCoroutine = null;
+        StartCoroutine(LaunchCooldownRoutine());
     }
 
     private IEnumerator LaunchCooldownRoutine()
@@ -93,10 +71,5 @@ public class LaunchFire: MonoBehaviour
         yield return new WaitForSeconds(launchCooldown);
 
         canLaunch = true;
-    }
-
-    public bool FinishLaunching()
-    {
-        return launchCoroutine == null;
     }
 }
