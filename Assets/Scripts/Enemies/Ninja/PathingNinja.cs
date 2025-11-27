@@ -16,9 +16,13 @@ public class PathingNinja: MonoBehaviour
     private NavMeshAgent agent;
     private bool isPatrolling = false;
 
+    private Break breakScript;
+    private StatsGomiNinja statsGomiNinja;
 
     private void Start()
     {
+        statsGomiNinja = GetComponent<StatsGomiNinja>();
+        breakScript = GetComponent<Break>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -33,6 +37,8 @@ public class PathingNinja: MonoBehaviour
 
             if (timer >= waitTime)
             {
+                statsGomiNinja.ModifyStats(-5, 5);
+
                 GoToNextPoint();
                 timer = 0f;
             }
@@ -46,6 +52,7 @@ public class PathingNinja: MonoBehaviour
         if (patrolPoints.Count == 0)
             return;
 
+
         if(currentPointIndex - 1 == lastPointIndex)
         {
             currentPointIndex = lastPointIndex;
@@ -58,9 +65,13 @@ public class PathingNinja: MonoBehaviour
 
     public Status StartPatrol()
     {
-        
         if (isPatrolling)
             return Status.Success;
+
+        if(breakScript.IsTakingABreak())
+            breakScript.TakeABreakStopped();
+
+        statsGomiNinja.ModifyStats(-4, 7);
 
         isPatrolling = true;
         agent.isStopped = false;

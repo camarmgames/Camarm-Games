@@ -7,6 +7,12 @@ using BehaviourAPI.Core.Perceptions;
 using BehaviourAPI.UnityToolkit;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.BehaviourTrees;
+using BehaviourAPI.UtilitySystems;
+using System.Numerics;
+
+/*
+ * Meter US
+ */
 
 public class cp_GomiNinja : BehaviourRunner
 {
@@ -21,6 +27,8 @@ public class cp_GomiNinja : BehaviourRunner
     NoiseListener m_NoiseListener;
     DetectPlayer m_DetectPlayer;
 	Attack m_Attack;
+    Break m_Break;
+    StatsGomiNinja m_StatsGomiNinja;
 
 	private PushPerception BTSe_ActivationPush;
 	private PushPerception BTSt_ActivationPush;
@@ -38,7 +46,8 @@ public class cp_GomiNinja : BehaviourRunner
         m_NoiseListener = GetComponent<NoiseListener>();
         m_DetectPlayer = GetComponent<DetectPlayer>();
 		m_Attack = GetComponent<Attack>();
-
+        m_Break = GetComponent<Break>();
+        m_StatsGomiNinja = GetComponent<StatsGomiNinja>();
 
         base.Init();
 	}
@@ -48,27 +57,19 @@ public class cp_GomiNinja : BehaviourRunner
 		
 		BehaviourTree BTSecondary_1 = new BehaviourTree();
 		BehaviourTree BTStandar_1 = new BehaviourTree();
+        UtilitySystem usAcciones = new UtilitySystem();
 
         // Perceptions
-        ConditionPerception checkAppearPerception = new ConditionPerception(m_DepartureLocation.CheckAppear);
-        ConditionPerception checkDisappearPerception = new ConditionPerception(m_DepartureLocation.CheckDisappear);
         ConditionPerception lightNoisePerception = new ConditionPerception(m_NoiseListener.LightNoise);
-        ConditionPerception finishLaunchingPerception = new ConditionPerception(m_LaunchFire.FinishLaunching);
         ConditionPerception highNoisePerception = new ConditionPerception(m_NoiseListener.HighNoise);
         ConditionPerception isPlayerDetectedPerception = new ConditionPerception(m_DetectPlayer.IsPlayerDetected);
-        ConditionPerception finishingPlacingTrapPerception = new ConditionPerception(m_TrapSpawner.FinishPlacingTrap);
         ConditionPerception finishTimerPerception = new ConditionPerception(m_DepartureLocation.FinishTimer);
         ConditionPerception checkActualDisappearPerception = new ConditionPerception(m_DepartureLocation.CheckActualDisappear);
 
-		ConditionPerception checkNoInvisiblePerception = new ConditionPerception(m_DepartureLocation.CheckNoInvisible);
 		ConditionPerception hasAppearedPerception = new ConditionPerception(m_GomiMagoAppearance.HasAppeared);
 		ConditionPerception hasDisappearedPerception = new ConditionPerception(m_GomiMagoAppearance.HasDisappeared);
 		ConditionPerception isPlayerWithinDistancePerception = new ConditionPerception(m_FollowPlayer.IsPlayerWithinDistance);
 
-        AndPerception checkAppearDisappearAndPerception = new AndPerception(checkAppearPerception, checkDisappearPerception);
-        AndPerception lightNoiseAndPerception = new AndPerception(lightNoisePerception, finishLaunchingPerception);
-        AndPerception highNoiseAndPerception = new AndPerception(highNoisePerception, finishLaunchingPerception);
-        AndPerception checkTrapFinishAndPerception = new AndPerception(finishingPlacingTrapPerception, finishLaunchingPerception);
 
         // MainFSM
         FSM MainFSM = new FSM();
@@ -78,12 +79,10 @@ public class cp_GomiNinja : BehaviourRunner
 		SubsystemAction BTSecondary_action = new SubsystemAction(BTSecondary_1);
 		State BTSecondary = MainFSM.CreateState(BTSecondary_action);
 
-        List<BehaviourAPI.Core.Actions.Action> subActions = new List<BehaviourAPI.Core.Actions.Action>(4)
+        List<BehaviourAPI.Core.Actions.Action> subActions = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_TrapSpawner.StopTrapCoroutine),
-			new FunctionalAction(m_LaunchFire.StopLaunchCoroutine),
             new FunctionalAction(m_GomiMagoAppearance.BuffEnemy, null)
         };
 
@@ -91,7 +90,7 @@ public class cp_GomiNinja : BehaviourRunner
 
         StateTransition AppearGomiMago = MainFSM.CreateTransition(BTStandar, BTSecondary, null, sBuffEnemy, StatusFlags.None);
 
-        List<BehaviourAPI.Core.Actions.Action> subActions2 = new List<BehaviourAPI.Core.Actions.Action>(4)
+        List<BehaviourAPI.Core.Actions.Action> subActions2 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
             new FunctionalAction(m_FollowPlayer.StopFollow),
             new FunctionalAction(m_GomiMagoAppearance.RestoreEnemyToNormal, null)
@@ -119,14 +118,12 @@ public class cp_GomiNinja : BehaviourRunner
 		ConditionNode Near = BTSecondary_1.CreateDecorator<ConditionNode>(Attack);
 		Near.SetPerception(isPlayerWithinDistancePerception);
 		
-		SequencerNode BTSe_Sequencer_1 = BTSecondary_1.CreateComposite<SequencerNode>(false, Near);
-		BTSe_Sequencer_1.IsRandomized = false;
 		
 		FunctionalAction Perseguir_action = new FunctionalAction();
 		Perseguir_action.onUpdated = m_FollowPlayer.StartFollow;
 		LeafNode Perseguir = BTSecondary_1.CreateLeafNode(Perseguir_action);
 		
-		SelectorNode BTSe_Selector_1 = BTSecondary_1.CreateComposite<SelectorNode>(false, BTSe_Sequencer_1, Perseguir);
+		SelectorNode BTSe_Selector_1 = BTSecondary_1.CreateComposite<SelectorNode>(false, Near, Perseguir);
 		BTSe_Selector_1.IsRandomized = false;
 		
 		LoopNode Main_Loop = BTSecondary_1.CreateDecorator<LoopNode>(BTSe_Selector_1);
@@ -134,12 +131,11 @@ public class cp_GomiNinja : BehaviourRunner
 		BTSecondary_1.SetRootNode(Main_Loop);
 
         // BTStandar
-        List<BehaviourAPI.Core.Actions.Action> subActions4 = new List<BehaviourAPI.Core.Actions.Action>(4)
+        List<BehaviourAPI.Core.Actions.Action> subActions4 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_TrapSpawner.StopTrapCoroutine),
-            new FunctionalAction(m_LaunchFire.Attack, null)
+            new FunctionalAction(m_LaunchFire.AttackStarted, m_LaunchFire.AttackUpdate, null)
         };
 
         SequenceAction sLaunch = new SequenceAction(Status.Running, subActions4);
@@ -148,13 +144,10 @@ public class cp_GomiNinja : BehaviourRunner
 		ConditionNode Detect_Player = BTStandar_1.CreateDecorator<ConditionNode>(Launch_candy);
 		Detect_Player.SetPerception(isPlayerDetectedPerception);
 
-		SequencerNode BTSt_Sequencer_5 = BTStandar_1.CreateComposite<SequencerNode>(false, Detect_Player);
-		BTSt_Sequencer_5.IsRandomized = false;
 
-        List<BehaviourAPI.Core.Actions.Action> subActions5 = new List<BehaviourAPI.Core.Actions.Action>(3)
+        List<BehaviourAPI.Core.Actions.Action> subActions5 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
-            new FunctionalAction(m_TrapSpawner.StopTrapCoroutine),
             new FunctionalAction(m_Investigation.InvestigateArea, null)
         };
 
@@ -162,19 +155,16 @@ public class cp_GomiNinja : BehaviourRunner
 
         LeafNode Investigate = BTStandar_1.CreateLeafNode(sInvestigate);
 		
-		SelectorNode BTSt_Selector_3 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Sequencer_5, Investigate);
+		SelectorNode BTSt_Selector_3 = BTStandar_1.CreateComposite<SelectorNode>(false, Detect_Player, Investigate);
 		BTSt_Selector_3.IsRandomized = false;
 		
 		ConditionNode LightNoise = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_3);
-		LightNoise.SetPerception(lightNoiseAndPerception);
+		LightNoise.SetPerception(lightNoisePerception);
 
-		SequencerNode BTSt_Sequencer_2_1 = BTStandar_1.CreateComposite<SequencerNode>(false, LightNoise);
-		BTSt_Sequencer_2_1.IsRandomized = false;
 
-		List<BehaviourAPI.Core.Actions.Action> subActions6 = new List<BehaviourAPI.Core.Actions.Action>(4)
+		List<BehaviourAPI.Core.Actions.Action> subActions6 = new List<BehaviourAPI.Core.Actions.Action>(3)
 		{
 			new FunctionalAction(m_PathingNinja.StopPatrol),
-			new FunctionalAction(m_TrapSpawner.StopTrapCoroutine),
 			new FunctionalAction(m_Investigation.StopInvestigation),
 			new FunctionalAction(m_TeleportBehindPlayer.TeleportEnemyBehindPlayer, null)
 		};
@@ -184,21 +174,17 @@ public class cp_GomiNinja : BehaviourRunner
         LeafNode Teleport = BTStandar_1.CreateLeafNode(sTeleport);
 		
 		ConditionNode HighNoise = BTStandar_1.CreateDecorator<ConditionNode>(Teleport);
-		HighNoise.SetPerception(highNoiseAndPerception);	
+		HighNoise.SetPerception(highNoisePerception);	
 
-		SequencerNode BTSt_Sequencer_2_2 = BTStandar_1.CreateComposite<SequencerNode>(false, HighNoise);
-		BTSt_Sequencer_2_2.IsRandomized = false;
 		
-		SelectorNode BTSt_Selector_2 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Sequencer_2_1, BTSt_Sequencer_2_2);
+		SelectorNode BTSt_Selector_2 = BTStandar_1.CreateComposite<SelectorNode>(false, LightNoise, HighNoise);
 		BTSt_Selector_2.IsRandomized = false;
 
         List<BehaviourAPI.Core.Actions.Action> subActions7 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_LaunchFire.StopLaunchCoroutine),
-			new FunctionalAction(m_TrapSpawner.StopTrapCoroutine),
-            new FunctionalAction(m_DepartureLocation.SetInvisible, null)
+            new FunctionalAction(m_DepartureLocation.DepartureLocationStarted, m_DepartureLocation.DepartureLocationUpdate, null)
         };
 
         SequenceAction sDisappear = new SequenceAction(Status.Running, subActions7);
@@ -208,39 +194,84 @@ public class cp_GomiNinja : BehaviourRunner
 		ConditionNode CheckActualDisappear = BTStandar_1.CreateDecorator<ConditionNode>(Disappear);
 		CheckActualDisappear.SetPerception(checkActualDisappearPerception);
 
-		SequencerNode BTSt_Sequencer_4 = BTStandar_1.CreateComposite<SequencerNode>(false, CheckActualDisappear);
-		BTSt_Sequencer_4.IsRandomized = false;
 
         List<BehaviourAPI.Core.Actions.Action> subActions8 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_DepartureLocation.CalculatePositionToExit, null)
+            new FunctionalAction(m_DepartureLocation.DepartureLocationStarted, m_DepartureLocation.DepartureLocationUpdate, null)
         };
 
         SequenceAction sDeparture = new SequenceAction(Status.Running, subActions8);
 
         LeafNode Departure_Location = BTStandar_1.CreateLeafNode(sDeparture);
 		
-		SelectorNode BTSt_Selector_5 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Sequencer_4, Departure_Location);
+		SelectorNode BTSt_Selector_5 = BTStandar_1.CreateComposite<SelectorNode>(false, CheckActualDisappear, Departure_Location);
 		BTSt_Selector_5.IsRandomized = false;
 		
 		ConditionNode Time_Finish = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_5);
 		Time_Finish.SetPerception(finishTimerPerception);
 
-		SequencerNode BTSt_Sequencer_3 = BTStandar_1.CreateComposite<SequencerNode>(false, Time_Finish);
-		BTSt_Sequencer_3.IsRandomized = false;
 
-        List<BehaviourAPI.Core.Actions.Action> subActions9 = new List<BehaviourAPI.Core.Actions.Action>(3)
-        {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
-            new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_TrapSpawner.PlaceRandomTrap, null)
-        };
+        //List<BehaviourAPI.Core.Actions.Action> subActions9 = new List<BehaviourAPI.Core.Actions.Action>(3)
+        //{
+        //    new FunctionalAction(m_PathingNinja.StopPatrol),
+        //    new FunctionalAction(m_Investigation.StopInvestigation),
+        //    new FunctionalAction(m_TrapSpawner.TrapSpawnerStarted, m_TrapSpawner.TrapSpawnerUpdate, null)
+        //};
 
-        SequenceAction sTrap = new SequenceAction(Status.Running, subActions9);
+        //SequenceAction sTrap = new SequenceAction(Status.Running, subActions9);
 
-        LeafNode Trap_Candy = BTStandar_1.CreateLeafNode(sTrap);
+        //LeafNode Trap_Candy = BTStandar_1.CreateLeafNode(sTrap);
+
+        //List<BehaviourAPI.Core.Actions.Action> subActions10 = new List<BehaviourAPI.Core.Actions.Action>(3)
+        //{
+        //    new FunctionalAction(m_Investigation.StopInvestigation),
+        //    new FunctionalAction(m_PathingNinja.StartPatrol, null)
+        //};
+
+        //SequenceAction sPatrol = new SequenceAction(Status.Running, subActions10);
+
+        //LeafNode Patrol = BTStandar_1.CreateLeafNode(sPatrol);
+
+        SubsystemAction US_Acciones = new SubsystemAction(usAcciones);
+        LeafNode US_Action = BTStandar_1.CreateLeafNode(US_Acciones);
+
+  //      ProbabilityBranchNode BTSt_Probability_Selector = BTStandar_1.CreateComposite<ProbabilityBranchNode>(false, Trap_Candy, Patrol);
+		//BTSt_Probability_Selector.probabilities = new List<float>() {0.05f, 0.95f};
+		//BTSt_Probability_Selector.IsRandomized = false;
+		
+		SelectorNode BTSt_Selector_4 = BTStandar_1.CreateComposite<SelectorNode>(false, Time_Finish, US_Action);
+		BTSt_Selector_4.IsRandomized = false;
+		
+		SelectorNode BTSt_Selector_1 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Selector_2, BTSt_Selector_4);
+		BTSt_Selector_1.IsRandomized = false;
+
+        LoopNode Main_Loop_1 = BTStandar_1.CreateDecorator<LoopNode>(BTSt_Selector_1);
+		Main_Loop_1.Iterations = -1;
+		BTStandar_1.SetRootNode(Main_Loop_1);
+		
+        // US Acciones
+        
+
+        VariableFactor staminaFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetStamina, 0f, 100f);
+
+        VariableFactor timePatrolFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTimePatrol, 0f, 100f);
+
+        SigmoidCurveFactor PatrolCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
+        PatrolCurve.GrownRate = 5f;
+        PatrolCurve.Midpoint = 0.2f;
+
+        SigmoidCurveFactor BreakCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
+        BreakCurve.GrownRate = -12f;
+        BreakCurve.Midpoint = 0.6f;
+
+        WeightedFusionFactor weightedFusionTrap = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, timePatrolFactor);
+        weightedFusionTrap.Weights = new float[] { 0.75f, 0.25f };
+
+        SigmoidCurveFactor TrapCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(weightedFusionTrap);
+        TrapCurve.GrownRate = 20;
+        TrapCurve.Midpoint = 0.6f;
 
         List<BehaviourAPI.Core.Actions.Action> subActions10 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
@@ -249,33 +280,30 @@ public class cp_GomiNinja : BehaviourRunner
         };
 
         SequenceAction sPatrol = new SequenceAction(Status.Running, subActions10);
+        UtilityAction PatrolUtilityAction = usAcciones.CreateAction(PatrolCurve, sPatrol, true);
 
-        LeafNode Patrol = BTStandar_1.CreateLeafNode(sPatrol);
-		
-		ProbabilityBranchNode BTSt_Probability_Selector = BTStandar_1.CreateComposite<ProbabilityBranchNode>(false, Trap_Candy, Patrol);
-		BTSt_Probability_Selector.probabilities = new List<float>() {0.02f, 0.98f};
-		BTSt_Probability_Selector.IsRandomized = false;
-		
-		SelectorNode BTSt_Selector_4 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Sequencer_3, BTSt_Probability_Selector);
-		BTSt_Selector_4.IsRandomized = false;
-		
-		ConditionNode CheckTrapFinish = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_4);
-        CheckTrapFinish.SetPerception(checkAppearDisappearAndPerception);
 
-        SequencerNode BTSt_Sequencer_2 = BTStandar_1.CreateComposite<SequencerNode>(false, CheckTrapFinish);
-		BTSt_Sequencer_2.IsRandomized = false;
-		
-		SelectorNode BTSt_Selector_1 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Selector_2, BTSt_Sequencer_2);
-		BTSt_Selector_1.IsRandomized = false;
-		
-		ConditionNode CheckAppearDisapear = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_1);
-        CheckAppearDisapear.SetPerception(checkAppearDisappearAndPerception);
+        List<BehaviourAPI.Core.Actions.Action> subActions11 = new List<BehaviourAPI.Core.Actions.Action>(3)
+        {
+            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Investigation.StopInvestigation),
+            new FunctionalAction(m_Break.TakeABreakStarted, null)
+        };
 
-        LoopNode Main_Loop_1 = BTStandar_1.CreateDecorator<LoopNode>(CheckAppearDisapear);
-		Main_Loop_1.Iterations = -1;
-		BTStandar_1.SetRootNode(Main_Loop_1);
-		
-		return MainFSM;
+        SequenceAction sBreak = new SequenceAction(Status.Running, subActions11);
+        UtilityAction BreakUtilityAction = usAcciones.CreateAction(BreakCurve, sBreak, true);
+
+        List<BehaviourAPI.Core.Actions.Action> subActions9 = new List<BehaviourAPI.Core.Actions.Action>(3)
+        {
+            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Investigation.StopInvestigation),
+            new FunctionalAction(m_TrapSpawner.TrapSpawnerStarted, m_TrapSpawner.TrapSpawnerUpdate, null)
+        };
+
+        SequenceAction sTrap = new SequenceAction(Status.Running, subActions9);
+        UtilityAction TrapUtilityAction = usAcciones.CreateAction(TrapCurve, sTrap, true);
+
+        return MainFSM;
 	}
 
 	public void SetBTSeActivationPush()
