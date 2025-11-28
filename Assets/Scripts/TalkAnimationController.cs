@@ -8,7 +8,7 @@ public class TalkAnimationController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        characterAnimator.SetFloat("speed", 0.3f);
     }
 
     // Update is called once per frame
@@ -23,9 +23,15 @@ public class TalkAnimationController : MonoBehaviour
         mouthAnimator.SetBool("talking",true);
     }
 
+    public void StopTalkingMouth()
+    {
+        characterAnimator.SetFloat("speed", 0.3f);
+        mouthAnimator.SetBool("talking", false);
+    }
+
     public void StopTalking()
     {
-        characterAnimator.SetFloat("speed", 0f);
+        characterAnimator.SetFloat("speed", 0.3f);
         mouthAnimator.SetBool("talking", false);
     }
 }
