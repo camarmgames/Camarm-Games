@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e67016eb61457242beaf10f85ccbf8d
+guid: f12a61953e1fb10429436a9d3b56b6f7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Scene
+      name: elegirPoli
       takeName: Scene
       internalID: -623603649343465320
-      firstFrame: 2
-      lastFrame: 21
+      firstFrame: 1
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 2
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []
