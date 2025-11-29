@@ -5,6 +5,9 @@ public class MenuPrincipal : MonoBehaviour
     [Header ("Canvas")]
     public GameObject menuPrincipal;
     public GameObject creditos;
+    public GameObject creditos2;
+    public GameObject creditos3;
+    public GameObject ajustes;
     public GameObject controles1;
     public GameObject controles2;
 
@@ -15,6 +18,9 @@ public class MenuPrincipal : MonoBehaviour
         creditos.SetActive(false);
         controles1.SetActive(false);
         controles2.SetActive(false);
+        creditos2.SetActive(false);
+        creditos3.SetActive(false);
+        ajustes.SetActive(false);
     }
 
     public void AbrirCreditos()
@@ -29,6 +35,11 @@ public class MenuPrincipal : MonoBehaviour
         controles1.SetActive(true);
     }
 
+    public void AbrirAjustes()
+    {
+        menuPrincipal.SetActive(false);
+        ajustes.SetActive(true);
+    }
     public void PasarPagina()
     {
         controles1.SetActive(false);
@@ -39,5 +50,25 @@ public class MenuPrincipal : MonoBehaviour
     {
         controles1.SetActive(true);
         controles2.SetActive(false);
+    }
+    public void PasarPaginaC()
+    {
+        creditos.SetActive(false);
+        creditos2.SetActive(true);
+    }
+    public void PasarPaginaC2()
+    {
+        creditos2.SetActive(false);
+        creditos3.SetActive(true);
+    }
+    public void PaginaAtrasC()
+    {
+        creditos.SetActive(true);
+        creditos2.SetActive(false);
+    }
+    public void PaginaAtrasC2()
+    {
+        creditos2.SetActive(true);
+        creditos3.SetActive(false);
     }
 }
