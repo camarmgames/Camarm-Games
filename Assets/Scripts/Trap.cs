@@ -123,7 +123,7 @@ public class Trap: MonoBehaviour
     public void ActivarMago()
     {
         Debug.Log("Activacion de Mago");
-        gomiMagoAppearance.SpawnMago();
+        //gomiMagoAppearance.SpawnMago();
         Destroy(gameObject);
     }
 }

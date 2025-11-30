@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class StatsGomiNinja: MonoBehaviour
 {
-    // Que no se pasen de 100
     [Header("Stats")]
-    [SerializeField] private float stamina = 100f;
+    [SerializeField] public float stamina = 100f;
     [SerializeField] private float timePatrol = 0f;
+    [SerializeField] public float takeABreak = 1f;
 
     [Header("Settings")]
-    [SerializeField] private float changeSpeed = 10f;
+    [SerializeField] public float changeSpeed = 10f;
+
+    [Header("Debug")]
+    [SerializeField] public bool debug = false;
 
     private float targetStamina;
     private float targetTimePatrol;
@@ -37,6 +40,13 @@ public class StatsGomiNinja: MonoBehaviour
     {
         targetStamina = Mathf.Clamp(targetStamina + staminaAmount, 0f, 100f);
         targetTimePatrol = Mathf.Clamp(targetTimePatrol + timePatrolAmount, 0f, 100f);
+
+        if (debug)
+        {
+            Debug.Log($"Stamina: {targetStamina}");
+            Debug.Log($"TimePatrol: {timePatrol}");
+        }
+
     }
 
     public void ResetTimePatrol()
@@ -46,4 +56,6 @@ public class StatsGomiNinja: MonoBehaviour
 
     public float GetStamina() => stamina;
     public float GetTimePatrol() => timePatrol;
+
+    public float GetTakeABreak() => takeABreak;
 }

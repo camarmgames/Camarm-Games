@@ -212,34 +212,9 @@ public class cp_GomiNinja : BehaviourRunner
 		ConditionNode Time_Finish = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_5);
 		Time_Finish.SetPerception(finishTimerPerception);
 
-
-        //List<BehaviourAPI.Core.Actions.Action> subActions9 = new List<BehaviourAPI.Core.Actions.Action>(3)
-        //{
-        //    new FunctionalAction(m_PathingNinja.StopPatrol),
-        //    new FunctionalAction(m_Investigation.StopInvestigation),
-        //    new FunctionalAction(m_TrapSpawner.TrapSpawnerStarted, m_TrapSpawner.TrapSpawnerUpdate, null)
-        //};
-
-        //SequenceAction sTrap = new SequenceAction(Status.Running, subActions9);
-
-        //LeafNode Trap_Candy = BTStandar_1.CreateLeafNode(sTrap);
-
-        //List<BehaviourAPI.Core.Actions.Action> subActions10 = new List<BehaviourAPI.Core.Actions.Action>(3)
-        //{
-        //    new FunctionalAction(m_Investigation.StopInvestigation),
-        //    new FunctionalAction(m_PathingNinja.StartPatrol, null)
-        //};
-
-        //SequenceAction sPatrol = new SequenceAction(Status.Running, subActions10);
-
-        //LeafNode Patrol = BTStandar_1.CreateLeafNode(sPatrol);
-
         SubsystemAction US_Acciones = new SubsystemAction(usAcciones);
         LeafNode US_Action = BTStandar_1.CreateLeafNode(US_Acciones);
 
-  //      ProbabilityBranchNode BTSt_Probability_Selector = BTStandar_1.CreateComposite<ProbabilityBranchNode>(false, Trap_Candy, Patrol);
-		//BTSt_Probability_Selector.probabilities = new List<float>() {0.05f, 0.95f};
-		//BTSt_Probability_Selector.IsRandomized = false;
 		
 		SelectorNode BTSt_Selector_4 = BTStandar_1.CreateComposite<SelectorNode>(false, Time_Finish, US_Action);
 		BTSt_Selector_4.IsRandomized = false;
@@ -258,16 +233,21 @@ public class cp_GomiNinja : BehaviourRunner
 
         VariableFactor timePatrolFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTimePatrol, 0f, 100f);
 
-        SigmoidCurveFactor PatrolCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
-        PatrolCurve.GrownRate = 5f;
-        PatrolCurve.Midpoint = 0.2f;
+        VariableFactor takeABreakFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTakeABreak, 0f, 1f);
+
+        WeightedFusionFactor weightedFusionPatrol = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, takeABreakFactor);
+        weightedFusionPatrol.Weights = new float[] { 0.4f, 0.6f };
+
+        SigmoidCurveFactor PatrolCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(weightedFusionPatrol);
+        PatrolCurve.GrownRate = 8f;
+        PatrolCurve.Midpoint = 0.6f;
 
         SigmoidCurveFactor BreakCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
-        BreakCurve.GrownRate = -12f;
+        BreakCurve.GrownRate = -10f;
         BreakCurve.Midpoint = 0.6f;
 
         WeightedFusionFactor weightedFusionTrap = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, timePatrolFactor);
-        weightedFusionTrap.Weights = new float[] { 0.75f, 0.25f };
+        weightedFusionTrap.Weights = new float[] { 0.5f, 0.5f };
 
         SigmoidCurveFactor TrapCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(weightedFusionTrap);
         TrapCurve.GrownRate = 20;
@@ -287,7 +267,7 @@ public class cp_GomiNinja : BehaviourRunner
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_Break.TakeABreakStarted, null)
+            new FunctionalAction(m_Break.TakeABreakStarted, m_Break.TakeABreakUpdate, null)
         };
 
         SequenceAction sBreak = new SequenceAction(Status.Running, subActions11);

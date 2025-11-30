@@ -20,26 +20,6 @@ public class PlayerNoise: MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
-    {
-        //timer -= Time.deltaTime;
-        
-        //bool isMoving = playerMovement != null && playerMovement.moveSpeed > 0f && playerMovement.enabled;
-        //movementPlayer = playerMovement.getMoveDirection();
-
-        //if(movementPlayer.magnitude > 0.1f && timer <= 0f)
-        //{
-        //    NoiseType typeToEmit = walkNoise;
-
-        //    if(Input.GetKey(KeyCode.LeftShift))
-        //        typeToEmit = runNoise;
-        //    else if (Input.GetKey(KeyCode.LeftControl))
-        //        typeToEmit = crouchNoise;
-
-        //    noiseEmitter.EmitNoise(typToEmit);
-        //}
-    }
-
     public void WalkNoise()
     {
         if(!playerMovement._sprint && !playerMovement._crouch)

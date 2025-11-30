@@ -17,16 +17,26 @@ public class Break: MonoBehaviour
         agent = GetComponent<NavMeshAgent>();  
     }
 
-    public Status TakeABreakStarted()
+    public void TakeABreakStarted()
     {
         agent.isStopped = true;
-        // StateIcon
+        stateIcon.SetTakeABreak();
 
         Debug.Log("Descansando");
-        statsGomiNinja.ModifyStats(5, 0);
+        statsGomiNinja.ModifyStats(40, 0);
+        statsGomiNinja.takeABreak = 0f;
         isTakingABreak = true;
+    }
+
+    public Status TakeABreakUpdate()
+    {
+        if(statsGomiNinja.stamina <= 80)
+            return Status.Running;
+
+        statsGomiNinja.takeABreak = 1f;
 
         return Status.Success;
+
     }
 
     public void TakeABreakStopped() => isTakingABreak = false;
