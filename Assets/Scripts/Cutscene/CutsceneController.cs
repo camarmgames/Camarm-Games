@@ -15,6 +15,7 @@ public class CutsceneController : MonoBehaviour
     int charIndex=0;
 
     public TextMeshProUGUI cutsceneText;
+    public TextMeshProUGUI name;
     private List<DialogueQuote> cutsceneQuotes = new List<DialogueQuote>();
     int cutsceneIndex=0;
     public float writingSpeed;
@@ -135,6 +136,7 @@ public class CutsceneController : MonoBehaviour
         RotarCamara(angulos[charId]);
         yield return new WaitForSeconds(.5f);
 
+        name.text = dialogue.GetNameFruta();
         string sentence = dialogue.GetDialogueContent("es");
         AudioClip[] audio = dialogue.GetCharacterVoice();
         float speed = dialogue.GetSpeedMultiplier();

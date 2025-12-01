@@ -8,21 +8,24 @@ public class DialogueQuote
     AudioClip[] characterVoice;
     float speedMultiplier; //el valor speedMultiplier se multiplica por la velocidad del dialogo asignada en cutscenedialogue. 1 sería velocidad normal pero se pueden poner frases mas rápidas o más lentas para dramatizar
     int characterIndex; //pera: 0, limon: 1, fresa: 2, platano: 3
+    string nameFruta;
 
-    public DialogueQuote(List<string> _dialogueContent, AudioClip _characterVoice, float _speedMultiplier, int _characterIndex)
+    public DialogueQuote(List<string> _dialogueContent, AudioClip _characterVoice, float _speedMultiplier, int _characterIndex, string nameFrutaIndex)
     {
         dialogueContent = _dialogueContent;
         characterVoice = new AudioClip[] { _characterVoice };
         speedMultiplier = _speedMultiplier;
         characterIndex = _characterIndex;
+        nameFruta = nameFrutaIndex;
     }
 
-    public DialogueQuote(List<string> _dialogueContent, AudioClip _characterVoice, int _characterIndex)
+    public DialogueQuote(List<string> _dialogueContent, AudioClip _characterVoice, int _characterIndex,string nameFrutaIndex)
     {
         dialogueContent = _dialogueContent;
         characterVoice = new AudioClip[] { _characterVoice };
         speedMultiplier = 1;
         characterIndex = _characterIndex;
+        nameFruta = nameFrutaIndex;
     }
 
     public string GetDialogueContent(string LANGUAGE)
@@ -43,6 +46,7 @@ public class DialogueQuote
     public AudioClip[] GetCharacterVoice() { return characterVoice; }
     public float GetSpeedMultiplier() { return speedMultiplier; }
     public int GetCharacterIndex() { return characterIndex; }
+    public string GetNameFruta() { return nameFruta; }
 
 }
 
@@ -55,120 +59,134 @@ public class Data_Cutscenes
 
     public static Dictionary<string, DialogueQuote> data_CutsceneIntro = new Dictionary<string, DialogueQuote>()
     {
+        //Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         //Intro
         {"OpeningSecretary_LilBug_1",    new DialogueQuote( new List<string>{
-            "Oh no, nonono. De todos los líos en los que nos has metido, este sin duda es el peor de todos.",
+            "Recordad chicos, tiene que ser un atraco rápido y sencillo sin ningún daño colateral.",
             "English"
             },
             VozPera,
-            0)
+            3,
+            "Seikan")
         },
         {"OpeningSecretary_Brother_2", new DialogueQuote(
             new List<string>{
-                "Vamos, relájate. Hemos revisado mil veces los horarios de los curratas, no va a venir nadie hasta mañana.",
+                "Eso lo dice por ti Daved. Esta vez no vale que ataques a ningún guardia. La mejor manera de no ser vistos es usando el sigilo a nuestro favor.",
                 "English"
             },
             VozPera,
-            2
+            2,
+            "Luu"
         )},
 
         {"OpeningSecretary_LilBug_3", new DialogueQuote(
             new List<string>{
-                "¡HE revisado mil veces el horario de los trabajadores! Si hubiéramos seguido tu plan, estaríamos de camino al correcional.",
+                "Ir con cuidado y sin hacer ruido. Eso no es divertido.",
                 "English"
             },
             VozPera,
-            3
+            1,
+            "Daved"
         )},
 
         {"OpeningSecretary_Brother_4", new DialogueQuote(
             new List<string>{
-                "Tienes razón, ¡eres el mejor, bichito! Que haría yo sin ti...",
+                "Luu tiene razón, no sabemos a que tipo de enemigos nos enfrentamos. Con algunos bastara simplemente con evitarlos yendo por caminos diferentes.",
                 "English"
             },
             VozPera,
-            1
+            0,
+            "Quesada"
         )},
 
         {"OpeningSecretary_Brother_5", new DialogueQuote(
             new List<string>{
-                "Siempre nos han salido bien nuestras aventuras porque estamos juntos en ellas, ¡Así que cálmate e intenta divertirte!",
+                "Pero con otros, necesitaremos usar diferentes herramientas del castillo para poder salir ilesos.",
                 "English"
             },
             VozPera,
-            2
+            0,
+            "Quesada"
         )},
 
         {"OpeningSecretary_LilBug_6", new DialogueQuote(
             new List<string>{
-                "Colarnos en una universidad a buscar documentos confidenciales no es exactamente mi idea de diversión...",
+                "Pero que estás diciendo. Es simplemente robar en un castillo no conquistar el reino. No debe ser tan difícil hacer algo que hago todos los días.",
                 "English"
             },
             VozPera,
-            0
+            1,
+            "Daved"
         )},
 
         {"OpeningSecretary_Brother_7", new DialogueQuote(
             new List<string>{
-                "Te demostraré que merece la pena. Te prometo que esta vez es la buena, están todos locos con esto en Quinto Milenio.",
+                "Quieres dejar de bromear. Yo he oído que los guardias de ese castillo han conseguido paralizar a sus víctimas e incluso cegarlas.",
                 "English"
             },
             VozPera,
-            1
+            2,
+            "Luu"
         )},
 
         {"OpeningSecretary_Brother_8", new DialogueQuote(
             new List<string>{
-                "Ya sabes que mamá y papá no me creen.",
+                "Asi que para poder tener éxito hay que usar la astucia y el ingenio. No ir ahí como un loco y sin pensar.",
                 "English"
             },
             VozPera,
-            0
+            2,
+            "Luu"
         )},
 
         {"OpeningSecretary_Brother_9", new DialogueQuote(
             new List<string>{
-                "Tu sí lo haces, ¿verdad?",
+                "Me estas llamando tonto, enana de mierda.",
                 "English"
             },
             VozPera,
-            3
+            1,
+            "Daved"
         )},
 
         {"OpeningSecretary_LilBug_10", new DialogueQuote(
             new List<string>{
-                "...",
+                "Quieres ver como te patea esta enana.",
                 "English"
             },
             VozPera,
-            0
+            2,
+            "Luu"
         )},
 
         {"OpeningSecretary_LilBug_11", new DialogueQuote(
             new List<string>{
-                "...siempre",
+                "Ya empiezan otra vez . . .",
                 "English"
             },
             VozPera,
-            2
+            0,
+            "Quesada"
         )},
 
         {"OpeningSecretary_Brother_12", new DialogueQuote(
             new List<string>{
-                "¡Ese es mi hermanito!",
+                "Nada de peleas en mi sótano. Si queréis mataros, salir a la calle. Pero antes debemos realizar el robo.",
                 "English"
             },
             VozPera,
-            1
+            3,
+            "Seikan"
         )},
 
         {"OpeningSecretary_Brother_13", new DialogueQuote(
             new List<string>{
-                "¡Hecho! Ahora intenta buscar algo que te mole. ¡Quien lo encuentra se lo queda!",
+                "Recordad, nadie sale del castillo sin las tres piezas del osito de oro. Ánimo equipo.",
                 "English"
             },
             VozPera,
-            0
+            3,
+            "Seikan"
         )},
 
     };
