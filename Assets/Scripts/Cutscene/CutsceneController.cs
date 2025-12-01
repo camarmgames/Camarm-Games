@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -110,6 +111,7 @@ public class CutsceneController : MonoBehaviour
         else
         {
             //terminar cinematica
+            SceneManager.LoadScene("Mazmorra_V2");
         }
     }
 
