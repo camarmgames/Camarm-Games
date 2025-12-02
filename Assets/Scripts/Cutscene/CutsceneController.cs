@@ -31,6 +31,10 @@ public class CutsceneController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        camera.transform.localPosition = new Vector3(0, 1.5f, 0);
+        camera.transform.localRotation = Quaternion.Euler(new Vector3(0, 270, 0));
+
         flechita.SetActive(false);
         cutsceneText.text = "";
 
