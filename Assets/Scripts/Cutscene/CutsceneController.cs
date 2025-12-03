@@ -28,6 +28,9 @@ public class CutsceneController : MonoBehaviour
 
     bool start;
 
+    [Header("ChangeScene Settings")]
+    public String nameSceneToGo;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -114,6 +117,7 @@ public class CutsceneController : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(nameSceneToGo);
             //terminar cinematica
             SceneManager.LoadScene("Mazmorra_V2");
         }

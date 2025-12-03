@@ -53,7 +53,7 @@ public class LaunchFire: MonoBehaviour
         GameObject proyectile = Instantiate(proyectilePrefab, firePoint, Quaternion.identity);
 
         // Calcula direccion hacia el jugador
-        Vector3 impactPosition = new Vector3(playerPosition.x, playerPosition.y + 1.5f, playerPosition.z);
+        Vector3 impactPosition = new Vector3(playerPosition.x, playerPosition.y + 0.5f, playerPosition.z);
         Vector3 direction = (impactPosition - firePoint).normalized;
 
         // Lanza el proyectil con fuerza
