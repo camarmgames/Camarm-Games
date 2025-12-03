@@ -115,7 +115,8 @@ public class CutsceneController : MonoBehaviour
         else
         {
             //terminar cinematica
-            SceneManager.LoadScene("Mazmorra_V2");
+            FindFirstObjectByType<CinematicaSegundaParte>().Play();
+;            //SceneManager.LoadScene("Mazmorra_V2");
         }
     }
 
