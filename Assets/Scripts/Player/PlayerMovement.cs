@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void OnSprint(InputAction.CallbackContext ctx)
     {
-        if (!_sprint && !_crouch && trapEffect)
+        if (!_sprint && !_crouch && !trapEffect)
         {
             moveSpeed *= 1.5f;
         }
@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
-        if (!_crouch && !_sprint && trapEffect)
+        if (!_crouch && !_sprint && !trapEffect)
         {
             moveSpeed = initialSpeed;
             moveSpeed *= 0.5f;

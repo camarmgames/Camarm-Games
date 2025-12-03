@@ -3886,6 +3886,7 @@ MonoBehaviour:
   flechita: {fileID: 851110387}
   pressedE: 0
   pressedE_twice: 0
+  nameSceneToGo: CharacterSelector
   rotationDuration: 0.4
 --- !u!114 &1877016041
 MonoBehaviour:

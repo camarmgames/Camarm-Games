@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class CutsceneController : MonoBehaviour
     int charId;
 
     bool start;
+
+    [Header("ChangeScene Settings")]
+    public String nameSceneToGo;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -109,6 +113,7 @@ public class CutsceneController : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(nameSceneToGo);
             //terminar cinematica
         }
     }

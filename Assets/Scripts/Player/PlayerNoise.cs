@@ -30,7 +30,7 @@ public class PlayerNoise: MonoBehaviour
     }
 
     public void RunNoise() {
-        if (playerMovement._crouch)
+        if (!playerMovement._crouch)
         {
             NoiseType typeToEmit = runNoise;
             noiseEmitter.EmitNoise(typeToEmit);
