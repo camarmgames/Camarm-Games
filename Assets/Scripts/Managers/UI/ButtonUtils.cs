@@ -27,15 +27,13 @@ public class ButtonUtils : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 
     public void NotShowEndGame()
     {
-        EndGameManager.Instance.endScreen.SetActive(false);
-        EndGameManager.Instance.isShowing = false;
+        EndGameManager.Instance.Reset();
         PlayerInput playerInput = FindFirstObjectByType<PlayerInput>();
-        playerInput.actions["Move"].Enable();
+        playerInput?.actions["Move"].Enable();
         Time.timeScale = 1.0f;
     }
 }

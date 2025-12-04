@@ -6,8 +6,10 @@ public class EndGameManager: MonoBehaviour
     public static EndGameManager Instance;
 
     public GameObject endScreen;
+    public GameObject backgroundVictory;
+    public GameObject backgroundLost;
     public GameObject btnRetry;
-    public GameObject btnPlayAgain;
+    public GameObject btnMainMenu;
     public TMPro.TextMeshProUGUI titleText;
 
     public bool isShowing = false;
@@ -32,11 +34,12 @@ public class EndGameManager: MonoBehaviour
         if(isShowing) return;
         isShowing = true;
 
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
-        titleText.text = "! has perdido !";
+        backgroundLost.SetActive(true);
+        titleText.text = "Derrota";
         btnRetry.SetActive(true);
-        btnPlayAgain.SetActive(false);
+        btnMainMenu.SetActive(false);
 
         endScreen.SetActive(true);
     }
@@ -46,12 +49,23 @@ public class EndGameManager: MonoBehaviour
         if(isShowing) return;
         isShowing = true;
 
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
-        titleText.text = "! victoria !";
+        backgroundVictory.SetActive(true);
+        titleText.text = "Victoria";
         btnRetry.SetActive(false);
-        btnPlayAgain.SetActive(true);
+        btnMainMenu.SetActive(true);
 
         endScreen.SetActive(true);
+    }
+
+    public void Reset()
+    {
+        endScreen.SetActive(false);
+        backgroundVictory.SetActive(false);
+        backgroundLost.SetActive(false);
+        btnRetry.SetActive(false);
+        btnMainMenu.SetActive(false);
+        isShowing = false;
     }
 }
