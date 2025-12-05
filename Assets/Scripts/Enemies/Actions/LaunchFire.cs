@@ -15,6 +15,8 @@ public class LaunchFire: MonoBehaviour
     [SerializeField, Tooltip("Cooldown between launchs")]
     private float launchCooldown = 5f;
 
+    public AudioClip effect;
+
     [SerializeField]
     private Animator animator;
 
@@ -60,6 +62,9 @@ public class LaunchFire: MonoBehaviour
         Rigidbody rb = proyectile.GetComponent<Rigidbody>();
 
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
+
+        // Efecto Musica
+        AudioManager.Instance.PlaySFX(effect);
 
         StartCoroutine(LaunchCooldownRoutine());
     }

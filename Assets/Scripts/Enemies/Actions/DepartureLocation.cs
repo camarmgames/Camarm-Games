@@ -22,6 +22,9 @@ public class DepartureLocation: MonoBehaviour
     [Tooltip("Prefab of renderObject")]
     private GameObject renderPrefab;
 
+    [Header("MusicEffects")]
+    public AudioClip effect;
+
     [Header("Materials")]
     [SerializeField] private Material appearDisapearMaterial;
     [SerializeField] private Material standardMaterial;
@@ -114,7 +117,10 @@ public class DepartureLocation: MonoBehaviour
 
 
             if (appear)
+            {
+                AudioManager.Instance.PlaySFXAtPosition(effect, transform.position, 1f, 1f);
                 return Status.Success;
+            }
 
             return Status.Running;
         }

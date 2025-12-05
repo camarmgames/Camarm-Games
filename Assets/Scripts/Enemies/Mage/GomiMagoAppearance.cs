@@ -9,6 +9,7 @@ public class GomiMagoAppearance: MonoBehaviour
     [SerializeField] private GameObject gomiMagoPrefab;
     [SerializeField] private float spawnDelay = 20f;
     [SerializeField] private float visibleTime = 30f;
+    public AudioClip effect;
 
     [Header("Buff Settings")]
     [SerializeField] private float speedMultiplier = 1.5f;
@@ -60,6 +61,7 @@ public class GomiMagoAppearance: MonoBehaviour
         hasAppeared = true;
         hasDisappeared = false;
         cp_GomiNinja.SetBTSeActivationPush();
+        AudioManager.Instance.PlaySFX(effect);
     }
 
     public void RemoveMago()

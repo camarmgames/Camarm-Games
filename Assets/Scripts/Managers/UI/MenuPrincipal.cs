@@ -11,6 +11,12 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject controles1;
     public GameObject controles2;
 
+    public AudioClip musicMainmenu;
+
+    private void Awake()
+    {
+        AudioManager.Instance.PlayMusic(musicMainmenu);
+    }
     //Mostrar el menu principal
     public void AbrirMenuPrincipal()
     {

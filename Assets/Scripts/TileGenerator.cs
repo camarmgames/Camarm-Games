@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class TileGenerator: MonoBehaviour
 {
+    [Header("MusicLevel")]
+    public AudioClip music;
+
     [Header("Prefabs de Baldosa")]
     public GameObject hardTilePrefab;
     public GameObject softTilePrefab;
@@ -13,6 +16,7 @@ public class TileGenerator: MonoBehaviour
 
     private void Awake()
     {
+        AudioManager.Instance.PlayMusic(music);
         GenerateTiles();    
     }
 
