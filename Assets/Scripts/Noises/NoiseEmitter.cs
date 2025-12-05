@@ -34,7 +34,7 @@ public class NoiseEmitter : MonoBehaviour
 
         // Reproducir sonido 
         if(noiseType.soundEffect != null)
-            AudioSource.PlayClipAtPoint(noiseType.soundEffect, transform.position);
+            AudioManager.Instance.PlaySFX(noiseType.soundEffect);
 
         yield return new WaitForSeconds(noiseType.duration);
         isEmitting = false;

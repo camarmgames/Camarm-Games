@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,9 +40,9 @@ public class BlockPath: MonoBehaviour
         }
     }
 
-    public void ABlockPath()
+    public Status ABlockPath()
     {
-        if (blockCoroutine != null || pointsBlock == null || pointsBlock.Count == 0) return;
+        if (blockCoroutine != null || pointsBlock == null || pointsBlock.Count == 0) return Status.Success; 
 
         Transform target = null;
         float minDist = Mathf.Infinity;
@@ -57,6 +58,8 @@ public class BlockPath: MonoBehaviour
         if (target != null) { 
             blockCoroutine = StartCoroutine(MoveAndBlock(target));
         }
+
+        return Status.Success;
     }
     private IEnumerator MoveAndBlock(Transform target)
     {

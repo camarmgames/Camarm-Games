@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b766e8ae57ef1ce499c3b3e70d6d87e6
+guid: c6f08bac21abf3d458a8486f1a8b0a42
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Shoting
+      name: dispararPoli
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
-      lastFrame: 33
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,7 +58,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

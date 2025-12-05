@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerNoise: MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class PlayerNoise: MonoBehaviour
     private PlayerMovement playerMovement;
     private NoiseEmitter noiseEmitter;
 
-    private float noiseCooldown = 0.5f;
-    private float timer = 0f;
+
+
+    private bool isCrouch;
 
     void Start()
     {
@@ -18,23 +20,33 @@ public class PlayerNoise: MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    void Update()
+    public void WalkNoise()
     {
-        timer -= Time.deltaTime;
-        
-        bool isMoving = playerMovement != null && playerMovement.moveSpeed > 0f && playerMovement.enabled;
-
-        if(isMoving && timer <= 0f)
+        if(!playerMovement._sprint && !playerMovement._crouch)
         {
             NoiseType typeToEmit = walkNoise;
-
-            if(Input.GetKey(KeyCode.LeftShift))
-                typeToEmit = runNoise;
-            else if (Input.GetKey(KeyCode.LeftControl))
-                typeToEmit = crouchNoise;
-
             noiseEmitter.EmitNoise(typeToEmit);
-            timer = noiseCooldown;
         }
     }
+
+    public void RunNoise() {
+        if (!playerMovement._crouch)
+        {
+            NoiseType typeToEmit = runNoise;
+            noiseEmitter.EmitNoise(typeToEmit);
+        }
+
+    }
+
+    public void CrouchNoise()
+    {
+        if (!playerMovement._sprint)
+        {
+            NoiseType typeToEmit = crouchNoise;
+            noiseEmitter.EmitNoise(typeToEmit);
+        }
+
+    }
+
+
 }

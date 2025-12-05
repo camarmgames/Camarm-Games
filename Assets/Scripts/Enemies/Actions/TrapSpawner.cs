@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,46 +18,47 @@ public class TrapSpawner: MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    private Coroutine trapCoroutine;
-    private bool isPlacingTrapAnimation = false;
+    [Header("Debug")]
+    public bool debug;
 
-    private void Update()
+    private StatsGomiNinja statsGomiNinja;
+
+    private void Start()
     {
-        if (animator != null)
+        statsGomiNinja = GetComponent<StatsGomiNinja>();
+    }
+    public void TrapSpawnerStarted()
+    {
+        Debug.Log("Intentando poner trampa");
+        if(limitTraps > 0)
         {
-            animator.SetBool("isPlacingTrap", isPlacingTrapAnimation);
+            if(debug)
+                Debug.Log($"Se puede poner trampa y me quedan {limitTraps}");
+            animator.Play("PlaceTrap");
         }
-    }
-    public void StopTrapCoroutine()
-    {
-        if (trapCoroutine != null)
+        else
         {
-            StopCoroutine(trapCoroutine);
-            trapCoroutine = null;
-            isPlacingTrapAnimation = false;
-        }
-    }
-    public void PlaceRandomTrap()
-    {
-        if (trapPrefab == null || limitTraps <= 0) return;
-            trapCoroutine = StartCoroutine(PlaceTrapRoutine());   
-    }
-
-    private IEnumerator PlaceTrapRoutine()
-    {
-        if(animator != null)
-        {
-            isPlacingTrapAnimation = true;
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).IsName("PlaceTrap"));
-
-            yield return new WaitUntil(() =>
-                animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
-
-            isPlacingTrapAnimation = false;
+            if(debug)
+                Debug.Log("No me quedan trampas");
         }
 
+        
+    }
+    public Status TrapSpawnerUpdate()
+    {
+        if (limitTraps <= 0) return Status.Success;
+
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
+            return Status.Running;
+
+        PlaceTrap();
+
+
+        return Status.Success;
+    }
+
+    private void PlaceTrap()
+    {
         Vector3 trapPos = new Vector3(transform.position.x, transform.position.y + trapHeightOffset, transform.position.z);
 
         Trap trap = trapPrefab.GetComponent<Trap>();
@@ -69,12 +71,6 @@ public class TrapSpawner: MonoBehaviour
 
         Debug.Log($"Trampa colocada: {randomType} en {transform.position}");
         limitTraps--;
-
-        trapCoroutine = null;
-    }
-
-    public bool FinishPlacingTrap()
-    {
-        return trapCoroutine == null;
+        statsGomiNinja.ResetTimePatrol();
     }
 }

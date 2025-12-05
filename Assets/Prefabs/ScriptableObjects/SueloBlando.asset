@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surfaceName: Suelo blando
   leavesFootprints: 1
-  footprintLifetime: 30
+  footprintLifetime: 20
   footprintPrefab: {fileID: 4443897782859022677, guid: ec5784a870aa0d940bf14d5541b40d76, type: 3}

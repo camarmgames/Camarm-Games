@@ -3,7 +3,97 @@ guid: 3b2a6d052a381c649a06cd5865d6d7e3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box001Mat
+    second: {fileID: 2100000, guid: f95ca4402ec26664f8bcafe7782c3946, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sphere001Mat
+    second: {fileID: 2100000, guid: 8976f15740b567b469b66ac9bee70251, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sphere002Mat
+    second: {fileID: 2100000, guid: dffe1fb7ce5d99d4aa8029c6129ceddf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sphere003Mat
+    second: {fileID: 2100000, guid: 99291444bb3dad34ea620bf852c6fde9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus001Mat
+    second: {fileID: 2100000, guid: 0e143e2c4e22abc4ea062a561db37de9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus002Mat
+    second: {fileID: 2100000, guid: 82669aef5a120b24bbb81f83178c767d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus003Mat
+    second: {fileID: 2100000, guid: 01c46f769da3e2e43b29d2294b711c16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus004Mat
+    second: {fileID: 2100000, guid: f0ada18245613d946a307d84b9b9935d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus005Mat
+    second: {fileID: 2100000, guid: 21cb9f0b23225e041a32f8259a0e6b07, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus006Mat
+    second: {fileID: 2100000, guid: c6d09c54776d2bf4c8e27530eabe6822, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus007Mat
+    second: {fileID: 2100000, guid: ba510a903606dd640a609ab738fe5a34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus008Mat
+    second: {fileID: 2100000, guid: 1cd3d4c0b91184b4a8239df7714d8fc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus009Mat
+    second: {fileID: 2100000, guid: b0a33ea3bf08df74cb2841e06098617a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus010Mat
+    second: {fileID: 2100000, guid: f2cd22bddc71f354da6b7f8c823bfd21, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus011Mat
+    second: {fileID: 2100000, guid: efe762c4ba9655e4ead469bc815c41fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus012Mat
+    second: {fileID: 2100000, guid: 7f596512db779a043bae60119a0e5908, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus013Mat
+    second: {fileID: 2100000, guid: 7944300e044180a45aab8bc4fd2721be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Torus014Mat
+    second: {fileID: 2100000, guid: fb81c5e7578dc7e49a4d8dc186bda4e6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

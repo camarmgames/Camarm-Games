@@ -9,20 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 188321eeda837014c8babf6c36c72a27
   - enabled: 1
-    path: Assets/Scenes/LevelSelector.unity
+    path: Assets/Scenes/Cinematica.unity
+    guid: 98b18b827833ac940942dd9018926a5f
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelector.unity
     guid: 50fe58e0566e9334b830e8a9dd1ce87f
   - enabled: 1
-    path: Assets/Scenes/CreditsScene.unity
-    guid: 8baed36e5cee5f04bbe15d42c0a37433
+    path: Assets/Scenes/Levels/Mazmorra_V2.unity
+    guid: dab23f1b908c52642b97b06d0b39bddb
   - enabled: 1
-    path: Assets/Scenes/OptionsScene.unity
-    guid: 877cd6dd289373243b9988f76913c994
+    path: Assets/Scenes/Levels/Almacenes.unity
+    guid: 2c9a3aaaf515b7e488f987231cc63753
   - enabled: 1
-    path: Assets/Scenes/Levels/Mazmorras.unity
-    guid: 1c2eceea71f41e04f92525d1744287c2
+    path: Assets/Scenes/Levels/Salones_Reales.unity
+    guid: 6b42a46ed2b9e2b4e915c21387c48cd4
   - enabled: 1
-    path: Assets/Scenes/Levels/Nivel_2.unity
-    guid: 163b6a136a4a23747a0759b74b779f49
+    path: Assets/Scenes/Cinematica.unity
+    guid: 98b18b827833ac940942dd9018926a5f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

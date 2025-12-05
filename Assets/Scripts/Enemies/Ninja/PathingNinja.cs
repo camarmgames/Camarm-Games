@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,9 +16,13 @@ public class PathingNinja: MonoBehaviour
     private NavMeshAgent agent;
     private bool isPatrolling = false;
 
+    private Break breakScript;
+    private StatsGomiNinja statsGomiNinja;
 
     private void Start()
     {
+        statsGomiNinja = GetComponent<StatsGomiNinja>();
+        breakScript = GetComponent<Break>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -32,6 +37,8 @@ public class PathingNinja: MonoBehaviour
 
             if (timer >= waitTime)
             {
+                statsGomiNinja.ModifyStats(-5, 5);
+
                 GoToNextPoint();
                 timer = 0f;
             }
@@ -45,6 +52,7 @@ public class PathingNinja: MonoBehaviour
         if (patrolPoints.Count == 0)
             return;
 
+
         if(currentPointIndex - 1 == lastPointIndex)
         {
             currentPointIndex = lastPointIndex;
@@ -55,18 +63,24 @@ public class PathingNinja: MonoBehaviour
         currentPointIndex = (currentPointIndex + 1) % patrolPoints.Count;
     }
 
-    public void StartPatrol()
+    public Status StartPatrol()
     {
         if (isPatrolling)
-            return;
+            return Status.Success;
+
+        if(breakScript.IsTakingABreak())
+            breakScript.TakeABreakStopped();
+
+        statsGomiNinja.ModifyStats(-4, 7);
 
         isPatrolling = true;
         agent.isStopped = false;
         GoToNextPoint();
-        Debug.Log("Empieza a patrullar");
+        //Debug.Log("Empieza a patrullar");
 
         if (animator != null)
             animator.SetBool("isWalking", isPatrolling);
+        return Status.Success;
     }
 
     public void StopPatrol()
@@ -78,7 +92,7 @@ public class PathingNinja: MonoBehaviour
         agent.isStopped = true;
         timer = 0f;
         lastPointIndex = ((currentPointIndex - 1) + patrolPoints.Count) % patrolPoints.Count;
-        Debug.Log("Patrulla detenida");
+        //Debug.Log("Patrulla detenida");
 
         if(animator != null)
             animator.SetBool("isWalking", isPatrolling);

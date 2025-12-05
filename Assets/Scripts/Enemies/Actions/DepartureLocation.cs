@@ -1,3 +1,4 @@
+using BehaviourAPI.Core;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ public class DepartureLocation: MonoBehaviour
     [Tooltip("Prefab of renderObject")]
     private GameObject renderPrefab;
 
+    [Header("MusicEffects")]
+    public AudioClip effect;
+
     [Header("Materials")]
     [SerializeField] private Material appearDisapearMaterial;
     [SerializeField] private Material standardMaterial;
@@ -38,10 +42,13 @@ public class DepartureLocation: MonoBehaviour
     private float timer = 0f;
     private bool timerRunning = false;
 
-    private Coroutine appearCoroutine;
-    private Coroutine disappearCoroutine;
     private bool actualDisappear = true;
     private NavMeshAgent agent;
+
+    private bool appearing = false;
+    private bool appear = false;
+    private Vector3 appearStartPos;
+    private Vector3 appearEndPos;
 
     private void Start()
     {
@@ -61,18 +68,87 @@ public class DepartureLocation: MonoBehaviour
         }
     }
 
-    #region Actions
-    public void CalculatePositionToExit()
+    public void DepartureLocationStarted()
     {
+        appearing = false;
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
 
-        if (playerPosition == null || spawnPoints.Count == 0) return;
+        Vector3 departurePosition = Vector3.zero;
 
-        // Reinicio timer
-        timer = cooldownTime;
-        timerRunning = true;
+        if (!appear){
+            // Reinicio timer
+            timer = cooldownTime;
+            timerRunning = true;
+
+            departurePosition = CalculatePositionToExit();
+        }
+
+        agent.enabled = false;
 
 
+        StartAppearDisappearSequence(departurePosition);
+    }
+
+    public Status DepartureLocationUpdate()
+    {
+        if (playerPosition == null || spawnPoints.Count == 0) return Status.Failure;
+        
+        if(!appearing) return Status.Running;
+
+        Transform model = transform;
+        model.position = Vector3.MoveTowards(
+            model.position,
+            appearEndPos,
+            moveSpeed * Time.deltaTime
+        );
+
+        if (!appear)
+        {
+            if (Vector3.Distance(model.position, appearEndPos) <= 0.05f)
+            {
+                model.position = appearEndPos;
+
+                SetMaterial(standardMaterial);
+
+                agent.enabled = true;
+                appear = true;
+                actualDisappear = false;
+            }
+
+
+            if (appear)
+            {
+                AudioManager.Instance.PlaySFXAtPosition(effect, transform.position, 1f, 1f);
+                return Status.Success;
+            }
+
+            return Status.Running;
+        }
+        else
+        {
+            if (Vector3.Distance(model.position, appearEndPos) <= 0.05f)
+            {
+                model.position = appearEndPos;
+
+                SetMaterial(standardMaterial);
+
+                renderPrefab.SetActive(false);
+                appear = false;
+                actualDisappear = true;
+            }
+
+
+            if (!appear)
+                return Status.Success;
+
+            return Status.Running;
+        }
+        
+    }
+
+    #region Actions
+    public Vector3 CalculatePositionToExit()
+    {
         // Lista temporal con las posiciones validas segun distancia
         List<Transform> validPoints = new List<Transform>();
         while (validPoints.Count == 0)
@@ -102,82 +178,34 @@ public class DepartureLocation: MonoBehaviour
             pathing.patrolPoints.Add(chosenPoint.GetChild(i));
         }
 
-        Vector3 departurePosition = new Vector3(chosenPoint.position.x, chosenPoint.position.y, chosenPoint.position.z);
-        Debug.Log(departurePosition);
-
-        agent.enabled = false;
-        // Animations
-        if (appearCoroutine == null)
-            appearCoroutine = StartCoroutine(AppearSequence(departurePosition));
+        return new Vector3(chosenPoint.position.x, chosenPoint.position.y, chosenPoint.position.z);
     }
 
-    private IEnumerator AppearSequence(Vector3 targetPos)
+    private void StartAppearDisappearSequence(Vector3 targetPos)
     {
-        Vector3 startPos = new Vector3(targetPos.x, targetPos.y + appearHeightOffset, targetPos.z);
-        Vector3 endPos = targetPos;
-
-        renderPrefab.SetActive(true);
-        SetMaterial(appearDisapearMaterial);
-
-        Transform model = GetComponent<Transform>();
-        model.position = startPos;
-
-        while(Vector3.Distance(model.position, endPos) > 0.05f)
+        if(!appear)
         {
-            model.position = Vector3.MoveTowards(model.position, endPos, moveSpeed * Time.deltaTime);
-            yield return null;
+            appearStartPos = new Vector3(targetPos.x, targetPos.y + appearHeightOffset, targetPos.z);
+            appearEndPos = targetPos;
+
+            renderPrefab.SetActive(true);
+            SetMaterial(appearDisapearMaterial);
+
+            transform.position = appearStartPos;
         }
-
-        model.position = endPos;
-        SetMaterial(standardMaterial);
-        appearCoroutine = null;
-        actualDisappear = false;
-        agent.enabled = true;
-    }
-
-    public void SetInvisible()
-    {
-        if (disappearCoroutine != null) StopCoroutine(disappearCoroutine);
-        agent.enabled = false;
-        disappearCoroutine = StartCoroutine(DisappearSequence());
-    }
-
-    private IEnumerator DisappearSequence()
-    {
-        SetMaterial(appearDisapearMaterial);
-
-        Transform model = GetComponent<Transform>();
-        Vector3 startPos = model.position;
-        Vector3 endPos = new Vector3(startPos.x, startPos.y + appearHeightOffset, startPos.z);
-
-        while(Vector3.Distance(model.position, endPos) > 0.05f)
+        else
         {
-            model.position = Vector3.MoveTowards(model.position, endPos, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
+            appearStartPos = transform.position;
+            appearEndPos = new Vector3(appearStartPos.x, appearStartPos.y + appearHeightOffset, appearStartPos.z); ;
 
-        renderPrefab.SetActive(false);
-        disappearCoroutine = null;
-        actualDisappear = true;
+            SetMaterial(appearDisapearMaterial);
+        }
+        appearing = true;
     }
 
     #endregion
 
     #region Perceptions
-    public bool CheckAppear()
-    {
-        return appearCoroutine == null;
-    }
-
-    public bool CheckDisappear()
-    {
-        return disappearCoroutine == null;
-    }
-
-    public bool CheckInvisible()
-    {
-        return !renderPrefab.activeSelf;
-    }
 
     public bool CheckActualDisappear()
     {
