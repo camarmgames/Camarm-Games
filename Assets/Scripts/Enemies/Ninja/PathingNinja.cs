@@ -9,6 +9,7 @@ public class PathingNinja: MonoBehaviour
     [SerializeField] public List<Transform> patrolPoints;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private Animator animator;
+    [SerializeField] private StatsGomiNinja statsGomiNinja;
 
     public int currentPointIndex = 0;
     private int lastPointIndex = -2;
@@ -17,11 +18,11 @@ public class PathingNinja: MonoBehaviour
     private bool isPatrolling = false;
 
     private Break breakScript;
-    private StatsGomiNinja statsGomiNinja;
+
 
     private void Start()
     {
-        statsGomiNinja = GetComponent<StatsGomiNinja>();
+        //statsGomiNinja = GetComponent<StatsGomiNinja>();
         breakScript = GetComponent<Break>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -37,7 +38,7 @@ public class PathingNinja: MonoBehaviour
 
             if (timer >= waitTime)
             {
-                statsGomiNinja.ModifyStats(-5, 5);
+                statsGomiNinja?.ModifyStats(-5, 5);
 
                 GoToNextPoint();
                 timer = 0f;
@@ -71,7 +72,7 @@ public class PathingNinja: MonoBehaviour
         if(breakScript.IsTakingABreak())
             breakScript.TakeABreakStopped();
 
-        statsGomiNinja.ModifyStats(-4, 7);
+        statsGomiNinja?.ModifyStats(-4, 7);
 
         isPatrolling = true;
         agent.isStopped = false;
