@@ -31,15 +31,17 @@ public class TileGenerator: MonoBehaviour
 
     private void Update()
     {
-        Vector3 camPos = playerCamera.transform.position;
-        Vector3 camForward = playerCamera.transform.forward;
+        Vector3 camPos = playerCamera.position;
+        Vector3 camForward = playerCamera.forward;
+
+        tileRenderers.RemoveAll(r => r == null);
 
         foreach (Renderer r in tileRenderers)
         {
             Vector3 dir = (r.transform.position - camPos).normalized;
 
             bool inDistance = Vector3.Distance(r.transform.position, camPos) < activationDistance;
-            bool inFov = Vector3.Dot(camForward, dir) > 0.4f; // 0.4 ~ 66° visión
+            bool inFov = Vector3.Dot(camForward, dir) > 0.4f; // 0.4 ~ 66°
 
             r.enabled = inDistance && inFov;
         }
@@ -68,5 +70,19 @@ public class TileGenerator: MonoBehaviour
             if (r != null)
                 tileRenderers.Add(r);
         }
+    }
+
+    public void RemoveTile(GameObject tile)
+    {
+        Renderer r = tile.GetComponent<Renderer>();
+        if (r != null)
+            tileRenderers.Remove(r);
+    }
+
+    public void AddTile(GameObject tile)
+    {
+        Renderer r = tile.GetComponent<Renderer>();
+        if (r != null)
+            tileRenderers.Add(r);
     }
 }

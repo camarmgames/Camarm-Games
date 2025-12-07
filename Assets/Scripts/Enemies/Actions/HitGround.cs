@@ -31,9 +31,11 @@ public class HitGround:MonoBehaviour
 
     private bool canHitGround = true;
     private EnemyStress enemyStress;
+    private TileGenerator tileGenerator;
 
     private void Start()
     {
+        tileGenerator = tileGeneratorParent.gameObject.GetComponent<TileGenerator>();
         enemyStress = GetComponent<EnemyStress>();
     }
     public void HitGroundStarted()
@@ -97,12 +99,18 @@ public class HitGround:MonoBehaviour
         Vector3 spawnPos = oldGround.transform.position;
         Quaternion spawnRot = oldGround.transform.rotation;
 
-        GameObject.Destroy(oldGround);
+        if (tileGenerator != null)
+            tileGenerator.RemoveTile(oldGround);
+
+        Destroy(oldGround);
 
         if (destroyedGroundPrefab != null)
         {
             GameObject tile = Instantiate(destroyedGroundPrefab, spawnPos, spawnRot, tileGeneratorParent);
             tile.transform.localScale = Vector3.one;
+
+            if(tileGenerator != null)
+                tileGenerator.AddTile(tile);
         }
     }
 
