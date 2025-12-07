@@ -8429,6 +8429,8 @@ MonoBehaviour:
   width: 110
   length: 115
   tileSize: 1
+  playerCamera: {fileID: 0}
+  activationDistance: 40
 --- !u!1001 &198198787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48273,7 +48275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1127901020
 Transform:
   m_ObjectHideFlags: 0

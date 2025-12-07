@@ -11,12 +11,12 @@ using BehaviourAPI.UtilitySystems;
 using System.Numerics;
 
 /*
- * Meter US
+ * Cambiar m_LaunchFire
  */
 
 public class cp_GomiNinja : BehaviourRunner
 {
-	GomiMagoAppearance m_GomiMagoAppearance;
+    LevelWizardController m_levelWizardController;
 	FollowPlayer m_FollowPlayer;
     PathingNinja m_PathingNinja;
     Investigation m_Investigation;
@@ -35,8 +35,9 @@ public class cp_GomiNinja : BehaviourRunner
 
     protected override void Init()
 	{
-		m_DepartureLocation = GetComponent<DepartureLocation>();
-		m_GomiMagoAppearance = GetComponent<GomiMagoAppearance>();
+        m_levelWizardController = FindAnyObjectByType<LevelWizardController>();
+
+        m_DepartureLocation = GetComponent<DepartureLocation>();
 		m_FollowPlayer = GetComponent<FollowPlayer>();
         m_PathingNinja = GetComponent<PathingNinja>();
         m_Investigation = GetComponent<Investigation>();
@@ -66,8 +67,6 @@ public class cp_GomiNinja : BehaviourRunner
         ConditionPerception finishTimerPerception = new ConditionPerception(m_DepartureLocation.FinishTimer);
         ConditionPerception checkActualDisappearPerception = new ConditionPerception(m_DepartureLocation.CheckActualDisappear);
 
-		ConditionPerception hasAppearedPerception = new ConditionPerception(m_GomiMagoAppearance.HasAppeared);
-		ConditionPerception hasDisappearedPerception = new ConditionPerception(m_GomiMagoAppearance.HasDisappeared);
 		ConditionPerception isPlayerWithinDistancePerception = new ConditionPerception(m_FollowPlayer.IsPlayerWithinDistance);
 
 
@@ -83,7 +82,7 @@ public class cp_GomiNinja : BehaviourRunner
         {
             new FunctionalAction(m_PathingNinja.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_GomiMagoAppearance.BuffEnemy, null)
+            new FunctionalAction(m_LaunchFire.pruebaFinish, null)
         };
 
         ParallelAction sBuffEnemy = new ParallelAction(true, false, subActions);
@@ -93,7 +92,7 @@ public class cp_GomiNinja : BehaviourRunner
         List<BehaviourAPI.Core.Actions.Action> subActions2 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
             new FunctionalAction(m_FollowPlayer.StopFollow),
-            new FunctionalAction(m_GomiMagoAppearance.RestoreEnemyToNormal, null)
+            new FunctionalAction(m_LaunchFire.pruebaFinish, null)
         };
 
         ParallelAction sRestoreEnemyToNormal = new ParallelAction(true, false, subActions2);

@@ -25,10 +25,12 @@ public class Investigation: MonoBehaviour
     private NavMeshAgent agent;
     public bool isInvestigating = false;
     private Coroutine investigateCoroutine;
+    private EnemyStress enemyStress;
     
 
     void Start()
     {
+        enemyStress = GetComponent<EnemyStress>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -41,6 +43,7 @@ public class Investigation: MonoBehaviour
     {
         if (investigateCoroutine == null && Time.time >= nextInvestigationTime)
         {
+            enemyStress?.AddStress(10);
             statsGomiNinja?.ModifyStats(-5, 0);
             isInvestigating = true;
             agent.isStopped = false;

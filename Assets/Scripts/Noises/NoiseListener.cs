@@ -73,7 +73,15 @@ public class NoiseListener: MonoBehaviour
 
             TeleportBehindPlayer teleportEnemy = GetComponent<TeleportBehindPlayer>();
             if (teleportEnemy != null)
+            {
                 teleportEnemy.player = playerT;
+                return true;
+            }
+
+            if (investigation != null)
+                investigation.pointToInvestigateArea = lastHeardPosition;
+
+            stateIcon.SetAlert();
             return true;
         }
             

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TileGenerator: MonoBehaviour
@@ -14,11 +15,36 @@ public class TileGenerator: MonoBehaviour
     public int length = 10;
     public float tileSize = 1f;
 
+    [Header("Render in camera")]
+    public Transform playerCamera;
+    public float activationDistance = 40f;
+
+    private Transform[] tiles;
+    private List<Renderer> tileRenderers = new List<Renderer>();
+
     private void Awake()
     {
         AudioManager.Instance.PlayMusic(music);
         GenerateTiles();    
     }
+
+
+    private void Update()
+    {
+        Vector3 camPos = playerCamera.transform.position;
+        Vector3 camForward = playerCamera.transform.forward;
+
+        foreach (Renderer r in tileRenderers)
+        {
+            Vector3 dir = (r.transform.position - camPos).normalized;
+
+            bool inDistance = Vector3.Distance(r.transform.position, camPos) < activationDistance;
+            bool inFov = Vector3.Dot(camForward, dir) > 0.4f; // 0.4 ~ 66° visión
+
+            r.enabled = inDistance && inFov;
+        }
+    }
+
 
     void GenerateTiles()
     {
@@ -32,6 +58,15 @@ public class TileGenerator: MonoBehaviour
 
                 Instantiate(prefabToSpawn, position, Quaternion.identity, transform);
             }
+        }
+
+        tiles = GetComponentsInChildren<Transform>();
+
+        foreach (Transform t in tiles)
+        {
+            Renderer r = t.GetComponent<Renderer>();
+            if (r != null)
+                tileRenderers.Add(r);
         }
     }
 }

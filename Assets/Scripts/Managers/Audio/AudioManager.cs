@@ -57,15 +57,15 @@ public class AudioManager: MonoBehaviour
         src.spatialBlend = spatialBlend;
         src.minDistance = 1f;
         src.maxDistance = 20f;
-        src.rolloffMode = AudioRolloffMode.Linear;
+        src.rolloffMode = AudioRolloffMode.Logarithmic;
 
-        // ?? AÑADIR FILTRO Y SCRIPT DE OCLUSIÓN
+       
         var lp = audioObj.AddComponent<AudioLowPassFilter>();
         lp.cutoffFrequency = 20000f;
 
         var occlusion = audioObj.AddComponent<AudioOcclusion>();
-        //occlusion.listener = Camera.main.transform;   // o el transform del jugador
-        //occlusion.obstacleMask = LayerMask.GetMask("Obstacles");
+        occlusion.listener = FindAnyObjectByType<PlayerMovement>().transform;  
+        occlusion.obstacleMask = LayerMask.GetMask("Obstacles");
 
         src.Play();
         Destroy(audioObj, clip.length + 0.1f);

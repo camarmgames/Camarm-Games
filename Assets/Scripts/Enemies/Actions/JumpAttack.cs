@@ -20,6 +20,7 @@ public class JumpAttack: MonoBehaviour
     [Header("Salto")]
     public float jumpCooldown = 3f;
     public float bodyRadius = 0.6f; // Para SphereCast
+    public AudioClip jumpSound;
 
     [Header("Animations Settings")]
     public Animator animator;
@@ -52,6 +53,8 @@ public class JumpAttack: MonoBehaviour
 
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75f)
             return Status.Running;
+
+        AudioManager.Instance.PlaySFXAtPosition(jumpSound, transform.position, 1f, 1f);
 
         TryParalyzePlayer();
 

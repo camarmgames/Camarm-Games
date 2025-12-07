@@ -107,6 +107,8 @@ GameObject:
   - component: {fileID: 6751800528557554051}
   - component: {fileID: 5291395245935561351}
   - component: {fileID: 3778334316791847845}
+  - component: {fileID: 3302482296348432615}
+  - component: {fileID: 4033202737615474946}
   m_Layer: 3
   m_Name: BehaviourGeoAPI
   m_TagString: Untagged
@@ -548,6 +550,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   executeOnLoop: 0
   interruptOptions: 0
+--- !u!114 &3302482296348432615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636135404643141372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d787bdbf9cb9da46bdb115d0b95e5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stress: 0
+  maxStress: 100
+  renderPrefab: {fileID: 3040050841697562041}
+  buffMaterial: {fileID: 2100000, guid: 82e9d5fca7d7b5047a3d8e6a6974cdb9, type: 2}
+  standardMaterial: {fileID: -6922793697723135513, guid: f0a25a410e7f188409a4d978d696aecb, type: 3}
+--- !u!114 &4033202737615474946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636135404643141372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad333454d79bed74880038e442b3c373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &922426264276263232
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +979,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53e5674946d2f4b4f85bed51a6247923, type: 3}
+--- !u!1 &3040050841697562041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9174929805771657083, guid: 53e5674946d2f4b4f85bed51a6247923, type: 3}
+  m_PrefabInstance: {fileID: 6152911247582651074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3872417604014547357 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6980050991725593439, guid: 53e5674946d2f4b4f85bed51a6247923, type: 3}

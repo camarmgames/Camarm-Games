@@ -1,6 +1,7 @@
 using BehaviourAPI.Core;
 using Cinemachine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HitGround:MonoBehaviour
@@ -15,6 +16,7 @@ public class HitGround:MonoBehaviour
     public Transform tileGeneratorParent;
     public float hitGroundCooldown = 2f;
     public Animator animator;
+    public AudioClip effect;
 
     [Header("Shockwave Settings")]
     public float shockwaveRange = 10f;
@@ -28,18 +30,27 @@ public class HitGround:MonoBehaviour
     public float shakeDuration = 1f;
 
     private bool canHitGround = true;
+    private EnemyStress enemyStress;
+
+    private void Start()
+    {
+        enemyStress = GetComponent<EnemyStress>();
+    }
     public void HitGroundStarted()
     {
         if (!canHitGround) return;
 
         animator.Play("HitGround");
+
+        enemyStress?.AddStress(8);
+
     }
 
     public Status HitGroundUpdate()
     {
         if (!canHitGround) return Status.Success;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.85f)
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
             return Status.Running;
 
         // 1. Golpe al suelo => destrucción
@@ -50,6 +61,8 @@ public class HitGround:MonoBehaviour
 
         // 3. Ondas expansivas
         StartCoroutine(Shockwave());
+
+        AudioManager.Instance.PlaySFXAtPosition(effect, transform.position, 2f, 1f);
 
         StartCoroutine(hitGroundCooldownRoutine());
 
@@ -93,32 +106,42 @@ public class HitGround:MonoBehaviour
         }
     }
 
+    private HashSet<Rigidbody> pushedBodies = new HashSet<Rigidbody>();
+
     private IEnumerator Shockwave()
     {
         float currentDistance = 0f;
+        pushedBodies.Clear();
 
         while (currentDistance < shockwaveRange)
         {
             currentDistance += shockwaveSpeed * Time.deltaTime;
 
-            // Detectar objetos impactados por la onda
-            Collider[] cols = Physics.OverlapSphere(
-                transform.position + transform.forward * currentDistance,
-                shockwaveRadius
-            );
+            Vector3 wavePos = transform.position + transform.forward * currentDistance;
+
+            Collider[] cols = Physics.OverlapSphere(wavePos, shockwaveRadius);
 
             foreach (Collider c in cols)
             {
-                if (c.attachedRigidbody != null)
-                {
-                    Vector3 dir = (c.transform.position - transform.position).normalized;
+                Rigidbody rb = c.attachedRigidbody;
+                if (rb == null) continue;
 
-                    // Comprobar si la onda está bloqueada
-                    if (!Physics.Raycast(transform.position, dir, out RaycastHit hit, currentDistance, obstacleMask))
-                    {
-                        c.attachedRigidbody.AddForce(dir * shockwaveForce, ForceMode.Impulse);
-                    }
-                }
+                // Solo empujar una vez
+                if (pushedBodies.Contains(rb)) continue;
+
+                // No empujar si está detrás de una pared
+                Vector3 dirToRB = (rb.transform.position - wavePos).normalized;
+
+                if (Physics.Raycast(wavePos, dirToRB, out RaycastHit hit, shockwaveRadius, obstacleMask))
+                    continue;
+
+                // Fuerza decreciente por distancia
+                float distanceFactor = 1f - (currentDistance / shockwaveRange);
+                float finalForce = shockwaveForce * distanceFactor;
+
+                rb.AddForce(dirToRB * finalForce, ForceMode.Impulse);
+
+                pushedBodies.Add(rb);
             }
 
             yield return null;
