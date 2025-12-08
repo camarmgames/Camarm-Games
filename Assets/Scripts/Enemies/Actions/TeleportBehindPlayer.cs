@@ -19,8 +19,10 @@ public class TeleportBehindPlayer: MonoBehaviour
     private bool canTeleport = true;
 
     private StatsGomiNinja statsGomiNinja;
+    private EnemyStress enemyStress;
     private void Start()
     {
+        enemyStress = GetComponent<EnemyStress>();
         statsGomiNinja = GetComponent<StatsGomiNinja>();
     }
 
@@ -34,6 +36,7 @@ public class TeleportBehindPlayer: MonoBehaviour
         }
 
         statsGomiNinja.ModifyStats(-10, 0);
+        enemyStress?.AddStress(15);
 
         StartCoroutine(TeleportCooldownRoutine());
         PerformTeleport();

@@ -36,4 +36,14 @@ public class ButtonUtils : MonoBehaviour
         playerInput?.actions["Move"].Enable();
         Time.timeScale = 1.0f;
     }
+
+    public void PauseTimeGame()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    public void RestoreTimeGame()
+    {
+        Time.timeScale = 1.0f;
+    }
 }

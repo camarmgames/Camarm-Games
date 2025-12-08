@@ -12,6 +12,7 @@ public class Investigation: MonoBehaviour
     [SerializeField] private float maxAngleDeviation = 30f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private Animator animator;
+    [SerializeField] private StatsGomiNinja statsGomiNinja;
 
     [Header("Cooldown")]
     [SerializeField] private float investigationCooldown = 10f;
@@ -24,11 +25,12 @@ public class Investigation: MonoBehaviour
     private NavMeshAgent agent;
     public bool isInvestigating = false;
     private Coroutine investigateCoroutine;
-    private StatsGomiNinja statsGomiNinja;
+    private EnemyStress enemyStress;
+    
 
     void Start()
     {
-        statsGomiNinja = GetComponent<StatsGomiNinja>();
+        enemyStress = GetComponent<EnemyStress>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -41,7 +43,8 @@ public class Investigation: MonoBehaviour
     {
         if (investigateCoroutine == null && Time.time >= nextInvestigationTime)
         {
-            statsGomiNinja.ModifyStats(-5, 0);
+            enemyStress?.AddStress(10);
+            statsGomiNinja?.ModifyStats(-5, 0);
             isInvestigating = true;
             agent.isStopped = false;
             investigateCoroutine = StartCoroutine(InspectArea(pointToInvestigateArea));

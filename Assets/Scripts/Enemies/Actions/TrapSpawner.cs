@@ -73,4 +73,11 @@ public class TrapSpawner: MonoBehaviour
         limitTraps--;
         statsGomiNinja.ResetTimePatrol();
     }
+
+    public void PlaceTrapPrueba()
+    {
+        //Debug.Log("Trampa colocadaaAAAAA");
+
+
+    }
 }

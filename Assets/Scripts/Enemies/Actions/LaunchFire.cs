@@ -22,12 +22,20 @@ public class LaunchFire: MonoBehaviour
 
     public Vector3 playerPosition;
     private bool canLaunch = true;
+    private EnemyStress enemyStress;
+
+    private void Start()
+    {
+        enemyStress = GetComponent<EnemyStress>();
+    }
+
     public void AttackStarted()
     {
         if (!canLaunch)
             return;
 
         animator.Play("Launch");
+        enemyStress?.AddStress(8);
     }
 
     public Status AttackUpdate()
@@ -64,7 +72,7 @@ public class LaunchFire: MonoBehaviour
         rb.AddForce(direction * launchForce, ForceMode.VelocityChange);
 
         // Efecto Musica
-        AudioManager.Instance.PlaySFX(effect);
+        AudioManager.Instance.PlaySFXAtPosition(effect, transform.position, 1f, 1f);
 
         StartCoroutine(LaunchCooldownRoutine());
     }
@@ -76,5 +84,10 @@ public class LaunchFire: MonoBehaviour
         yield return new WaitForSeconds(launchCooldown);
 
         canLaunch = true;
+    }
+
+    public Status pruebaFinish()
+    {
+        return Status.Success;
     }
 }
