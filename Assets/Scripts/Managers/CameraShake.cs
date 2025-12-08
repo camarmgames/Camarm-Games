@@ -8,6 +8,7 @@ public class CameraShake : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin perlin;
     private float shakeTimer;
     private bool shaking = false;
+    public bool powerUpBatido;
 
     private void Awake()
     {
@@ -34,6 +35,8 @@ public class CameraShake : MonoBehaviour
 
     public void ShakeCamera(NoiseSettings noiseProfile, float intensity, float duration)
     {
+        if(powerUpBatido) return;
+
         perlin.m_NoiseProfile = noiseProfile;
         perlin.m_AmplitudeGain = intensity;
 

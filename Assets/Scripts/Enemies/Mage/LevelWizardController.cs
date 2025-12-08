@@ -70,7 +70,7 @@ public class LevelWizardController: MonoBehaviour
         }
     }
 
-    void SpawnWizard()
+    public void SpawnWizard()
     {
         isVisible = true;
         visibleTimer = timeVisible;

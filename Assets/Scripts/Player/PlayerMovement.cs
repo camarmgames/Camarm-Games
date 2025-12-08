@@ -171,18 +171,20 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region CollideFunction
-    public void OnTriggerEnter(Collider other)
-    {
-        Collectable collectable;
-        if (other != null)
-        {
-            collectable = other.GetComponent<Collectable>();
-            if (collectable != null && !PlayerInventory.instance.IsFull())
-            {
-                PlayerInventory.instance.Add(collectable);
-                Destroy(other.gameObject);
-            }
-        }
-    }
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Trigger con: " + other.name);
+
+    //    Collectable collectable;
+    //    if (other != null)
+    //    {
+    //        collectable = other.GetComponent<Collectable>();
+    //        if (collectable != null && !PlayerInventory.instance.IsFull())
+    //        {
+    //            PlayerInventory.instance.Add(collectable);
+    //            Destroy(other.transform.GetChild(0).gameObject);
+    //        }
+    //    }
+    //}
     #endregion
 }
