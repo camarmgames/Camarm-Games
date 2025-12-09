@@ -352,6 +352,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6191623474963696300, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: m_Name
+      value: Animator
+      objectReference: {fileID: 0}
+    - target: {fileID: -138383449610161411, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: m_Name
+      value: oPoli
+      objectReference: {fileID: 0}
     - target: {fileID: 264258476469163845, guid: f4b1644655570654698cebf5adbdc246, type: 3}
       propertyPath: animator
       value: 
@@ -428,6 +436,18 @@ PrefabInstance:
       propertyPath: pointsToInvestigate
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4113268176529233722, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: wallPrefab
+      value: 
+      objectReference: {fileID: 4071832300304311256, guid: 50808b58c2d701743978c7136ddb7e28, type: 3}
+    - target: {fileID: 4113268176529233722, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: pointsBlock.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113268176529233722, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: 'pointsBlock.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8409041658386086196}
     - target: {fileID: 4275487891899991475, guid: f4b1644655570654698cebf5adbdc246, type: 3}
       propertyPath: waitTime
       value: 1
@@ -540,6 +560,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7129894053621372237, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ad940f1621f9d3845905ee4241d7809e, type: 2}
     - target: {fileID: 7131096818378092829, guid: f4b1644655570654698cebf5adbdc246, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
@@ -600,7 +624,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872806403688547803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1ac8352b8ab6b14a8cc39426a767ec8, type: 3}
   m_Name: 
@@ -615,5 +639,10 @@ Transform:
 --- !u!4 &3241796130663922029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6179637873647109455, guid: f4b1644655570654698cebf5adbdc246, type: 3}
+  m_PrefabInstance: {fileID: 8736798009812859938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8409041658386086196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 976644870412977430, guid: f4b1644655570654698cebf5adbdc246, type: 3}
   m_PrefabInstance: {fileID: 8736798009812859938}
   m_PrefabAsset: {fileID: 0}

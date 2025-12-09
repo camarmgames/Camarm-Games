@@ -9,6 +9,8 @@ using BehaviourAPI.StateMachines;
 using BehaviourAPI.StateMachines.StackFSMs;
 using BehaviourAPI.UnityToolkit.GUIDesigner.Framework;
 using UnityEngine.AI;
+using UnityEditor;
+using UnityEngine.InputSystem;
 
 public class GomiPoliBehaviour : BehaviourRunner
 {
@@ -42,6 +44,15 @@ public class GomiPoliBehaviour : BehaviourRunner
 
 	//--About Player Detection Perception:
 	private GameObject player;
+
+    //--About Blocking Path Action:
+    [SerializeField] private List<Transform> pointsBlock;
+    [SerializeField] private GameObject wallPrefab;
+
+	//--About Attack Action:
+    [SerializeField] private PlayerInput playerInput;
+
+
 
 
     #region -----------------BEHAVIOUR GRAPH-----------------
@@ -86,31 +97,41 @@ public class GomiPoliBehaviour : BehaviourRunner
 
         FunctionalAction inspeccionar_accion = new FunctionalAction(
 			InspectAreaStart,
-            InspectAreaUpdate,
-            InspectAreaStop
+            InspectAreaUpdate
             );
         State inspeccionar_area = GomiPoliFSM2.CreateState(inspeccionar_accion);
 
 		StateTransition perseguir_inspeccionar = GomiPoliFSM2.CreateTransition(perseguir_rastro, inspeccionar_area, statusFlags: StatusFlags.Success);
-
+		FunctionalAction BloqueoCamino = new FunctionalAction(
+			BlockPathStart,
+			BlockPathUpdate,
+			BlockPathStop
+			);
 		StateTransition vuelta_movimiento = GomiPoliFSM2.CreateTransition(perseguir_rastro, Movimiento, statusFlags: StatusFlags.Failure);
 
 		StateTransition inspeccionar_perseguir = GomiPoliFSM2.CreateTransition(inspeccionar_area, perseguir_rastro, movimiento_inspeccionar, statusFlags: StatusFlags.Running);
 		
-		StateTransition vuelta_movimiento2 = GomiPoliFSM2.CreateTransition(inspeccionar_area, Movimiento, statusFlags: StatusFlags.Finished);
+		State bloquear_camino = GomiPoliFSM2.CreateState(BloqueoCamino);
 
-		State Atacar = GomiPoliFSM2.CreateState();
+		StateTransition inspeccionar_bloqueo = GomiPoliFSM2.CreateTransition(inspeccionar_area, bloquear_camino, statusFlags: StatusFlags.Finished);
+        StateTransition bloqueo_movimiento = GomiPoliFSM2.CreateTransition(bloquear_camino, Movimiento, statusFlags: StatusFlags.Finished);
+
+        FunctionalAction atacar_accion = new FunctionalAction(
+			AttackStart,
+			AttackUpdate
+			);
+        State Atacar = GomiPoliFSM2.CreateState(atacar_accion);
 
         CustomPerception inspeccionar_movimiento = new CustomPerception();
         inspeccionar_movimiento.onCheck = DetectPlayerPerception;
         StateTransition DetectarJugador = GomiPoliFSM2.CreateTransition(Movimiento, Atacar, perception: inspeccionar_movimiento, statusFlags: StatusFlags.Running);
 
 		StateTransition Devolver = GomiPoliFSM2.CreateTransition(Atacar, Movimiento, statusFlags: StatusFlags.Finished);
-		
-		StateTransition BloquearCamino = GomiPoliFSM2.CreateTransition(perseguir_rastro, Movimiento, statusFlags: StatusFlags.Finished);
+
 
 		return GomiPoliFSM1;
 	}
+
     #endregion
 
     #region -----------------UNITY FUNCTIONS-----------------
@@ -258,7 +279,6 @@ public class GomiPoliBehaviour : BehaviourRunner
         navMeshAgent.SetDestination(footprintNavMeshPoint);
 		lastPos = transform.position;
 		stuckTimer = 0;
-        Debug.Log("GOMIPOLIBEH. TRACKER START");
     }
 
 	private float stuckTimer;
@@ -281,7 +301,6 @@ public class GomiPoliBehaviour : BehaviourRunner
 		}
 		else
 			return Status.Success;
-        Debug.Log("GOMIPOLIBEH. TRACKER UPDATE");
         return Status.Running;
 	}
 
@@ -289,7 +308,6 @@ public class GomiPoliBehaviour : BehaviourRunner
 	{
 		navMeshAgent?.ResetPath();
 		animator.SetBool("isWalking", false);
-        Debug.Log("GOMIPOLIBEH. TRACKER STOP");
     }
 
     #endregion
@@ -298,7 +316,6 @@ public class GomiPoliBehaviour : BehaviourRunner
 
     public void InspectAreaStart()
 	{
-        Debug.Log("GOMIPOLIBEH. INSPECT START");
         inspectingTime = 5f;
         timer = 0f;
         angle = transform.eulerAngles.y;
@@ -306,7 +323,6 @@ public class GomiPoliBehaviour : BehaviourRunner
 
     public Status InspectAreaUpdate()
 	{
-        Debug.Log("GOMIPOLIBEH. INSPECT UPDATE");
 
 		if (timer < inspectingTime)
 		{
@@ -318,11 +334,84 @@ public class GomiPoliBehaviour : BehaviourRunner
 			return Status.Success;
         return Status.Running;
 	}
+	#endregion
 
-	public void InspectAreaStop()
+	#region -----------------BLOCK PATH ACTIONS-----------------
+	Transform closestBlockPoint = null;
+    bool first = true;
+    private Transform GetClosestBlockPoint()
 	{
-        Debug.Log("GOMIPOLIBEH. INSPECT STOP");
+        Transform target = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (var path in pointsBlock)
+        {
+            float dist = Vector3.Distance(transform.position, path.position);
+            if ((dist < minDist))
+            {
+                minDist = dist;
+                target = path;
+            }
+        }
+		return (target);
     }
+
+    private void BlockPathStart()
+    {
+        closestBlockPoint = GetClosestBlockPoint();
+		navMeshAgent.SetDestination(closestBlockPoint.position);
+        animator.SetBool("isWalking", true);
+		first = true;
+    }
+
+    private Status BlockPathUpdate()
+    {
+        if (Vector3.Distance(transform.position, footprintNavMeshPoint) < 0.8)
+		{
+			if (first)
+			{
+				navMeshAgent?.ResetPath();
+				animator.SetBool("isWalking", false);
+				animator.SetBool("isBlocking", true);
+				first = false;
+			}
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (!stateInfo.IsName("Blocking"))
+                return Status.Running;
+            if (stateInfo.normalizedTime < 1f)
+                return Status.Running;
+            animator.SetBool("isBlocking", false);
+            Debug.Log($"{name}: Bloqueando el camino...");
+            Instantiate(wallPrefab, closestBlockPoint.position, transform.rotation);
+            Debug.Log($"{name}: Camino boqueado en {closestBlockPoint.name}");
+        }
+		else
+			return Status.Running;
+        return Status.Success;
+    }
+
+	private void BlockPathStop()
+	{
+        navMeshAgent?.ResetPath();
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isBlocking", false);
+    }
+    #endregion
+
+    #region -----------------ATTACK ACTIONS-----------------
+    private void AttackStart()
+    {
+    }
+    private Status AttackUpdate()
+	{
+        animator.SetBool("isAttacking", true);
+
+        playerInput.actions["Move"].Disable();
+
+        EndGameManager.Instance.ShowLoseScreen();
+        return Status.Success;
+	}
+
     #endregion
 
 

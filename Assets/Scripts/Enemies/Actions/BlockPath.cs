@@ -42,7 +42,7 @@ public class BlockPath: MonoBehaviour
 
     public Status ABlockPath()
     {
-        if (blockCoroutine != null || pointsBlock == null || pointsBlock.Count == 0) return Status.Success; 
+        if (blockCoroutine != null || pointsBlock == null || pointsBlock.Count == 0) return Status.Success;
 
         Transform target = null;
         float minDist = Mathf.Infinity;
