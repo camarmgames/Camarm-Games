@@ -42,6 +42,17 @@ public class PlayerInventory : MonoBehaviour
 
     public void Clean()
     {
+        for(int i = 0; i < INVENTORY_SIZE; i++)
+        {
+            if(images[i] != null)
+            {
+                images[i].sprite = null;
+                images[i].color = new Color(1f, 1f, 1f, 0f);
+                images[i].enabled = false;
+                occupiedslots[i] = false;
+            }
+        }
+
         objects.Clear();
     }
 
@@ -76,7 +87,7 @@ public class PlayerInventory : MonoBehaviour
             if (images[i].sprite.Equals(obj.inventory))
                 break;
         }
-        images[i].color.WithAlpha(0f);
+        images[i].color = new Color(1f, 1f, 1f, 0f);
         images[i].sprite = null;
         occupiedslots[i] = false;
     }
@@ -94,9 +105,9 @@ public class PlayerInventory : MonoBehaviour
         occupiedslots[slotIndex] = false;
 
         
-        ActiveItemBlink blink = images[slotIndex].GetComponent<ActiveItemBlink>();
-        if (blink != null)
-            Destroy(blink);
+        //ActiveItemBlink blink = images[slotIndex].GetComponent<ActiveItemBlink>();
+        //if (blink != null)
+        //    Destroy(blink);
     }
 
     public bool IsFull()
