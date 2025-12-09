@@ -24,11 +24,15 @@ public class TileGenerator: MonoBehaviour
 
     private void Awake()
     {
+        
         AudioManager.Instance.PlayMusic(music);
         GenerateTiles();    
     }
 
-
+    private void Start()
+    {
+        PlayerInventory.instance.Clean();
+    }
     private void Update()
     {
         Vector3 camPos = playerCamera.position;

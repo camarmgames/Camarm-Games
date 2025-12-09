@@ -7,7 +7,6 @@ using BehaviourAPI.Core.Perceptions;
 using BehaviourAPI.UnityToolkit;
 using BehaviourAPI.StateMachines;
 using BehaviourAPI.StateMachines.StackFSMs;
-using BehaviourAPI.UnityToolkit.GUIDesigner.Framework;
 using UnityEngine.AI;
 using UnityEditor;
 using UnityEngine.InputSystem;
@@ -30,6 +29,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 
 	//--About Footprint Detection Perception:
 	public float viewRadius = 5.0f;
+	public float playerViewRadius = 2.0f;
 	public LayerMask footprintMask;
 	public LayerMask obstacleMask;
 	public float viewAngle = 90.0f;
@@ -91,7 +91,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 			);
 		State perseguir_rastro = GomiPoliFSM2.CreateState(perseguir_accion);
 
-		CustomPerception movimiento_inspeccionar = new CustomPerception();
+		ConditionPerception movimiento_inspeccionar = new ConditionPerception();
 		movimiento_inspeccionar.onCheck = DetectFootprintsPerception;
 		StateTransition DetectaRastro = GomiPoliFSM2.CreateTransition(Movimiento, perseguir_rastro, movimiento_inspeccionar, statusFlags: StatusFlags.Running);
 
@@ -122,7 +122,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 			);
         State Atacar = GomiPoliFSM2.CreateState(atacar_accion);
 
-        CustomPerception inspeccionar_movimiento = new CustomPerception();
+        ConditionPerception inspeccionar_movimiento = new ConditionPerception();
         inspeccionar_movimiento.onCheck = DetectPlayerPerception;
         StateTransition DetectarJugador = GomiPoliFSM2.CreateTransition(Movimiento, Atacar, perception: inspeccionar_movimiento, statusFlags: StatusFlags.Running);
 
@@ -213,7 +213,7 @@ public class GomiPoliBehaviour : BehaviourRunner
         Vector3 dirToPlayer = (player.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector3.Distance(this.transform.position, player.transform.position);
 
-        if (Vector3.Angle(transform.forward, dirToPlayer) > viewAngle / 2 || distanceToPlayer > viewRadius
+        if (Vector3.Angle(transform.forward, dirToPlayer) > viewAngle / 2 || distanceToPlayer > playerViewRadius
 			|| Physics.Raycast(transform.position + Vector3.up * 1.5f, dirToPlayer, distanceToPlayer, obstacleMask))
             return false;
 		Debug.Log("Player seen TRUE");
@@ -382,7 +382,20 @@ public class GomiPoliBehaviour : BehaviourRunner
                 return Status.Running;
             animator.SetBool("isBlocking", false);
             Debug.Log($"{name}: Bloqueando el camino...");
-            Instantiate(wallPrefab, closestBlockPoint.position, transform.rotation);
+
+            float checkRadius = 0.5f; // Ajustable
+
+            Collider[] colliders = Physics.OverlapSphere(closestBlockPoint.position, checkRadius);
+            foreach (var col in colliders)
+            {
+                if (col.CompareTag("Wall")) // Asegúrate de que tu prefab tenga tag "Wall"
+                {
+                    Debug.Log($"{name}: Ya había un muro en {closestBlockPoint.name}, no se instancia otro.");
+                    return Status.Success;
+                }
+            }
+
+            Instantiate(wallPrefab, closestBlockPoint.position, closestBlockPoint.rotation);
             Debug.Log($"{name}: Camino boqueado en {closestBlockPoint.name}");
         }
 		else

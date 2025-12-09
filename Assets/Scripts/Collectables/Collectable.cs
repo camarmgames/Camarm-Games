@@ -22,7 +22,7 @@ public abstract class Collectable : MonoBehaviour
         if (other != null)
         {
             collectable = GetComponent<Collectable>();
-            if (!PlayerInventory.instance.IsFull())
+            if (!PlayerInventory.instance.IsFull() && transform.childCount > 0)
             {
                 PlayerInventory.instance.Add(collectable);
                 Destroy(transform.GetChild(0).gameObject);

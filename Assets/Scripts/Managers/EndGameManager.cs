@@ -39,7 +39,7 @@ public class EndGameManager: MonoBehaviour
         backgroundLost.SetActive(true);
         titleText.text = "Derrota";
         btnRetry.SetActive(true);
-        btnMainMenu.SetActive(false);
+        btnMainMenu.SetActive(true);
 
         endScreen.SetActive(true);
     }
