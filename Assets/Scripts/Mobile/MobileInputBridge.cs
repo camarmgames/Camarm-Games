@@ -40,4 +40,30 @@ public class MobileInputBridge: MonoBehaviour
     {
         crouch = false;
     }
+
+    public void CrouchSelected()
+    {
+        if (crouch)
+        {
+            Debug.Log("Desactivado agachado");
+            crouch = false;
+        }
+        else
+        {
+            Debug.Log("Activado agachado");
+            crouch = true;
+        }
+    }
+
+    public void SprintSelected()
+    {
+        if (sprint)
+        {
+            sprint = false;
+        }
+        else
+        {
+            sprint = true;
+        }
+    }
 }

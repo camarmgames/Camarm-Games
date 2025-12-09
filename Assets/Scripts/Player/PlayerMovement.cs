@@ -68,18 +68,43 @@ public class PlayerMovement : MonoBehaviour
         {
             _input = MobileInputBridge.Instance.GetMove();
 
-            _sprint = MobileInputBridge.Instance.GetSprint();
-            if (!_sprint && !_crouch && !stunnedTrap)
+            if (!stunnedTrap)
             {
-                playerStateIcon.SetRun();
-                moveSpeed *= 1.5f;
+                bool sprintInput = MobileInputBridge.Instance.GetSprint();
+
+                // ACTIVAR sprint
+                if (sprintInput && !_crouch)
+                {
+                    _sprint = true;
+                    playerStateIcon.SetRun();
+                    moveSpeed = initialSpeed * 1.5f;
+                }
+                // DESACTIVAR sprint
+                else if (!sprintInput && _sprint)
+                {
+                    _sprint = false;
+                    moveSpeed = initialSpeed;
+                }
             }
-            _crouch = MobileInputBridge.Instance.GetCrouch();
-            if (!_crouch && !_sprint && !stunnedTrap)
+
+            // --- CROUCH ---
+            if (!stunnedTrap)
             {
-                playerStateIcon.SetCrouch();
-                moveSpeed = initialSpeed;
-                moveSpeed *= 0.5f;
+                bool crouchInput = MobileInputBridge.Instance.GetCrouch();
+
+                // ACTIVAR crouch
+                if (crouchInput && !_sprint)
+                {
+                    _crouch = true;
+                    playerStateIcon.SetCrouch();
+                    moveSpeed = initialSpeed * 0.5f;
+                }
+                // DESACTIVAR crouch
+                else if (!crouchInput && _crouch)
+                {
+                    _crouch = false;
+                    moveSpeed = initialSpeed;
+                }
             }
         }
 

@@ -9,12 +9,20 @@ public class PlayerFootprints : MonoBehaviour
     [SerializeField]
     private float stepDistance = 1.5f;
 
+    public AudioClip footClip;
+
     private Vector3 lastFootPos;
     private int nextFootprintID = 0;
+    public int fruitIndex;
 
     void Start()
     {
-        lastFootPos = transform.position;    
+        lastFootPos = transform.position;
+
+        if (CharacterSelection.Instance != null)
+        {
+            fruitIndex = CharacterSelection.Instance.selectedCharacterIndex;
+        }
     }
 
     void Update()
@@ -35,13 +43,21 @@ public class PlayerFootprints : MonoBehaviour
 
             if(surface != null && surface.surfaceType.leavesFootprints)
             {
-                // Crear huella
+                Vector3 forward = transform.forward;
+                forward.y = -90;
+                forward.Normalize();
+
+                // Rotación de la huella: mira hacia la orientación del jugador y mantiene "arriba"
+                Quaternion footRotation = Quaternion.LookRotation(forward, Vector3.up);
+
                 GameObject footprint = Instantiate(
                     surface.surfaceType.footprintPrefab,
                     hit.point + Vector3.up * 0.01f,
-                    Quaternion.LookRotation(transform.forward)
+                    footRotation
                 );
 
+                footprint.transform.GetChild(fruitIndex).gameObject.SetActive(true);
+                AudioManager.Instance.PlaySFXAtPosition(footClip, footprint.transform.position, 1f, 1f);
                 footprint.tag = "Footprint";
                 footprint.layer = LayerMask.NameToLayer("Footprints");
 
