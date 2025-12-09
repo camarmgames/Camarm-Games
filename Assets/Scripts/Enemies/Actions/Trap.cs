@@ -25,12 +25,17 @@ public class Trap: MonoBehaviour
     public Material stuckMaterial;
     public Material magoMaterial;
 
+    [Header("PowerUps Objects")]
+    public static bool pastillaNaranja;
+    public static bool pastillaVerde;
+    public static bool pastillaAmarilla;
+
     public Renderer rend;
 
-
     private float initialPlayerSpeed;
-    private GomiMagoAppearance gomiMagoAppearance;
     public TrapSpawner trapSpawner;
+
+    
 
     private void Start()
     {
@@ -48,8 +53,6 @@ public class Trap: MonoBehaviour
                 rend.material = magoMaterial;
                 break;
         }
-
-        gomiMagoAppearance = GetComponent<GomiMagoAppearance>();
         initialPlayerSpeed = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().initialSpeed;
 
         if (temporal)
@@ -90,40 +93,51 @@ public class Trap: MonoBehaviour
 
     IEnumerator SlowEffect(PlayerMovement player)
     {
-        float originalSpeed = player.moveSpeed;
-
-        if (initialPlayerSpeed == originalSpeed)
+        if (!pastillaVerde) 
         {
+            float originalSpeed = player.moveSpeed;
+
+            if (initialPlayerSpeed == originalSpeed)
+            {
+                player.trapEffect = true;
+                player.moveSpeed *= 0.4f;
+
+                yield return new WaitForSeconds(timingEffect);
+
+                player.moveSpeed = originalSpeed;
+                player.trapEffect = false;
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    IEnumerator StuckEffect(PlayerMovement player)
+    {
+        if (!pastillaNaranja)
+        {
+            float originalSpeed = player.moveSpeed;
             player.trapEffect = true;
-            player.moveSpeed *= 0.4f;
+            player.moveSpeed = 0f;
+            Debug.Log("Jugador atrapado");
 
             yield return new WaitForSeconds(timingEffect);
 
             player.moveSpeed = originalSpeed;
             player.trapEffect = false;
-            Destroy(gameObject);
+            Debug.Log("Jugador liberado");
+            
         }
-    }
 
-    IEnumerator StuckEffect(PlayerMovement player)
-    {
-        float originalSpeed = player.moveSpeed;
-        player.trapEffect = true;
-        player.moveSpeed = 0f;
-        Debug.Log("Jugador atrapado");
-
-        yield return new WaitForSeconds(timingEffect);
-
-        player.moveSpeed = originalSpeed;
-        player.trapEffect = false;
-        Debug.Log("Jugador liberado");
         Destroy(gameObject);
     }
 
     public void ActivarMago()
     {
+        if(pastillaAmarilla) return;
+
         Debug.Log("Activacion de Mago");
-        //gomiMagoAppearance.SpawnMago();
+        LevelWizardController.Instance.SpawnWizard();
         Destroy(gameObject);
     }
 }

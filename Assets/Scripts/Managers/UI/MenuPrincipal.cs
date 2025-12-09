@@ -13,7 +13,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public AudioClip musicMainmenu;
 
-    private void Awake()
+    private void Start()
     {
         AudioManager.Instance.PlayMusic(musicMainmenu);
     }

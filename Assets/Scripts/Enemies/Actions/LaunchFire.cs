@@ -57,6 +57,9 @@ public class LaunchFire: MonoBehaviour
         Trap trap = proyectilePrefab.GetComponent<Trap>();
         Trap.TrapType randomType = (Trap.TrapType)Random.Range(0, System.Enum.GetValues(typeof(Trap.TrapType)).Length);
 
+        if(randomType == Trap.TrapType.GomiMago)
+            enemyStress?.AddStress(30);
+
         trap.trapType = randomType;
 
         Vector3 firePoint = new Vector3(transform.position.x, firePosition.position.y, transform.position.z);

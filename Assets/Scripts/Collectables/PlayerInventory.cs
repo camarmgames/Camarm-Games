@@ -62,7 +62,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
             }
         }
-
+        images[i].color = new Color(1f, 1f, 1f, 1f);
         images[i].sprite = item.sprite;
         images[i].preserveAspect = true;
         images[i].enabled = true;
@@ -76,8 +76,27 @@ public class PlayerInventory : MonoBehaviour
             if (images[i].sprite.Equals(obj.inventory))
                 break;
         }
+        images[i].color.WithAlpha(0f);
         images[i].sprite = null;
         occupiedslots[i] = false;
+    }
+
+    public void RemoveAtSlot(int slotIndex, InventoryItem item)
+    {
+        Debug.Log("Eliminado");
+        if (objects.Contains(item))
+            objects.Remove(item);
+
+        
+        images[slotIndex].sprite = null;
+        images[slotIndex].color = new Color(1f, 1f, 1f, 0f); 
+        images[slotIndex].enabled = false;
+        occupiedslots[slotIndex] = false;
+
+        
+        ActiveItemBlink blink = images[slotIndex].GetComponent<ActiveItemBlink>();
+        if (blink != null)
+            Destroy(blink);
     }
 
     public bool IsFull()
@@ -85,17 +104,43 @@ public class PlayerInventory : MonoBehaviour
         return (objects.Count == INVENTORY_SIZE);
     }
 
-    public void Use(int index)
+    public void Use(int slotIndex)
     {
-        if (index < 0 || index >= objects.Count)
+        if (slotIndex < 0 || slotIndex >= INVENTORY_SIZE)
             return;
-        Debug.Log("Pressed " + index);
-        if (objects[index] != null)
+
+        if (!occupiedslots[slotIndex])
+            return;
+
+        
+        Sprite slotSprite = images[slotIndex].sprite;
+
+        
+        int objListIndex = objects.FindIndex(it => it.sprite == slotSprite);
+        if (objListIndex == -1)
         {
-            objects[index].Use();
-            objects.RemoveAt(index);
-            images[index].sprite = null;
-            occupiedslots[index] = false;
+            Debug.LogWarning("No se encontró el item en la lista de objects para el slot " + slotIndex);
+            return;
         }
+
+        InventoryItem item = objects[objListIndex];
+
+        
+        ActiveItemBlink blink = images[slotIndex].GetComponent<ActiveItemBlink>();
+        if (blink == null)
+            blink = images[slotIndex].gameObject.AddComponent<ActiveItemBlink>();
+
+        blink.Activate(item.collectable.duration);
+
+        
+        int localSlot = slotIndex;
+
+        
+        item.Use(() =>
+        {
+            
+            RemoveAtSlot(localSlot, item);
+        });
+
     }
 }

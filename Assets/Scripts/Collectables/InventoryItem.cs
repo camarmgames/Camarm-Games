@@ -5,15 +5,15 @@ using UnityEngine;
 public class InventoryItem
 {
     public Sprite sprite;
-    [NonSerialized] public System.Action execute;
-    public InventoryItem(Sprite sprite, System.Action execute)
+    [NonSerialized] public Collectable collectable;
+    public InventoryItem(Sprite sprite, Collectable collectable)
     {
         this.sprite = sprite;
-        this.execute = execute;
+        this.collectable = collectable;
     }
 
-    public void Use()
+    public void Use(Action onFinish = null)
     {
-        execute?.Invoke();
+        collectable.Execute(onFinish);
     }
 }
