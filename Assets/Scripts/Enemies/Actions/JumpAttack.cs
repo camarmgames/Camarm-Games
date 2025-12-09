@@ -86,7 +86,7 @@ public class JumpAttack: MonoBehaviour
         // Llamar parálisis al jugador
         PlayerMovement playerMovement = playerTarget.GetComponent<PlayerMovement>();
         float originalSpeed = playerMovement.moveSpeed;
-        playerMovement.trapEffect = true;
+        playerMovement.stunnedTrap = true;
         playerMovement.moveSpeed = 0f;
         if(debug)
             Debug.Log("Jugador atrapado");
@@ -94,7 +94,7 @@ public class JumpAttack: MonoBehaviour
         yield return new WaitForSeconds(paralysisDuration);
 
         playerMovement.moveSpeed = originalSpeed;
-        playerMovement.trapEffect = false;
+        playerMovement.stunnedTrap = false;
         if(debug)
             Debug.Log("Jugador liberado");
     }

@@ -80,6 +80,8 @@ public class LevelWizardController: MonoBehaviour
 
         AudioManager.Instance.PlaySFXAtPosition(effectAparicion, transform.position, 1f, 1f);
 
+        PlayerInventory.instance.transform.GetChild(6).GetComponent<ActiveItemBlink>().Activate(visibleTimer);
+
         Debug.Log("MAGO APARECE");
 
         AffectStressedEnemies();

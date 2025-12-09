@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632b2020d27c8634683762786ac6c53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpBatido: 0
 --- !u!1 &4482833996834400267
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +361,7 @@ Transform:
   - {fileID: 5353995782816998719}
   - {fileID: 6678355876096462290}
   - {fileID: 2372255624454871545}
+  - {fileID: 6899660400787050530}
   m_Father: {fileID: 7040825493564398633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7445431637094423537
@@ -589,6 +591,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9d888370-ab93-465f-b34a-e9ecc99b137a
     m_ActionName: 'Player/UseInventory[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f117785-ab10-4f5a-92b9-85e470d449f4
+    m_ActionName: 'UI/ClickCutscenes[/Mouse/leftButton,/Pen/tip]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -609,7 +615,7 @@ MonoBehaviour:
   moveSpeed: 6
   animator: {fileID: 0}
   initialSpeed: 0
-  trapEffect: 0
+  stunnedTrap: 0
   bewitched: 1
   rotationSmoothness: 6.5
   characterModels:
@@ -619,6 +625,7 @@ MonoBehaviour:
   - {fileID: 0}
   _sprint: 0
   _crouch: 0
+  playerStateIcon: {fileID: 877013203761165226}
 --- !u!114 &3140174220866235760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +673,111 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!1 &4673284864490652073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6899660400787050530}
+  - component: {fileID: 2997603236030868821}
+  - component: {fileID: 877013203761165226}
+  m_Layer: 6
+  m_Name: StateIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6899660400787050530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673284864490652073}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.572, z: 0}
+  m_LocalScale: {x: 0.317647, y: 0.317647, z: 0.317647}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 3564555858637783161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2997603236030868821
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673284864490652073}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ce5033d862e123c4191bf27f785437d2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4, y: 4}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &877013203761165226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4673284864490652073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f79f0b56de30d84fa9349df0cc8e4e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconRenderer: {fileID: 2997603236030868821}
+  crouch: {fileID: 21300000, guid: ce5033d862e123c4191bf27f785437d2, type: 3}
+  walk: {fileID: 21300000, guid: 62d26188ad2b6a940855aaa79c5d232c, type: 3}
+  run: {fileID: 21300000, guid: 0416bd41849454d4080109ec7584698c, type: 3}
+  stunned: {fileID: 21300000, guid: aebdf63589b9fba4c92a2e98305f9002, type: 3}
 --- !u!1 &5602138269473572204
 GameObject:
   m_ObjectHideFlags: 0

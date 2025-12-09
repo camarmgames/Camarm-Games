@@ -9,11 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 5f;                // Velocidad de movimiento
     public Animator animator;                   // Referencia al Animator
+    
 
     Vector3 _moveDirection;                     // Movimiento aplicado
     Vector2 _input;                             // Input recibido
     public float initialSpeed;
-    public bool trapEffect = false;
+    public bool stunnedTrap = false;
     public int bewitched = 1;                   // 1 o -1 dependiendo de si ha sido hechizado por el Mago.
     private bool useMobile = false;
 
@@ -24,9 +25,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject[] characterModels;
 
-
     public bool _sprint;
     public bool _crouch;
+
+    public PlayerStateIcon playerStateIcon;
+
     #endregion
 
     #region Monobehavior
@@ -66,17 +69,21 @@ public class PlayerMovement : MonoBehaviour
             _input = MobileInputBridge.Instance.GetMove();
 
             _sprint = MobileInputBridge.Instance.GetSprint();
-            if (!_sprint && !_crouch && trapEffect)
+            if (!_sprint && !_crouch && !stunnedTrap)
             {
+                playerStateIcon.SetRun();
                 moveSpeed *= 1.5f;
             }
             _crouch = MobileInputBridge.Instance.GetCrouch();
-            if (!_crouch && !_sprint && trapEffect)
+            if (!_crouch && !_sprint && !stunnedTrap)
             {
+                playerStateIcon.SetCrouch();
                 moveSpeed = initialSpeed;
                 moveSpeed *= 0.5f;
             }
         }
+
+        
         HandleAnimations();
     }
 
@@ -108,9 +115,27 @@ public class PlayerMovement : MonoBehaviour
 
             // Movimiento en el espacio mundial
             transform.Translate(_moveDirection * moveSpeed * Time.deltaTime, Space.World);
+
+            if (!_crouch && !_sprint && !stunnedTrap)
+            {
+                playerStateIcon.SetWalk();
+            }
+
         }
-        
-        if (!_sprint && !_crouch && !trapEffect && moveSpeed != initialSpeed)
+        else
+        {
+            if (!_crouch && !_sprint && !stunnedTrap)
+            {
+                playerStateIcon.SetCrouch();
+            }
+        }
+
+        if (stunnedTrap)
+        {
+            playerStateIcon.SetStunned();
+        }
+
+        if (!_sprint && !_crouch && !stunnedTrap && moveSpeed != initialSpeed)
         {
             moveSpeed = initialSpeed;
         }
@@ -152,8 +177,9 @@ public class PlayerMovement : MonoBehaviour
     
     public void OnSprint(InputAction.CallbackContext ctx)
     {
-        if (!_sprint && !_crouch && !trapEffect)
+        if (!_sprint && !_crouch && !stunnedTrap)
         {
+            playerStateIcon.SetRun();
             moveSpeed *= 1.5f;
         }
         _sprint = ctx.ReadValueAsButton();
@@ -161,30 +187,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
-        if (!_crouch && !_sprint && !trapEffect)
+        if (!_crouch && !_sprint && !stunnedTrap)
         {
+            playerStateIcon.SetCrouch();
             moveSpeed = initialSpeed;
             moveSpeed *= 0.5f;
         }  
         _crouch = ctx.ReadValueAsButton();
     }
-    #endregion
-
-    #region CollideFunction
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log("Trigger con: " + other.name);
-
-    //    Collectable collectable;
-    //    if (other != null)
-    //    {
-    //        collectable = other.GetComponent<Collectable>();
-    //        if (collectable != null && !PlayerInventory.instance.IsFull())
-    //        {
-    //            PlayerInventory.instance.Add(collectable);
-    //            Destroy(other.transform.GetChild(0).gameObject);
-    //        }
-    //    }
-    //}
     #endregion
 }

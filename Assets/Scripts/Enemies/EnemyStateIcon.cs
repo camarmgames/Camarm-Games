@@ -8,6 +8,7 @@ public class EnemyStateIcon: MonoBehaviour
     public Sprite detected;
     public Sprite alert;
     public Sprite takeABreak;
+    public Sprite investigation;
 
     private void LateUpdate()
     {
@@ -19,4 +20,6 @@ public class EnemyStateIcon: MonoBehaviour
     public void SetAlert() => iconRenderer.sprite = alert;
 
     public void SetTakeABreak() => iconRenderer.sprite = takeABreak;
+
+    public void SetInvestigation() => iconRenderer.sprite = investigation;
 }

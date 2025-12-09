@@ -52,7 +52,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 	//--About Attack Action:
     [SerializeField] private PlayerInput playerInput;
 
-
+	public EnemyStateIcon EnemyStateIcon;
 
 
     #region -----------------BEHAVIOUR GRAPH-----------------
@@ -248,6 +248,7 @@ public class GomiPoliBehaviour : BehaviourRunner
     #region -----------------PATROL ACTIONS-----------------
     public void PatrolStart()
 	{
+		EnemyStateIcon.SetCalm();
         animator?.SetBool("isWalking", true);
         navMeshAgent.SetDestination(patrolPoints[index]);
 	}
@@ -275,6 +276,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 	private Vector3 lastPos;
 	public void TrackerFootprintStart()
 	{
+		EnemyStateIcon.SetInvestigation();
         animator.SetBool("isWalking", true);
         navMeshAgent.SetDestination(footprintNavMeshPoint);
 		lastPos = transform.position;
@@ -316,6 +318,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 
     public void InspectAreaStart()
 	{
+		EnemyStateIcon.SetInvestigation();
         inspectingTime = 5f;
         timer = 0f;
         angle = transform.eulerAngles.y;
@@ -414,6 +417,7 @@ public class GomiPoliBehaviour : BehaviourRunner
     #region -----------------ATTACK ACTIONS-----------------
     private void AttackStart()
     {
+		EnemyStateIcon.SetDetected();
     }
     private Status AttackUpdate()
 	{

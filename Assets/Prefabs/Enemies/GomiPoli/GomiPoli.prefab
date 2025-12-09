@@ -1024,8 +1024,9 @@ MonoBehaviour:
   executeOnLoop: 0
   interruptOptions: 0
   patrolPointsHolder: {fileID: 5272576479950289572}
-  animator: {fileID: 0}
+  animator: {fileID: 4524939259145322678}
   viewRadius: 5
+  playerViewRadius: 2
   footprintMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1038,6 +1039,7 @@ MonoBehaviour:
   pointsBlock: []
   wallPrefab: {fileID: 0}
   playerInput: {fileID: 0}
+  EnemyStateIcon: {fileID: 7890198112987223912}
 --- !u!1 &8960887959887156128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,3 +1222,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7166641312054506315, guid: fd2c53010b0674440bef82b53c58aaa7, type: 3}
   m_PrefabInstance: {fileID: 6365960938572452189}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &4524939259145322678 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7391462480990179819, guid: fd2c53010b0674440bef82b53c58aaa7, type: 3}
+  m_PrefabInstance: {fileID: 6365960938572452189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7890198112987223912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3830297051880490549, guid: fd2c53010b0674440bef82b53c58aaa7, type: 3}
+  m_PrefabInstance: {fileID: 6365960938572452189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271be3e55dba55042a6c0c2d92253c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

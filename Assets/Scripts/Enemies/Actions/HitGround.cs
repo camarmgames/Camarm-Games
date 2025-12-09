@@ -60,6 +60,7 @@ public class HitGround:MonoBehaviour
 
         // 2. Temblor
         CameraShake.Instance.ShakeCamera(shakeProfile, shakeIntensity, shakeDuration);
+        
 
         // 3. Ondas expansivas
         StartCoroutine(Shockwave());
@@ -118,6 +119,9 @@ public class HitGround:MonoBehaviour
 
     private IEnumerator Shockwave()
     {
+        PlayerMovement playerMovement = FindAnyObjectByType<PlayerMovement>();
+        playerMovement.stunnedTrap = true;
+
         float currentDistance = 0f;
         pushedBodies.Clear();
 
@@ -154,6 +158,8 @@ public class HitGround:MonoBehaviour
 
             yield return null;
         }
+
+        playerMovement.stunnedTrap = false;
     }
 
     private IEnumerator hitGroundCooldownRoutine()
