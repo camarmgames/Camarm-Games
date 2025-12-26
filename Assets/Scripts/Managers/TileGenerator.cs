@@ -25,30 +25,30 @@ public class TileGenerator: MonoBehaviour
     private void Awake()
     {
         
-        AudioManager.Instance.PlayMusic(music);
+        AudioManager.Instance?.PlayMusic(music);
         GenerateTiles();    
     }
 
     private void Start()
     {
-        PlayerInventory.instance.Clean();
+        PlayerInventory.instance?.Clean();
     }
     private void Update()
     {
-        Vector3 camPos = playerCamera.position;
-        Vector3 camForward = playerCamera.forward;
+        //Vector3 camPos = playerCamera.position;
+        //Vector3 camForward = playerCamera.forward;
 
-        tileRenderers.RemoveAll(r => r == null);
+        //tileRenderers.RemoveAll(r => r == null);
 
-        foreach (Renderer r in tileRenderers)
-        {
-            Vector3 dir = (r.transform.position - camPos).normalized;
+        //foreach (Renderer r in tileRenderers)
+        //{
+        //    Vector3 dir = (r.transform.position - camPos).normalized;
 
-            bool inDistance = Vector3.Distance(r.transform.position, camPos) < activationDistance;
-            bool inFov = Vector3.Dot(camForward, dir) > 0.4f; // 0.4 ~ 66°
+        //    bool inDistance = Vector3.Distance(r.transform.position, camPos) < activationDistance;
+        //    bool inFov = Vector3.Dot(camForward, dir) > 0.4f; // 0.4 ~ 66°
 
-            r.enabled = inDistance && inFov;
-        }
+        //    r.enabled = inDistance && inFov;
+        //}
     }
 
 

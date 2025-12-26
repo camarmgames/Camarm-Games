@@ -14,7 +14,7 @@ public class PoliController : MonoBehaviour
     void Awake()
     {
         stressLevel = 0;
-        GameObject.FindFirstObjectByType<MageController>().OnMageAppeared += MustEvolve;
+        //GameObject.FindFirstObjectByType<MageController>().OnMageAppeared += MustEvolve;
     }
 
     private void AddStress(int sum)

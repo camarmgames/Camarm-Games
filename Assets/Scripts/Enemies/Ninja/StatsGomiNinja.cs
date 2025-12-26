@@ -3,9 +3,9 @@ using UnityEngine;
 public class StatsGomiNinja: MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] public float stamina = 100f;
-    [SerializeField] private float timePatrol = 0f;
-    [SerializeField] public float takeABreak = 1f;
+    [SerializeField] public float estamina = 100f;
+    [SerializeField] private float tiempoPatrullando = 0f;
+    [SerializeField] public float agotamiento = 1f;
 
     [Header("Settings")]
     [SerializeField] public float changeSpeed = 10f;
@@ -18,21 +18,21 @@ public class StatsGomiNinja: MonoBehaviour
 
     private void Start()
     {
-        targetStamina = stamina;
-        targetTimePatrol = timePatrol;
+        targetStamina = estamina;
+        targetTimePatrol = tiempoPatrullando;
     }
 
 
     private void Update()
     {
-        if(Mathf.Abs(stamina - targetStamina) > 0.01f)
+        if(Mathf.Abs(estamina - targetStamina) > 0.01f)
         {
-            stamina = Mathf.Clamp(Mathf.MoveTowards(stamina, targetStamina, changeSpeed * Time.deltaTime), 0f, 100f);
+            estamina = Mathf.Clamp(Mathf.MoveTowards(estamina, targetStamina, changeSpeed * Time.deltaTime), 0f, 100f);
         }
 
-        if(Mathf.Abs(timePatrol - targetTimePatrol) > 0.01f)
+        if(Mathf.Abs(tiempoPatrullando - targetTimePatrol) > 0.01f)
         {
-            timePatrol = Mathf.Clamp(Mathf.MoveTowards(timePatrol, targetTimePatrol, changeSpeed * Time.deltaTime), 0, 100f);
+            tiempoPatrullando = Mathf.Clamp(Mathf.MoveTowards(tiempoPatrullando, targetTimePatrol, changeSpeed * Time.deltaTime), 0, 100f);
         }
     }
 
@@ -44,18 +44,18 @@ public class StatsGomiNinja: MonoBehaviour
         if (debug)
         {
             Debug.Log($"Stamina: {targetStamina}");
-            Debug.Log($"TimePatrol: {timePatrol}");
+            Debug.Log($"TimePatrol: {tiempoPatrullando}");
         }
 
     }
 
     public void ResetTimePatrol()
     {
-        timePatrol = 0f;
+        tiempoPatrullando = 0f;
     }
 
-    public float GetStamina() => stamina;
-    public float GetTimePatrol() => timePatrol;
+    public float GetStamina() => estamina;
+    public float GetTimePatrol() => tiempoPatrullando;
 
-    public float GetTakeABreak() => takeABreak;
+    public float GetTakeABreak() => agotamiento;
 }

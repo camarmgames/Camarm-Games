@@ -42,8 +42,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _GlowStrength: 10
-    - _PulseSpeed: 2
+    - _GlowStrength: 8
+    - _PulseSpeed: 5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

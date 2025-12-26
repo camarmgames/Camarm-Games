@@ -18,7 +18,7 @@ public class cp_GomiNinja : BehaviourRunner
 {
     LevelWizardController m_levelWizardController;
 	FollowPlayer m_FollowPlayer;
-    PathingNinja m_PathingNinja;
+    Patrol m_Patrol;
     Investigation m_Investigation;
     TrapSpawner m_TrapSpawner;
     LaunchFire m_LaunchFire;
@@ -30,8 +30,8 @@ public class cp_GomiNinja : BehaviourRunner
     Break m_Break;
     StatsGomiNinja m_StatsGomiNinja;
 
-	private PushPerception BTSe_ActivationPush;
-	private PushPerception BTSt_ActivationPush;
+	private PushPerception EstadoNormalToBuffeadoPorMago_Push;
+	private PushPerception BuffeadoPorMagoToEstadoNormal_Push;
 
     protected override void Init()
 	{
@@ -39,7 +39,7 @@ public class cp_GomiNinja : BehaviourRunner
 
         m_DepartureLocation = GetComponent<DepartureLocation>();
 		m_FollowPlayer = GetComponent<FollowPlayer>();
-        m_PathingNinja = GetComponent<PathingNinja>();
+        m_Patrol = GetComponent<Patrol>();
         m_Investigation = GetComponent<Investigation>();
         m_TrapSpawner = GetComponent<TrapSpawner>();
         m_LaunchFire = GetComponent<LaunchFire>();
@@ -56,8 +56,8 @@ public class cp_GomiNinja : BehaviourRunner
 	protected override BehaviourGraph CreateGraph()
 	{
 		
-		BehaviourTree BTSecondary_1 = new BehaviourTree();
-		BehaviourTree BTStandar_1 = new BehaviourTree();
+		BehaviourTree BuffeadoPorMagoBT = new BehaviourTree();
+		BehaviourTree EstadoNormalBT = new BehaviourTree();
         UtilitySystem usAcciones = new UtilitySystem();
 
         // Perceptions
@@ -71,23 +71,24 @@ public class cp_GomiNinja : BehaviourRunner
 
 
         // MainFSM
+
         FSM MainFSM = new FSM();
-        SubsystemAction BTStandar_action = new SubsystemAction(BTStandar_1);
-		State BTStandar = MainFSM.CreateState(BTStandar_action);
+        SubsystemAction EstadoNormalBT_action = new SubsystemAction(EstadoNormalBT);
+		State EstadoNormal = MainFSM.CreateState(EstadoNormalBT_action);
 		
-		SubsystemAction BTSecondary_action = new SubsystemAction(BTSecondary_1);
-		State BTSecondary = MainFSM.CreateState(BTSecondary_action);
+		SubsystemAction BuffeadoPorMago_action = new SubsystemAction(BuffeadoPorMagoBT);
+		State EstadoBuffeadoPorMago = MainFSM.CreateState(BuffeadoPorMago_action);
 
         List<BehaviourAPI.Core.Actions.Action> subActions = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_LaunchFire.pruebaFinish, null)
         };
 
-        ParallelAction sBuffEnemy = new ParallelAction(true, false, subActions);
+        ParallelAction sBuffEnemyPA = new ParallelAction(true, false, subActions);
 
-        StateTransition AppearGomiMago = MainFSM.CreateTransition(BTStandar, BTSecondary, null, sBuffEnemy, StatusFlags.None);
+        StateTransition SpellMagoTransition = MainFSM.CreateTransition(EstadoNormal, EstadoBuffeadoPorMago, null, sBuffEnemyPA, StatusFlags.None);
 
         List<BehaviourAPI.Core.Actions.Action> subActions2 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
@@ -95,14 +96,14 @@ public class cp_GomiNinja : BehaviourRunner
             new FunctionalAction(m_LaunchFire.pruebaFinish, null)
         };
 
-        ParallelAction sRestoreEnemyToNormal = new ParallelAction(true, false, subActions2);
+        ParallelAction sRestoreEnemyToNormalPA = new ParallelAction(true, false, subActions2);
 
-        StateTransition DisappearGomiMago = MainFSM.CreateTransition(BTSecondary, BTStandar, null, sRestoreEnemyToNormal, StatusFlags.None);
+        StateTransition DisappearMagoTransition = MainFSM.CreateTransition(EstadoBuffeadoPorMago, EstadoNormal, null, sRestoreEnemyToNormalPA, StatusFlags.None);
 
-        BTSe_ActivationPush = new PushPerception(AppearGomiMago);
-        BTSt_ActivationPush = new PushPerception(DisappearGomiMago);
+        EstadoNormalToBuffeadoPorMago_Push = new PushPerception(SpellMagoTransition);
+        BuffeadoPorMagoToEstadoNormal_Push = new PushPerception(DisappearMagoTransition);
 
-        // BTSecondary
+        // BuffeadoPorMago BT
 
         List<BehaviourAPI.Core.Actions.Action> subActions3 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
@@ -110,188 +111,188 @@ public class cp_GomiNinja : BehaviourRunner
             new FunctionalAction(m_Attack.AttackP, null)
         };
 
-        SequenceAction sAttack = new SequenceAction(Status.Running, subActions3);
+        SequenceAction sAttackSA = new SequenceAction(Status.Running, subActions3);
 
-        LeafNode Attack = BTSecondary_1.CreateLeafNode(sAttack);
+        LeafNode AtraparAlJugador = BuffeadoPorMagoBT.CreateLeafNode(sAttackSA);
 		
-		ConditionNode Near = BTSecondary_1.CreateDecorator<ConditionNode>(Attack);
-		Near.SetPerception(isPlayerWithinDistancePerception);
+		ConditionNode SuficienteCercaDelJugador = BuffeadoPorMagoBT.CreateDecorator<ConditionNode>(AtraparAlJugador);
+		SuficienteCercaDelJugador.SetPerception(isPlayerWithinDistancePerception);
 		
 		
 		FunctionalAction Perseguir_action = new FunctionalAction();
 		Perseguir_action.onUpdated = m_FollowPlayer.StartFollow;
-		LeafNode Perseguir = BTSecondary_1.CreateLeafNode(Perseguir_action);
+		LeafNode PerseguirAlJugador = BuffeadoPorMagoBT.CreateLeafNode(Perseguir_action);
 		
-		SelectorNode BTSe_Selector_1 = BTSecondary_1.CreateComposite<SelectorNode>(false, Near, Perseguir);
-		BTSe_Selector_1.IsRandomized = false;
+		SelectorNode BPM_Selector_1 = BuffeadoPorMagoBT.CreateComposite<SelectorNode>(false, SuficienteCercaDelJugador, PerseguirAlJugador);
+		BPM_Selector_1.IsRandomized = false;
 		
-		LoopNode Main_Loop = BTSecondary_1.CreateDecorator<LoopNode>(BTSe_Selector_1);
+		LoopNode Main_Loop = BuffeadoPorMagoBT.CreateDecorator<LoopNode>(BPM_Selector_1);
 		Main_Loop.Iterations = -1;
-		BTSecondary_1.SetRootNode(Main_Loop);
+		BuffeadoPorMagoBT.SetRootNode(Main_Loop);
 
-        // BTStandar
+        // EstadoNormal BT
+
         List<BehaviourAPI.Core.Actions.Action> subActions4 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_LaunchFire.AttackStarted, m_LaunchFire.AttackUpdate, null)
         };
 
-        SequenceAction sLaunch = new SequenceAction(Status.Running, subActions4);
-        LeafNode Launch_candy = BTStandar_1.CreateLeafNode(sLaunch);
+        SequenceAction sLaunchSA = new SequenceAction(Status.Running, subActions4);
+        LeafNode LanzamientoProyectil = EstadoNormalBT.CreateLeafNode(sLaunchSA);
 		
-		ConditionNode Detect_Player = BTStandar_1.CreateDecorator<ConditionNode>(Launch_candy);
-		Detect_Player.SetPerception(isPlayerDetectedPerception);
+		ConditionNode JugadorDetectado = EstadoNormalBT.CreateDecorator<ConditionNode>(LanzamientoProyectil);
+		JugadorDetectado.SetPerception(isPlayerDetectedPerception);
 
 
         List<BehaviourAPI.Core.Actions.Action> subActions5 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.InvestigateArea, null)
         };
 
-        SequenceAction sInvestigate = new SequenceAction(Status.Running, subActions5);
+        SequenceAction sInvestigateSA = new SequenceAction(Status.Running, subActions5);
 
-        LeafNode Investigate = BTStandar_1.CreateLeafNode(sInvestigate);
+        LeafNode Investigar = EstadoNormalBT.CreateLeafNode(sInvestigateSA);
 		
-		SelectorNode BTSt_Selector_3 = BTStandar_1.CreateComposite<SelectorNode>(false, Detect_Player, Investigate);
-		BTSt_Selector_3.IsRandomized = false;
+		SelectorNode EN_Selector_3 = EstadoNormalBT.CreateComposite<SelectorNode>(false, JugadorDetectado, Investigar);
+		EN_Selector_3.IsRandomized = false;
 		
-		ConditionNode LightNoise = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_3);
-		LightNoise.SetPerception(lightNoisePerception);
+		ConditionNode VeAlgoORuidoFlojo = EstadoNormalBT.CreateDecorator<ConditionNode>(EN_Selector_3);
+		VeAlgoORuidoFlojo.SetPerception(lightNoisePerception);
 
 
 		List<BehaviourAPI.Core.Actions.Action> subActions6 = new List<BehaviourAPI.Core.Actions.Action>(3)
 		{
-			new FunctionalAction(m_PathingNinja.StopPatrol),
+			new FunctionalAction(m_Patrol.StopPatrol),
 			new FunctionalAction(m_Investigation.StopInvestigation),
 			new FunctionalAction(m_TeleportBehindPlayer.TeleportEnemyBehindPlayer, null)
 		};
 
-        SequenceAction sTeleport = new SequenceAction(Status.Running, subActions6);
+        SequenceAction sTeleportSA = new SequenceAction(Status.Running, subActions6);
 
-        LeafNode Teleport = BTStandar_1.CreateLeafNode(sTeleport);
+        LeafNode TeletransportarseAlJugador = EstadoNormalBT.CreateLeafNode(sTeleportSA);
 		
-		ConditionNode HighNoise = BTStandar_1.CreateDecorator<ConditionNode>(Teleport);
-		HighNoise.SetPerception(highNoisePerception);	
+		ConditionNode RuidoFuerte = EstadoNormalBT.CreateDecorator<ConditionNode>(TeletransportarseAlJugador);
+		RuidoFuerte.SetPerception(highNoisePerception);	
 
 		
-		SelectorNode BTSt_Selector_2 = BTStandar_1.CreateComposite<SelectorNode>(false, LightNoise, HighNoise);
-		BTSt_Selector_2.IsRandomized = false;
+		SelectorNode EN_Selector_2 = EstadoNormalBT.CreateComposite<SelectorNode>(false, VeAlgoORuidoFlojo, RuidoFuerte);
+		EN_Selector_2.IsRandomized = false;
 
         List<BehaviourAPI.Core.Actions.Action> subActions7 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_DepartureLocation.DepartureLocationStarted, m_DepartureLocation.DepartureLocationUpdate, null)
         };
 
-        SequenceAction sDisappear = new SequenceAction(Status.Running, subActions7);
+        SequenceAction sDisappearSA = new SequenceAction(Status.Running, subActions7);
 
-        LeafNode Disappear = BTStandar_1.CreateLeafNode(sDisappear);
+        LeafNode DesaparecerDelEscenario = EstadoNormalBT.CreateLeafNode(sDisappearSA);
 		
-		ConditionNode CheckActualDisappear = BTStandar_1.CreateDecorator<ConditionNode>(Disappear);
-		CheckActualDisappear.SetPerception(checkActualDisappearPerception);
+		ConditionNode AcabaDeDesaparecer = EstadoNormalBT.CreateDecorator<ConditionNode>(DesaparecerDelEscenario);
+		AcabaDeDesaparecer.SetPerception(checkActualDisappearPerception);
 
 
         List<BehaviourAPI.Core.Actions.Action> subActions8 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_DepartureLocation.DepartureLocationStarted, m_DepartureLocation.DepartureLocationUpdate, null)
         };
 
-        SequenceAction sDeparture = new SequenceAction(Status.Running, subActions8);
+        SequenceAction sDepartureSA = new SequenceAction(Status.Running, subActions8);
 
-        LeafNode Departure_Location = BTStandar_1.CreateLeafNode(sDeparture);
+        LeafNode AparicionEnElEscenario = EstadoNormalBT.CreateLeafNode(sDepartureSA);
 		
-		SelectorNode BTSt_Selector_5 = BTStandar_1.CreateComposite<SelectorNode>(false, CheckActualDisappear, Departure_Location);
-		BTSt_Selector_5.IsRandomized = false;
+		SelectorNode EN_Selector_5 = EstadoNormalBT.CreateComposite<SelectorNode>(false, AcabaDeDesaparecer, AparicionEnElEscenario);
+		EN_Selector_5.IsRandomized = false;
 		
-		ConditionNode Time_Finish = BTStandar_1.CreateDecorator<ConditionNode>(BTSt_Selector_5);
-		Time_Finish.SetPerception(finishTimerPerception);
+		ConditionNode PasoMuchoTiempoEnUnaZona = EstadoNormalBT.CreateDecorator<ConditionNode>(EN_Selector_5);
+		PasoMuchoTiempoEnUnaZona.SetPerception(finishTimerPerception);
 
         SubsystemAction US_Acciones = new SubsystemAction(usAcciones);
-        LeafNode US_Action = BTStandar_1.CreateLeafNode(US_Acciones);
+        LeafNode AccionesRutinarias = EstadoNormalBT.CreateLeafNode(US_Acciones);
 
 		
-		SelectorNode BTSt_Selector_4 = BTStandar_1.CreateComposite<SelectorNode>(false, Time_Finish, US_Action);
-		BTSt_Selector_4.IsRandomized = false;
+		SelectorNode EN_Selector_4 = EstadoNormalBT.CreateComposite<SelectorNode>(false, PasoMuchoTiempoEnUnaZona, AccionesRutinarias);
+		EN_Selector_4.IsRandomized = false;
 		
-		SelectorNode BTSt_Selector_1 = BTStandar_1.CreateComposite<SelectorNode>(false, BTSt_Selector_2, BTSt_Selector_4);
-		BTSt_Selector_1.IsRandomized = false;
+		SelectorNode EN_Selector_1 = EstadoNormalBT.CreateComposite<SelectorNode>(false, EN_Selector_2, EN_Selector_4);
+		EN_Selector_1.IsRandomized = false;
 
-        LoopNode Main_Loop_1 = BTStandar_1.CreateDecorator<LoopNode>(BTSt_Selector_1);
+        LoopNode Main_Loop_1 = EstadoNormalBT.CreateDecorator<LoopNode>(EN_Selector_1);
 		Main_Loop_1.Iterations = -1;
-		BTStandar_1.SetRootNode(Main_Loop_1);
+		EstadoNormalBT.SetRootNode(Main_Loop_1);
 		
-        // US Acciones
-        
+        // Acciones Rutinarias US
 
         VariableFactor staminaFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetStamina, 0f, 100f);
 
-        VariableFactor timePatrolFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTimePatrol, 0f, 100f);
+        VariableFactor tiempoPatrullandoFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTimePatrol, 0f, 100f);
 
-        VariableFactor takeABreakFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTakeABreak, 0f, 1f);
+        VariableFactor agotamientoFactor = usAcciones.CreateVariable(m_StatsGomiNinja.GetTakeABreak, 0f, 1f);
 
-        WeightedFusionFactor weightedFusionPatrol = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, takeABreakFactor);
-        weightedFusionPatrol.Weights = new float[] { 0.4f, 0.6f };
+        WeightedFusionFactor GanasDePatrullarWeightedFusion = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, agotamientoFactor);
+        GanasDePatrullarWeightedFusion.Weights = new float[] { 0.4f, 0.6f };
 
-        SigmoidCurveFactor PatrolCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(weightedFusionPatrol);
-        PatrolCurve.GrownRate = 8f;
-        PatrolCurve.Midpoint = 0.6f;
+        SigmoidCurveFactor CurvaPatrulla = usAcciones.CreateCurve<SigmoidCurveFactor>(GanasDePatrullarWeightedFusion);
+        CurvaPatrulla.GrownRate = 8f;
+        CurvaPatrulla.Midpoint = 0.6f;
 
-        SigmoidCurveFactor BreakCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
-        BreakCurve.GrownRate = -10f;
-        BreakCurve.Midpoint = 0.6f;
+        SigmoidCurveFactor CurvaDeDescanso = usAcciones.CreateCurve<SigmoidCurveFactor>(staminaFactor);
+        CurvaDeDescanso.GrownRate = -10f;
+        CurvaDeDescanso.Midpoint = 0.6f;
 
-        WeightedFusionFactor weightedFusionTrap = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, timePatrolFactor);
-        weightedFusionTrap.Weights = new float[] { 0.5f, 0.5f };
+        WeightedFusionFactor GanasDePonerUnaTrampaWeightedFusion = usAcciones.CreateFusion<WeightedFusionFactor>(staminaFactor, tiempoPatrullandoFactor);
+        GanasDePonerUnaTrampaWeightedFusion.Weights = new float[] { 0.5f, 0.5f };
 
-        SigmoidCurveFactor TrapCurve = usAcciones.CreateCurve<SigmoidCurveFactor>(weightedFusionTrap);
-        TrapCurve.GrownRate = 20;
-        TrapCurve.Midpoint = 0.6f;
+        SigmoidCurveFactor CurvaDeTrampa = usAcciones.CreateCurve<SigmoidCurveFactor>(GanasDePonerUnaTrampaWeightedFusion);
+        CurvaDeTrampa.GrownRate = 20;
+        CurvaDeTrampa.Midpoint = 0.6f;
 
         List<BehaviourAPI.Core.Actions.Action> subActions10 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_Investigation.StopInvestigation),
-            new FunctionalAction(m_PathingNinja.StartPatrol, null)
+            new FunctionalAction(m_Patrol.StartPatrol, null)
         };
 
-        SequenceAction sPatrol = new SequenceAction(Status.Running, subActions10);
-        UtilityAction PatrolUtilityAction = usAcciones.CreateAction(PatrolCurve, sPatrol, true);
+        SequenceAction sPatrolSA = new SequenceAction(Status.Running, subActions10);
+        UtilityAction Patrullar = usAcciones.CreateAction(CurvaPatrulla, sPatrolSA, true);
 
 
         List<BehaviourAPI.Core.Actions.Action> subActions11 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_Break.TakeABreakStarted, m_Break.TakeABreakUpdate, null)
         };
 
-        SequenceAction sBreak = new SequenceAction(Status.Running, subActions11);
-        UtilityAction BreakUtilityAction = usAcciones.CreateAction(BreakCurve, sBreak, true);
+        SequenceAction sBreakSA = new SequenceAction(Status.Running, subActions11);
+        UtilityAction TomarUnDescanso = usAcciones.CreateAction(CurvaDeDescanso, sBreakSA, true);
 
         List<BehaviourAPI.Core.Actions.Action> subActions9 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
-            new FunctionalAction(m_PathingNinja.StopPatrol),
+            new FunctionalAction(m_Patrol.StopPatrol),
             new FunctionalAction(m_Investigation.StopInvestigation),
             new FunctionalAction(m_TrapSpawner.TrapSpawnerStarted, m_TrapSpawner.TrapSpawnerUpdate, null)
         };
 
-        SequenceAction sTrap = new SequenceAction(Status.Running, subActions9);
-        UtilityAction TrapUtilityAction = usAcciones.CreateAction(TrapCurve, sTrap, true);
+        SequenceAction sTrapSA = new SequenceAction(Status.Running, subActions9);
+        UtilityAction ColocarTrampa = usAcciones.CreateAction(CurvaDeTrampa, sTrapSA, true);
 
         return MainFSM;
 	}
 
 	public void SetBTSeActivationPush()
 	{
-		BTSe_ActivationPush.Fire();
+		EstadoNormalToBuffeadoPorMago_Push.Fire();
 	}
 
 	public void SetBTStActivationPush()
 	{
-		BTSt_ActivationPush.Fire();
+		BuffeadoPorMagoToEstadoNormal_Push.Fire();
 	}
 }

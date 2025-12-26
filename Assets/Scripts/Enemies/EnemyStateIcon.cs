@@ -10,14 +10,30 @@ public class EnemyStateIcon: MonoBehaviour
     public Sprite takeABreak;
     public Sprite investigation;
 
+    public Material materialVisionField;
+
     private void LateUpdate()
     {
         iconRenderer.transform.forward = Camera.main.transform.forward;
     }
 
-    public void SetCalm() => iconRenderer.sprite = calm;
-    public void SetDetected() => iconRenderer.sprite = detected;
-    public void SetAlert() => iconRenderer.sprite = alert;
+    public void SetCalm()
+    {
+        materialVisionField?.SetColor("_VisionColor", Color.yellow);
+        iconRenderer.sprite = calm;
+    }
+
+    public void SetDetected()
+    {
+        materialVisionField?.SetColor("_VisionColor", Color.red);
+        iconRenderer.sprite = detected;
+    }
+
+    public void SetAlert()
+    {
+        materialVisionField?.SetColor("_VisionColor", Color.magenta);
+        iconRenderer.sprite = alert;
+    }
 
     public void SetTakeABreak() => iconRenderer.sprite = takeABreak;
 
