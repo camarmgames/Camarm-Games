@@ -16,7 +16,6 @@ using System.Numerics;
 
 public class cp_GomiNinja : BehaviourRunner
 {
-    LevelWizardController m_levelWizardController;
 	FollowPlayer m_FollowPlayer;
     Patrol m_Patrol;
     Investigation m_Investigation;
@@ -30,13 +29,14 @@ public class cp_GomiNinja : BehaviourRunner
     Break m_Break;
     StatsGomiNinja m_StatsGomiNinja;
 
+    // SmartObjects
+    SmartObjectSensor m_SmartObjectSensor;
+
 	private PushPerception EstadoNormalToBuffeadoPorMago_Push;
 	private PushPerception BuffeadoPorMagoToEstadoNormal_Push;
 
     protected override void Init()
 	{
-        m_levelWizardController = FindAnyObjectByType<LevelWizardController>();
-
         m_DepartureLocation = GetComponent<DepartureLocation>();
 		m_FollowPlayer = GetComponent<FollowPlayer>();
         m_Patrol = GetComponent<Patrol>();
@@ -49,6 +49,8 @@ public class cp_GomiNinja : BehaviourRunner
 		m_Attack = GetComponent<Attack>();
         m_Break = GetComponent<Break>();
         m_StatsGomiNinja = GetComponent<StatsGomiNinja>();
+
+        m_SmartObjectSensor = GetComponent<SmartObjectSensor>();
 
         base.Init();
 	}
@@ -253,6 +255,29 @@ public class cp_GomiNinja : BehaviourRunner
         CurvaDeTrampa.GrownRate = 20;
         CurvaDeTrampa.Midpoint = 0.6f;
 
+
+        // SmartObjects
+
+        // Factor: solo existe si hay smart objects visibles
+        VariableFactor smartObjectFactor = usAcciones.CreateVariable(m_SmartObjectSensor.SmartObjectSignal, 0f, 1f);
+
+        // Fusión
+        WeightedFusionFactor oportunidadFusion =
+            usAcciones.CreateFusion<WeightedFusionFactor>(
+                smartObjectFactor,
+                staminaFactor
+            );
+
+        oportunidadFusion.Weights = new float[] { 0.8f, 0.2f };
+
+        // Acción
+        UtilityAction OportunidadSmartObject =
+            usAcciones.CreateAction(
+                oportunidadFusion,
+                CreateSmartObjectAction("Oso")
+            );
+
+
         List<BehaviourAPI.Core.Actions.Action> subActions10 = new List<BehaviourAPI.Core.Actions.Action>(3)
         {
             new FunctionalAction(m_Investigation.StopInvestigation),
@@ -281,7 +306,9 @@ public class cp_GomiNinja : BehaviourRunner
         };
 
         SequenceAction sTrapSA = new SequenceAction(Status.Running, subActions9);
+
         UtilityAction ColocarTrampa = usAcciones.CreateAction(CurvaDeTrampa, sTrapSA, true);
+
 
         return MainFSM;
 	}
@@ -295,4 +322,33 @@ public class cp_GomiNinja : BehaviourRunner
 	{
 		BuffeadoPorMagoToEstadoNormal_Push.Fire();
 	}
+
+    private float CalculateUtilityForSmartObject(SmartObject so)
+    {
+        float distance = UnityEngine.Vector3.Distance(transform.position, so.transform.position);
+        float distanceFactor = Mathf.InverseLerp(10f, 0f, distance);
+
+        float staminaFactor = m_StatsGomiNinja.GetStamina() / 100f;
+
+        float dangerPenalty = m_DetectPlayer.IsPlayerDetected() ? 0.2f : 1f;
+
+        Debug.Log($"Valores: {distanceFactor * staminaFactor * dangerPenalty} ");
+
+        return distanceFactor * staminaFactor * dangerPenalty;
+    }
+
+    private BehaviourAPI.Core.Actions.Action CreateSmartObjectAction(string needName)
+    {
+        var bt = new BehaviourTree();
+        bt.SetRootNode(
+            bt.CreateDecorator<LoopNode>("loop",
+                bt.CreateComposite<SelectorNode>("sel",
+                    false,
+                    bt.CreateLeafNode("request", new NeedRequestAction(needName)),
+                    bt.CreateLeafNode("delay", new DelayAction(5f))
+                )
+            )
+        );
+        return new SubsystemAction(bt);
+    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StatsGomiNinja: MonoBehaviour
+public class StatsGomiGeo: MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] public float estamina = 100f;
@@ -25,12 +25,12 @@ public class StatsGomiNinja: MonoBehaviour
 
     private void Update()
     {
-        if(Mathf.Abs(estamina - targetStamina) > 0.01f)
+        if (Mathf.Abs(estamina - targetStamina) > 0.01f)
         {
             estamina = Mathf.Clamp(Mathf.MoveTowards(estamina, targetStamina, changeSpeed * Time.deltaTime), 0f, 100f);
         }
 
-        if(Mathf.Abs(tiempoPatrullando - targetTimePatrol) > 0.01f)
+        if (Mathf.Abs(tiempoPatrullando - targetTimePatrol) > 0.01f)
         {
             tiempoPatrullando = Mathf.Clamp(Mathf.MoveTowards(tiempoPatrullando, targetTimePatrol, changeSpeed * Time.deltaTime), 0, 100f);
         }
@@ -60,6 +60,4 @@ public class StatsGomiNinja: MonoBehaviour
     public float GetTakeABreak() => agotamiento;
 
     public void SetTakeABreak(float i) => agotamiento = i;
-
-
 }

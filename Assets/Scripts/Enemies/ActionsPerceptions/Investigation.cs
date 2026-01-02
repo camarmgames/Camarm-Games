@@ -13,6 +13,7 @@ public class Investigation: MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private Animator animator;
     [SerializeField] private StatsGomiNinja statsGomiNinja;
+    [SerializeField] private StatsGomiGeo statsGomiGeo;
 
     [Header("Cooldown")]
     [SerializeField] private float investigationCooldown = 10f;
@@ -45,6 +46,7 @@ public class Investigation: MonoBehaviour
         {
             enemyStress?.AddStress(10);
             statsGomiNinja?.ModifyStats(-5, 0);
+            statsGomiGeo?.ModifyStats(-8, 35);
             isInvestigating = true;
             agent.isStopped = false;
             investigateCoroutine = StartCoroutine(InspectArea(pointToInvestigateArea));

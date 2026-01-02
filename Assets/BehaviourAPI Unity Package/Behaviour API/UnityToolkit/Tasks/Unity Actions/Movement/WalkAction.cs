@@ -51,7 +51,8 @@ namespace BehaviourAPI.UnityToolkit
 
         public override void Stop()
         {
-            context.Movement.CancelMove();
+            Debug.Log("Se para");
+            //context.Movement.CancelMove();
         }
 
         public override string ToString() => $"Walk to {Target}";

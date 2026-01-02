@@ -25,7 +25,9 @@ public abstract class Collectable : MonoBehaviour
             if (!PlayerInventory.instance.IsFull() && transform.childCount > 0)
             {
                 PlayerInventory.instance.Add(collectable);
+                Destroy(transform.GetChild(1).gameObject);
                 Destroy(transform.GetChild(0).gameObject);
+                
             }
         }
     }

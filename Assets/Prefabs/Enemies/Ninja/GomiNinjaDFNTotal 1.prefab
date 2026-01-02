@@ -86,6 +86,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &898325064090716013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5925625247140795699}
+  m_Layer: 3
+  m_Name: Mochila
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5925625247140795699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898325064090716013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.782, z: -0.661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 981496923473013066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1077218590705126601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,6 +1296,9 @@ GameObject:
   - component: {fileID: 2257760894784378694}
   - component: {fileID: 5940724320022185988}
   - component: {fileID: 3359592611318989367}
+  - component: {fileID: 5824011686220558088}
+  - component: {fileID: 4670716168497310149}
+  - component: {fileID: 875129394035041145}
   m_Layer: 3
   m_Name: BehaviourNinjaAPI
   m_TagString: Untagged
@@ -1286,6 +1320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7058298006905875272}
+  - {fileID: 5925625247140795699}
   - {fileID: 5526098543879886667}
   m_Father: {fileID: 3753575512879467359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3101,7 +3136,8 @@ MonoBehaviour:
   maxAngleDeviation: 30
   rotationSpeed: 10
   animator: {fileID: 3884074860815831999}
-  statsGomiNinja: {fileID: 0}
+  statsGomiNinja: {fileID: 1285680195960542659}
+  statsGomiGeo: {fileID: 0}
   investigationCooldown: 3
   debug: 0
   pointToInvestigateArea: {x: 0, y: 0, z: 0}
@@ -3213,6 +3249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateIcon: {fileID: 6462154967097453794}
+  statsGomiNinja: {fileID: 0}
+  statsGomiGeo: {fileID: 0}
 --- !u!114 &2257760894784378694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3258,7 +3296,62 @@ MonoBehaviour:
   waitTime: 1
   animator: {fileID: 3884074860815831999}
   statsGomiNinja: {fileID: 0}
+  statsGomiGeo: {fileID: 0}
   currentPointIndex: 0
+--- !u!114 &5824011686220558088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772726198672997751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73368f6cdd52cdf4d85e5f9e99e6d7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetThreshold: 1
+  minDistanceToTarget: 0.5
+  drawGizmos: 0
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &4670716168497310149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772726198672997751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d8b668019770d44b1137d063b62740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 05262cfb201a7ad4b86f5c572c9f7c93, type: 2}
+--- !u!114 &875129394035041145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772726198672997751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a204318220104468136739289f5e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  viewAngle: 120
+  smartObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  scanInterval: 0.2
+  memoryDuration: 2
+  hasSmartObject: 0
+  hasSmartObjectInHand: 0
+  canSeeSmartObjects: 0
 --- !u!1 &5843446470127819971
 GameObject:
   m_ObjectHideFlags: 0

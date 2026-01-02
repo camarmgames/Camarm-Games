@@ -21,6 +21,7 @@ public class JumpAttack: MonoBehaviour
     public float jumpCooldown = 3f;
     public float bodyRadius = 0.6f; // Para SphereCast
     public AudioClip jumpSound;
+    public StatsGomiGeo statsGomiGeo;
 
     [Header("Animations Settings")]
     public Animator animator;
@@ -45,6 +46,7 @@ public class JumpAttack: MonoBehaviour
         if (!canJump) return;
 
         animator.Play("JumpAttack");
+        statsGomiGeo.ModifyStats(0, -100);
     }
 
     public Status JumpAttackUpdate()

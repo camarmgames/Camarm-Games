@@ -17,6 +17,7 @@ public class HitGround:MonoBehaviour
     public float hitGroundCooldown = 2f;
     public Animator animator;
     public AudioClip effect;
+    public StatsGomiGeo statsGomiGeo;
 
     [Header("Shockwave Settings")]
     public float shockwaveRange = 10f;
@@ -45,7 +46,7 @@ public class HitGround:MonoBehaviour
         animator.Play("HitGround");
 
         enemyStress?.AddStress(8);
-
+        statsGomiGeo?.ModifyStats(-5, 0);
     }
 
     public Status HitGroundUpdate()

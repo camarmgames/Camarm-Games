@@ -9,7 +9,8 @@ public class Patrol : MonoBehaviour
     [SerializeField] public List<Transform> patrolPoints;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private Animator animator;
-    [SerializeField] private StatsGomiNinja statsGomiNinja;
+    public StatsGomiNinja statsGomiNinja;
+    public StatsGomiGeo statsGomiGeo;
 
     public int currentPointIndex = 0;
     private int lastPointIndex = -2;
@@ -38,7 +39,8 @@ public class Patrol : MonoBehaviour
 
             if (timer >= waitTime)
             {
-                statsGomiNinja?.ModifyStats(-5, 5);
+                statsGomiNinja?.ModifyStats(-5, 15);
+                statsGomiGeo?.ModifyStats(-5, 35);
 
                 GoToNextPoint();
                 timer = 0f;

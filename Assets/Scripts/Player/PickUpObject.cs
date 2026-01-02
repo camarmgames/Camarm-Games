@@ -12,7 +12,7 @@ public class PickUpObject : MonoBehaviour
             PlayerInventory.instance.transform.GetChild(1).transform.GetChild(showInUI).gameObject.SetActive(true);
             doorOpen.SetActive(true);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

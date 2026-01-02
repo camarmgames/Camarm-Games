@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b703f363d94d455438e8b9c459a586b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showInUI: {fileID: 0}
+  showInUI: 0
   doorOpen: {fileID: 0}
 --- !u!65 &2523093966171447969
 BoxCollider:
