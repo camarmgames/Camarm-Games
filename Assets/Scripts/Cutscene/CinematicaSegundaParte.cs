@@ -60,4 +60,12 @@ public class CinematicaSegundaParte : MonoBehaviour
         yield return new WaitForEndOfFrame();
         camaraDialogo.SetActive(false);
     }
+
+    public void ChangeSpeed(float s)
+    {
+        pera.SetFloat("speed",s);
+        limon.SetFloat("speed", s);
+        fresa.SetFloat("speed", s);
+        platano.SetFloat("speed", s);
+    }
 }
