@@ -79,115 +79,115 @@ public class Data_Cutscenes
             "Luu"
         )},
 
-        //{"OpeningSecretary_LilBug_3", new DialogueQuote(
-        //    new List<string>{
-        //        "Ir con cuidado y sin hacer ruido. Eso no es divertido.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    1,
-        //    "Daved"
-        //)},
+        {"OpeningSecretary_LilBug_3", new DialogueQuote(
+            new List<string>{
+                "Ir con cuidado y sin hacer ruido. Eso no es divertido.",
+                "English"
+            },
+            VozPera,
+            1,
+            "Daved"
+        )},
 
-        //{"OpeningSecretary_Brother_4", new DialogueQuote(
-        //    new List<string>{
-        //        "Luu tiene razón, no sabemos a que tipo de enemigos nos enfrentamos. Con algunos bastara simplemente con evitarlos yendo por caminos diferentes.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    0,
-        //    "Quesada"
-        //)},
+        {"OpeningSecretary_Brother_4", new DialogueQuote(
+            new List<string>{
+                "Luu tiene razón, no sabemos a que tipo de enemigos nos enfrentamos. Con algunos bastara simplemente con evitarlos yendo por caminos diferentes.",
+                "English"
+            },
+            VozPera,
+            0,
+            "Quesada"
+        )},
 
-        //{"OpeningSecretary_Brother_5", new DialogueQuote(
-        //    new List<string>{
-        //        "Pero con otros, necesitaremos usar diferentes herramientas del castillo para poder salir ilesos.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    0,
-        //    "Quesada"
-        //)},
+        {"OpeningSecretary_Brother_5", new DialogueQuote(
+            new List<string>{
+                "Pero con otros, necesitaremos usar diferentes herramientas del castillo para poder salir ilesos.",
+                "English"
+            },
+            VozPera,
+            0,
+            "Quesada"
+        )},
 
-        //{"OpeningSecretary_LilBug_6", new DialogueQuote(
-        //    new List<string>{
-        //        "Pero que estás diciendo. Es simplemente robar en un castillo no conquistar el reino. No debe ser tan difícil hacer algo que hago todos los días.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    1,
-        //    "Daved"
-        //)},
+        {"OpeningSecretary_LilBug_6", new DialogueQuote(
+            new List<string>{
+                "Pero que estás diciendo. Es simplemente robar en un castillo no conquistar el reino. No debe ser tan difícil hacer algo que hago todos los días.",
+                "English"
+            },
+            VozPera,
+            1,
+            "Daved"
+        )},
 
-        //{"OpeningSecretary_Brother_7", new DialogueQuote(
-        //    new List<string>{
-        //        "Quieres dejar de bromear. Yo he oído que los guardias de ese castillo han conseguido paralizar a sus víctimas e incluso cegarlas.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    2,
-        //    "Luu"
-        //)},
+        {"OpeningSecretary_Brother_7", new DialogueQuote(
+            new List<string>{
+                "Quieres dejar de bromear. Yo he oído que los guardias de ese castillo han conseguido paralizar a sus víctimas e incluso cegarlas.",
+                "English"
+            },
+            VozPera,
+            2,
+            "Luu"
+        )},
 
-        //{"OpeningSecretary_Brother_8", new DialogueQuote(
-        //    new List<string>{
-        //        "Asi que para poder tener éxito hay que usar la astucia y el ingenio. No ir ahí como un loco y sin pensar.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    2,
-        //    "Luu"
-        //)},
+        {"OpeningSecretary_Brother_8", new DialogueQuote(
+            new List<string>{
+                "Asi que para poder tener éxito hay que usar la astucia y el ingenio. No ir ahí como un loco y sin pensar.",
+                "English"
+            },
+            VozPera,
+            2,
+            "Luu"
+        )},
 
-        //{"OpeningSecretary_Brother_9", new DialogueQuote(
-        //    new List<string>{
-        //        "Me estas llamando tonto, enana de mierda.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    1,
-        //    "Daved"
-        //)},
+        {"OpeningSecretary_Brother_9", new DialogueQuote(
+            new List<string>{
+                "Me estas llamando tonto, enana de mierda.",
+                "English"
+            },
+            VozPera,
+            1,
+            "Daved"
+        )},
 
-        //{"OpeningSecretary_LilBug_10", new DialogueQuote(
-        //    new List<string>{
-        //        "Quieres ver como te patea esta enana.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    2,
-        //    "Luu"
-        //)},
+        {"OpeningSecretary_LilBug_10", new DialogueQuote(
+            new List<string>{
+                "Quieres ver como te patea esta enana.",
+                "English"
+            },
+            VozPera,
+            2,
+            "Luu"
+        )},
 
-        //{"OpeningSecretary_LilBug_11", new DialogueQuote(
-        //    new List<string>{
-        //        "Ya empiezan otra vez . . .",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    0,
-        //    "Quesada"
-        //)},
+        {"OpeningSecretary_LilBug_11", new DialogueQuote(
+            new List<string>{
+                "Ya empiezan otra vez . . .",
+                "English"
+            },
+            VozPera,
+            0,
+            "Quesada"
+        )},
 
-        //{"OpeningSecretary_Brother_12", new DialogueQuote(
-        //    new List<string>{
-        //        "Nada de peleas en mi sótano. Si queréis mataros, salir a la calle. Pero antes debemos realizar el robo.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    3,
-        //    "Seikan"
-        //)},
+        {"OpeningSecretary_Brother_12", new DialogueQuote(
+            new List<string>{
+                "Nada de peleas en mi sótano. Si queréis mataros, salir a la calle. Pero antes debemos realizar el robo.",
+                "English"
+            },
+            VozPera,
+            3,
+            "Seikan"
+        )},
 
-        //{"OpeningSecretary_Brother_13", new DialogueQuote(
-        //    new List<string>{
-        //        "Recordad, nadie sale del castillo sin las tres piezas del osito de oro. Ánimo equipo.",
-        //        "English"
-        //    },
-        //    VozPera,
-        //    3,
-        //    "Seikan"
-        //)},
+        {"OpeningSecretary_Brother_13", new DialogueQuote(
+            new List<string>{
+                "Recordad, nadie sale del castillo sin las tres piezas del osito de oro. Ánimo equipo.",
+                "English"
+            },
+            VozPera,
+            3,
+            "Seikan"
+        )},
 
     };
 
