@@ -29,7 +29,7 @@ public class Break: MonoBehaviour
         statsGomiNinja?.SetTakeABreak(0f);
 
         // Geo
-        statsGomiGeo?.ModifyStats(50, 0); 
+        statsGomiGeo?.ModifyStats(40, 0); 
         statsGomiGeo?.SetTakeABreak(0f);
 
         isTakingABreak = true;
@@ -37,12 +37,14 @@ public class Break: MonoBehaviour
 
     public Status TakeABreakUpdate()
     {
-        if(statsGomiNinja?.estamina <= 80 || statsGomiGeo?.estamina <= 85)
+        if(statsGomiNinja?.estamina <= 80 || statsGomiGeo?.estamina <= 80)
             return Status.Running;
 
         statsGomiNinja?.SetTakeABreak(1f);
 
         statsGomiGeo?.SetTakeABreak(1f);
+
+        stateIcon.SetCalm();
 
         return Status.Success;
 

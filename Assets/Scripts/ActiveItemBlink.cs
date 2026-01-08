@@ -4,46 +4,71 @@ using UnityEngine.UI;
 public class ActiveItemBlink : MonoBehaviour
 {
     public Image img;
+
+    [Header("Blink Settings")]
     public float baseSpeed = 2f;
     public float maxSpeed = 10f;
 
-    public float duration;
-    public float remainingTime;
-
+    private float duration;
+    private float remainingTime;
     private float t;
 
-    void Start()
+    private bool isActive;
+    private Color initialColor;
+
+    void Awake()
     {
         if (img == null)
             img = GetComponent<Image>();
+
+        if (img != null)
+            initialColor = img.color;
+
+        Desactivate(); // estado inicial limpio
     }
 
     public void Activate(float totalTime)
     {
+        if (img == null)
+            return;
+
         duration = totalTime;
         remainingTime = totalTime;
+        t = 0f;
+        isActive = true;
         enabled = true;
-        t = 0;
+    }
+
+    public void Desactivate()
+    {
+        isActive = false;
+        enabled = false;
+
+        if (img != null)
+            img.color = initialColor;
     }
 
     void Update()
     {
-        if (remainingTime <= 0)
+        if (!isActive || img == null)
+            return;
+
+        if (remainingTime <= 0f)
         {
-            Color c = img.color;           
-            img.color = c;
-            enabled = false;
+            Desactivate();
             return;
         }
 
-        // velocidad aumenta a medida que queda menos
+        // Velocidad aumenta a medida que queda menos tiempo
         float pct = 1f - (remainingTime / duration);
         float speed = Mathf.Lerp(baseSpeed, maxSpeed, pct);
 
         t += Time.deltaTime * speed;
-        float alpha = Mathf.Lerp(0.3f, 1f, (Mathf.Sin(t) + 1f) / 2f);
 
-        Color col = img.color;
+        float alpha =
+            Mathf.Lerp(0.3f, initialColor.a, (Mathf.Sin(t) + 1f) * 0.5f);
+
+        Color col = initialColor;
         col.a = alpha;
         img.color = col;
 

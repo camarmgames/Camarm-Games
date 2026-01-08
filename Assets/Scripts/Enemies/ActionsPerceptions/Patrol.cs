@@ -23,7 +23,6 @@ public class Patrol : MonoBehaviour
 
     private void Start()
     {
-        //statsGomiNinja = GetComponent<StatsGomiNinja>();
         breakScript = GetComponent<Break>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -39,8 +38,8 @@ public class Patrol : MonoBehaviour
 
             if (timer >= waitTime)
             {
-                statsGomiNinja?.ModifyStats(-5, 15);
-                statsGomiGeo?.ModifyStats(-5, 35);
+                statsGomiNinja?.ModifyStats(-5, 20);
+                statsGomiGeo?.ModifyStats(-5, 40);
 
                 GoToNextPoint();
                 timer = 0f;
@@ -74,7 +73,8 @@ public class Patrol : MonoBehaviour
         if (breakScript.IsTakingABreak())
             breakScript.TakeABreakStopped();
 
-        statsGomiNinja?.ModifyStats(-4, 7);
+        statsGomiNinja?.ModifyStats(-4, 10);
+        statsGomiGeo?.ModifyStats(-5, 10);
 
         isPatrolling = true;
         agent.isStopped = false;

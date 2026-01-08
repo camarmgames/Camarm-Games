@@ -137,7 +137,7 @@ public class Trap: MonoBehaviour
         if(pastillaAmarilla) return;
 
         Debug.Log("Activacion de Mago");
-        LevelWizardController.Instance.SpawnWizard();
+        LevelWizardController.Instance.ActionAppear();
         Destroy(gameObject);
     }
 }

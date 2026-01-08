@@ -7,6 +7,7 @@ public class FollowPlayer: MonoBehaviour
     [Header("FollowPlayer Settings")]
     [SerializeField] private float stopDistance = 2f;
     [SerializeField] private Animator animator;
+    public EnemyStateIcon stateIcon;
 
     private NavMeshAgent agent;
     private Transform player;
@@ -39,6 +40,7 @@ public class FollowPlayer: MonoBehaviour
     {
         if (isFollowing) return Status.Failure;
 
+        stateIcon.SetAlert();
         isFollowing = true;
         agent.isStopped = false;
         if (animator != null)
