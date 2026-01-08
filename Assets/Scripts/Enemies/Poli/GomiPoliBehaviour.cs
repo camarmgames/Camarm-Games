@@ -26,6 +26,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 
 	//--About Potenciacion Action:
 	float time;
+	public float speedOriginal;
 
 	//--About Footprint Detection Perception:
 	public float viewRadius = 5.0f;
@@ -54,7 +55,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 
 	public EnemyStateIcon EnemyStateIcon;
 
-
+	public EnemyStress EnemyStress;
     #region -----------------BEHAVIOUR GRAPH-----------------
     protected override BehaviourGraph CreateGraph()
 	{
@@ -226,6 +227,8 @@ public class GomiPoliBehaviour : BehaviourRunner
     //Esta función es el nodo potenciación, ¿activa una animación o algo?
     public void PotenciacionStart()
 	{
+		speedOriginal = navMeshAgent.speed;
+		navMeshAgent.speed *= 2;
         return;
 	}
 	//Esta funcion actualiza la potenciacion, debería esperar a que acabe una animación?
@@ -276,6 +279,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 	private Vector3 lastPos;
 	public void TrackerFootprintStart()
 	{
+		EnemyStress.AddStress(15);
 		EnemyStateIcon.SetInvestigation();
         animator.SetBool("isWalking", true);
         navMeshAgent.SetDestination(footprintNavMeshPoint);
@@ -318,6 +322,7 @@ public class GomiPoliBehaviour : BehaviourRunner
 
     public void InspectAreaStart()
 	{
+		EnemyStress.AddStress(5);
 		EnemyStateIcon.SetInvestigation();
         inspectingTime = 5f;
         timer = 0f;

@@ -262,18 +262,18 @@ public class cp_GomiNinja : BehaviourRunner
         VariableFactor smartObjectFactor = usAcciones.CreateVariable(m_SmartObjectSensor.SmartObjectSignal, 0f, 1f);
 
         // Fusión
-        WeightedFusionFactor oportunidadFusion =
+        WeightedFusionFactor GanasRecolocarElOsoDorado =
             usAcciones.CreateFusion<WeightedFusionFactor>(
                 smartObjectFactor,
                 staminaFactor
             );
 
-        oportunidadFusion.Weights = new float[] { 0.8f, 0.2f };
+        GanasRecolocarElOsoDorado.Weights = new float[] { 0.9f, 0.1f };
 
         // Acción
-        UtilityAction OportunidadSmartObject =
+        UtilityAction RecolocarElOsoDorado =
             usAcciones.CreateAction(
-                oportunidadFusion,
+                GanasRecolocarElOsoDorado,
                 CreateSmartObjectAction("Oso")
             );
 

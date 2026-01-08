@@ -45,6 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6075568490727254116}
   - component: {fileID: 7176403885832879494}
+  - component: {fileID: 1059016430178657294}
   m_Layer: 0
   m_Name: BehaviourGomiMago
   m_TagString: Untagged
@@ -81,13 +82,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gomiMagoPrefab: {fileID: 2463956576287259354}
-  spawnThreshold: 50
-  timeVisible: 20
-  spawnProbabilityPerSecond: 0.1
+  maxTiempoVisible: 6
+  maxTiempoEscondido: 10
+  maxTiempoPersiguiendo: 5
   player: {fileID: 0}
   lampsParent: {fileID: 4697105365973823829}
   effectAparicion: {fileID: 8300000, guid: 42627cb553787744dade433071640a83, type: 3}
   effectHechizo: {fileID: 8300000, guid: 011eed0e1af7dbe4caad15ecb2ceb578, type: 3}
+--- !u!114 &1059016430178657294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134698488711810751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab4414c3289e3c4694800f736046cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  executeOnLoop: 0
+  interruptOptions: 0
 --- !u!1 &8020181982400143268
 GameObject:
   m_ObjectHideFlags: 0

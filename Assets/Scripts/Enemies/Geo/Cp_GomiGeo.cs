@@ -17,7 +17,6 @@ public class Cp_GomiGeo : BehaviourRunner
 	NoiseListener m_NoiseListener;
 	DetectPlayer m_DetectPlayer;
 	JumpAttack m_JumpAttack;
-	TrapSpawner m_TrapSpawner;
 	HitGround m_HitGround;
     StatsGomiGeo m_StatsGomiGeo;
     Break m_Break;
@@ -29,7 +28,6 @@ public class Cp_GomiGeo : BehaviourRunner
     {
         m_Patrol = GetComponent<Patrol>();
         m_Investigation = GetComponent<Investigation>();
-        m_TrapSpawner = GetComponent<TrapSpawner>();
         m_NoiseListener = GetComponent<NoiseListener>();
         m_DetectPlayer = GetComponent<DetectPlayer>();
 		m_JumpAttack = GetComponent<JumpAttack>();
@@ -65,58 +63,31 @@ public class Cp_GomiGeo : BehaviourRunner
         };
 
 		SequenceAction sHitGround = new SequenceAction(Status.Running, subActions1);
-		LeafNode Hit_Ground = MainBT.CreateLeafNode(sHitGround);
+		LeafNode GolpearAlSuelo = MainBT.CreateLeafNode(sHitGround);
 
-        ConditionNode Detect_Player = MainBT.CreateDecorator<ConditionNode>(Hit_Ground);
-        Detect_Player.SetPerception(isPlayerDetectedPerception);
+        ConditionNode JugadorDetectado = MainBT.CreateDecorator<ConditionNode>(GolpearAlSuelo);
+        JugadorDetectado.SetPerception(isPlayerDetectedPerception);
 
         List<BehaviourAPI.Core.Actions.Action> subActions2 = new List<BehaviourAPI.Core.Actions.Action>(2)
         {
             new FunctionalAction(m_Patrol.StopPatrol),
-			new FunctionalAction(m_TrapSpawner.PlaceTrapPrueba),
             new FunctionalAction(m_Investigation.InvestigateArea, null)
         };
 
         SequenceAction sInvestigate = new SequenceAction(Status.Running, subActions2);
 
-        LeafNode Investigate = MainBT.CreateLeafNode(sInvestigate);
+        LeafNode Investigar = MainBT.CreateLeafNode(sInvestigate);
 
-        SelectorNode Selector_3 = MainBT.CreateComposite<SelectorNode>(false, Detect_Player, Investigate);
+        SelectorNode Selector_3 = MainBT.CreateComposite<SelectorNode>(false, JugadorDetectado, Investigar);
         Selector_3.IsRandomized = false;
 
-        ConditionNode LightOrHighNoise = MainBT.CreateDecorator<ConditionNode>(Selector_3);
-        LightOrHighNoise.SetPerception(lightOrHighPerception);
-
-        //List<BehaviourAPI.Core.Actions.Action> subActions3 = new List<BehaviourAPI.Core.Actions.Action>(3)
-        //{
-        //    new FunctionalAction(m_Investigation.StopInvestigation),
-        //    new FunctionalAction(m_PathingNinja.StartPatrol, null)
-        //};
-
-        //SequenceAction sPatrol = new SequenceAction(Status.Running, subActions3);
-        //LeafNode Patrol = MainBT.CreateLeafNode(sPatrol);
-
-        //List<BehaviourAPI.Core.Actions.Action> subActions4 = new List<BehaviourAPI.Core.Actions.Action>(3)
-        //{
-        //    new FunctionalAction(m_Investigation.StopInvestigation),
-        //    new FunctionalAction(m_PathingNinja.StopPatrol),
-        //    new FunctionalAction(m_JumpAttack.JumpAttackStarted, m_JumpAttack.JumpAttackUpdate, null)
-        //};
-
-        //SequenceAction sJumpAttack = new SequenceAction(Status.Running, subActions4);
-        //LeafNode JumpAttack = MainBT.CreateLeafNode(sJumpAttack);
-
-        //ConditionNode CanJump = MainBT.CreateDecorator<ConditionNode>(JumpAttack);
-        //CanJump.SetPerception(canJumpPerception);
-
-        //ProbabilityBranchNode RandomSelector = MainBT.CreateComposite<ProbabilityBranchNode>(false, Patrol, CanJump);
-        //RandomSelector.probabilities = new List<float>() { 0.9f, 0.1f };
-        //RandomSelector.IsRandomized = false;
+        ConditionNode SePercibeAlgunRuidoOSeVeAlgo = MainBT.CreateDecorator<ConditionNode>(Selector_3);
+        SePercibeAlgunRuidoOSeVeAlgo.SetPerception(lightOrHighPerception);
 
         SubsystemAction US_Acciones = new SubsystemAction(usAcciones);
         LeafNode AccionesRutinarias = MainBT.CreateLeafNode(US_Acciones);
 
-        SelectorNode Selector_1 = MainBT.CreateComposite<SelectorNode>(false, LightOrHighNoise, AccionesRutinarias);
+        SelectorNode Selector_1 = MainBT.CreateComposite<SelectorNode>(false, SePercibeAlgunRuidoOSeVeAlgo, AccionesRutinarias);
         Selector_1.IsRandomized = false;
 
         LoopNode Main_Loop_1 = MainBT.CreateDecorator<LoopNode>(Selector_1);
@@ -162,7 +133,7 @@ public class Cp_GomiGeo : BehaviourRunner
                 staminaFactor
             );
 
-        oportunidadFusion.Weights = new float[] { 0.8f, 0.2f };
+        oportunidadFusion.Weights = new float[] { 0.9f, 0.1f };
 
         // Acción
         UtilityAction OportunidadSmartObject =

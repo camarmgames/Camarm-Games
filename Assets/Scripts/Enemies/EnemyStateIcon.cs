@@ -37,5 +37,9 @@ public class EnemyStateIcon: MonoBehaviour
 
     public void SetTakeABreak() => iconRenderer.sprite = takeABreak;
 
-    public void SetInvestigation() => iconRenderer.sprite = investigation;
+    public void SetInvestigation()
+    {
+        materialVisionField?.SetColor("_VisionColor", Color.magenta);
+        iconRenderer.sprite = investigation;
+    }
 }

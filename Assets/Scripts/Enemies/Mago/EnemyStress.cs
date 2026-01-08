@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStress: MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class EnemyStress: MonoBehaviour
     [SerializeField] private Material buffMaterial;
     [SerializeField] private Material standardMaterial;
 
-    private Renderer rend;
     private bool isBuffed = false;
 
     public float StressNormalized => stress / maxStress;
+
 
     void Awake()
     {
@@ -66,6 +67,14 @@ public class EnemyStress: MonoBehaviour
         //Transform secondChild = renderPrefab.transform.GetChild(1);
         SkinnedMeshRenderer r = renderPrefab.GetComponent<SkinnedMeshRenderer>();
         if (r != null)
+        {
             r.material = mat;
+        }
+        else
+        {
+            MeshRenderer r2 = renderPrefab.GetComponent<MeshRenderer>();
+            if(r2 != null)
+                r2.material = mat;
+        }
     }
 }
